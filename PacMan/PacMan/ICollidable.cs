@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
-    public class Class1
+    public interface ICollidable
     {
+        int Points { get; set; }
+
+        void Collide();
     }
 }

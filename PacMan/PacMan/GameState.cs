@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
-    class GameState
+    public class GameState
     {
 
-        Pacman Pacman { get; }
-        GhostPack Ghostpack { get; }
-        Maze Maze { get; }
-        Pen Pen { get; }
-        ScoreAndLives Score { get; }
+        public Pacman Pacman { get; }
+        public GhostPack Ghostpack { get; }
+        public Maze Maze { get; }
+        public Pen Pen { get; }
+        public ScoreAndLives Score { get; }
 
         public static GameState Parse(string filecontent)
         {
