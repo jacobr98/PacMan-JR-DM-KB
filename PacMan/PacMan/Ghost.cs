@@ -33,7 +33,7 @@ namespace PacMan
             Ask Dan for specification on what is written in uml
         }*/
 
-        public Ghost(GameState g, int x, int y, Vector2 target, IGhostState start, Color colour)
+        public Ghost(GameState g, int x, int y, Vector2 target, GhostState start, Color colour)
         {
             this.target = target;
             this.colour = colour;
@@ -50,7 +50,7 @@ namespace PacMan
             throw new NotImplementedException();
         }
 
-        public void ChangeState(IGhostState state)
+        public void ChangeState(GhostState state)
         {
             this.currentState = state;
         }

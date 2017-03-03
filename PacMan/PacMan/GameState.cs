@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
+    public enum Direction {Left, Right, Up, Down}
+
+    public enum GhostState { Scared, Chase, Release}
+
     public class GameState
     {
 
@@ -19,6 +23,8 @@ namespace PacMan
         public static GameState Parse(string filecontent)
         {
             string[] stringLines = File.ReadAllLines(filecontent);
+
+            string[][] parseStr = 
         }
 
     }
