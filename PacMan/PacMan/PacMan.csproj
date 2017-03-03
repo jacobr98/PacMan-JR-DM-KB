@@ -41,12 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ghost.cs" />
     <Compile Include="GhostPack.cs" />
     <Compile Include="ICollidable.cs" />
+    <Compile Include="IGhostState.cs" />
+    <Compile Include="IMoveable.cs" />
+    <Compile Include="Pen.cs" />
+    <Compile Include="Scared.cs" />
     <Compile Include="ScoreAndLives.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Pacman.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="levels.csv" />

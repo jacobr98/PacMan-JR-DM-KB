@@ -9,9 +9,10 @@ namespace PacMan
 {
     public class GhostPack : Ghost
     {
-        List<Ghost> ghosts;
+        private List<Ghost> ghosts;
 
-        public GhostPack()
+        //look into it
+        public GhostPack() : base()
         {
             ghosts = new List<Ghost>();
         }

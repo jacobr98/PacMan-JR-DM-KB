@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
-    public interface ICollidable
+    public abstract class Tile
     {
 
-        event Action Collision;
-
-        int Points { get; set; }
-
-        void Collide();
     }
 }
