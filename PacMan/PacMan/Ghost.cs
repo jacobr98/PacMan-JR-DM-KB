@@ -21,17 +21,17 @@ namespace PacMan
         public Color Colour { get; }
 
         private IGhostState currentState;
-        public IGhostState CurrentState;
-
         private static Timer scared;
 
+        //Events
         public event Action PacmanDied;
         public event Action Collision;
-        
-        /*public static Ghost()
-        {
-            Ask Dan for specification on what is written in uml
-        }*/
+
+        //Properties
+        public Vector2 Position { get; set; }
+        public Direction Direction { get; set; }
+        public GhostState CurrentState { get; }
+        public int Points { get; set; }
 
         public Ghost(GameState g, int x, int y, Vector2 target, GhostState start, Color colour)
         {
@@ -52,8 +52,15 @@ namespace PacMan
 
         public void ChangeState(GhostState state)
         {
-            this.currentState = state;
+            this.CurrentState = state;
         }
+
+        public void Move()
+        {
+
+        }
+
+        public void Collide() { }
 
     }
 }

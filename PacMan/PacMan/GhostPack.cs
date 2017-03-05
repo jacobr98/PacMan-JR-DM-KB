@@ -29,7 +29,9 @@ namespace PacMan
 
         public void ScareGhost()
         {
-            throw new NotImplementedException();
+            foreach (Ghost g in ghosts) {
+                g.ChangeState()
+            }
         }
 
         public void Move()
