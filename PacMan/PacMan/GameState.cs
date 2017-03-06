@@ -24,8 +24,8 @@ namespace PacMan
         {
             string[] stringLines = File.ReadAllLines(filecontent);
 
-            string[][] parseStr = 
-        }
+            string[][] parseStr = //hello
+                }
 
     }
 }
