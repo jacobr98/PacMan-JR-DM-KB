@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,16 @@ namespace PacMan
 
         private Ghost ghost;
         private Maze maze;
+        private Vector2 target;
         private Pacman pacman;
-        private 
+
+        public Chase(Ghost ghost, Maze maze, Vector2 target, Pacman pacman)
+        {
+            this.ghost = ghost;
+            this.maze = maze;
+            this.target = target;
+            this.pacman = pacman;
+        }
+
     }
 }
