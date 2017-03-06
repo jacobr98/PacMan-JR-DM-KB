@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace PacMan
 {
-    public class GhostPack : Ghost
+    public class GhostPack : Ghost, IEnumerable<Ghost>
     {
         private List<Ghost> ghosts;
 
@@ -17,7 +18,7 @@ namespace PacMan
             ghosts = new List<Ghost>();
         }
 
-        public bool CheckCollideGhosts(Vector2 v)
+        public void CheckCollideGhosts(Vector2 v)
         {
             throw new NotImplementedException();
         }
@@ -44,6 +45,14 @@ namespace PacMan
             this.ghosts.Add(g);
         }
 
-        
+        public IEnumerator<Ghost> GetEnumerator()
+        {
+            return ghosts.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ghosts.GetEnumerator();
+        }
     }
 }
