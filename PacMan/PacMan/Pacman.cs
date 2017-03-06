@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,12 @@ namespace PacMan
     {
         private GameState controller;
         private Maze maze;
-
-        public Pacman(GameState controller)
+        private Vector2 position;
+        public Pacman(GameState controller, int x, int y)
         {
             this.controller = controller;
             this.maze = this.controller.Maze;
+            this.position = new Vector2(x, y);
         }
 
         public void Move (Direction dir)
