@@ -26,7 +26,7 @@ namespace PacMan
             this.Lives--;
         }
 
-        private void incrementScore(ICollidable collidable)
+        public void IncrementScore(ICollidable collidable)
         {
             this.Score += collidable.Points;
         }

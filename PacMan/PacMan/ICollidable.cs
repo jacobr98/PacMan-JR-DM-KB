@@ -9,10 +9,10 @@ namespace PacMan
     public interface ICollidable
     {
 
-        event Action Collision;
+        event Action<ICollidable> Collision;
 
         int Points { get; set; }
 
-        void Collide();
+        void Collide(ICollidable ic);
     }
 }

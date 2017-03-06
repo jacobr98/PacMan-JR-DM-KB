@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
-    public class Energizer
+    public class Energizer : ICollidable
     {
         private int points;
         public int Points { get; set; }
         GhostPack ghosts;
 
+        public event Action<ICollidable> Collision;
         public Energizer(GhostPack ghosts)
         {
             this.ghosts = ghosts;
         }
 
-        public void Collide()
+        public void Collide(ICollidable ic)
         {
             throw new NotImplementedException();
         }

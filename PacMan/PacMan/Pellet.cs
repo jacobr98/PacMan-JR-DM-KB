@@ -11,14 +11,14 @@ namespace PacMan
         private int points;
         public int Points { get; set; }
 
-        public event Action Collision;
+        public event Action<ICollidable> Collision;
 
         public Pellet(int point)
         {
             this.points = point;
         }
 
-        public void Collide()
+        public void Collide(ICollidable ic)
         {
             throw new NotImplementedException();
         }
