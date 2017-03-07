@@ -47,11 +47,11 @@ namespace PacMan
             //scared.Elapsed += await StopFear();
             //to finish
         }
-        private async Task StopFear()
+        /*private async Task StopFear()
         {
             ChangeState(GhostState.Chase);
             //return
-        }
+        }*/
 
         public void Reset()
         {

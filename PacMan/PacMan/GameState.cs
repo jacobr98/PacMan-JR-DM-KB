@@ -42,19 +42,18 @@ namespace PacMan
             Pen pen = new Pen();
             Maze maze = new Maze();
             GhostPack gp = new GhostPack();
-            ScoreAndLives sl = new ScoreAndLives(g);
 
             g.pacman = pac;
             g.pen = pen;
             g.maze = maze;
             g.ghostpack = gp;
-            g.score = sl;
+            g.score = new ScoreAndLives(g);
             Ghost gh;
             string[][] parse = getElements(filecontent);
-            Tile[,] array = new Tile[parse.GetLength(1),parse.GetLength(0)];
-            for (int y=0; y<parse.GetLength(0); y++)
+            Tile[,] array = new Tile[parse[0].Length,parse.Length];
+            for (int y=0; y<parse.Length; y++)
             {
-                for(int x=0; x<parse.GetLength(1); y++)
+                for(int x=0; x<parse[0].Length; x++)
                 {
                     switch (parse[y][x])
                     {
@@ -91,7 +90,7 @@ namespace PacMan
                             array[x, y] = new Path(x, y, null);
                             break;
                         case "2":
-                            gh = new Ghost(g, x, y, new Vector2(1, 1), GhostState.Chase, new Color(255, 192, 203));
+                            gh = new Ghost(g, x, y, new Vector2(2, 1), GhostState.Chase, new Color(255, 192, 203));
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);
@@ -100,7 +99,7 @@ namespace PacMan
                             g.pen.AddToPen(gh);
                             break;
                         case "3":
-                            gh = new Ghost(g, x, y, new Vector2(1, 1), GhostState.Chase, new Color(64, 224, 208));
+                            gh = new Ghost(g, x, y, new Vector2(3, 1), GhostState.Chase, new Color(64, 224, 208));
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);
@@ -109,7 +108,7 @@ namespace PacMan
                             g.pen.AddToPen(gh);
                             break;
                         case "4":
-                            gh = new Ghost(g, x, y, new Vector2(1, 1), GhostState.Chase, new Color(255, 165, 0));
+                            gh = new Ghost(g, x, y, new Vector2(4, 1), GhostState.Chase, new Color(255, 165, 0));
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);

@@ -15,8 +15,7 @@ namespace PacMan
 
         public ScoreAndLives(GameState game)
         {
-            this.Lives = game.Score.Lives;
-            this.Score = game.Score.Score;
+            
         }
 
         public void DeadPacman()

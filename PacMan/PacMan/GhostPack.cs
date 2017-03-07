@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace PacMan
 {
-    public class GhostPack : Ghost, IEnumerable<Ghost>
+    public class GhostPack //: Ghost, IEnumerable<Ghost>
     {
         private List<Ghost> ghosts;
 
@@ -50,9 +50,9 @@ namespace PacMan
             return ghosts.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        /*IEnumerator IEnumerable.GetEnumerator()
         {
             return ghosts.GetEnumerator();
-        }
+        }*/
     }
 }
