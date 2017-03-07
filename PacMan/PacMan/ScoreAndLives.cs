@@ -11,7 +11,7 @@ namespace PacMan
         public int Lives { get; set; }
         public int Score { get; set; }
 
-        public event Action GameOver;
+        public event Action<string> GameOver;
 
         public ScoreAndLives(GameState game)
         {
@@ -21,14 +21,24 @@ namespace PacMan
 
         public void DeadPacman()
         {
-            this.Lives--;
+            if(this.Lives == 0)
+            {
+                onOver("Dead");
+            }else
+            {
+                this.Lives--;
+            }
         }
 
+        protected void onOver(string state)
+        {
+            GameOver?.Invoke(state);
+        }
 
-        private 
         public void IncrementScore(ICollidable collidable)
         {
             this.Score += collidable.Points;
+
         }
     }
 }

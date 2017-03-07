@@ -16,15 +16,18 @@ namespace PacMan
         public Energizer(GhostPack ghosts, int point)
         {
             this.ghosts = ghosts;
+            Collision += this.ghosts.ScareGhost;
             this.points = point;
         }
 
         public void Collide()
         {
-            if (Collision != null)
-            {
-                Collision(this);
-            }
+            onCollision(this);
         }
+
+        protected void onCollision(ICollidable ic)
+        {
+            Collision?.Invoke(this);
+        } 
     }
 }

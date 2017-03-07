@@ -9,7 +9,16 @@ namespace PacMan
 {
     public class Wall : Tile
     {
-        public override ICollidable Member { get; set; }
+        public override ICollidable Member {
+            get
+            {
+                throw new NotImplementedException();
+            }
+                set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public Wall(int x, int y) : base(x, y)
         {

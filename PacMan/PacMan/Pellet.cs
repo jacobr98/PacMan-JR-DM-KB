@@ -20,6 +20,11 @@ namespace PacMan
 
         public void Collide()
         {
+            onCollision(this);
+        }
+
+        protected void onCollision(ICollidable ic)
+        {
             Collision?.Invoke(this);
         }
     }
