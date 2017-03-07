@@ -10,7 +10,7 @@ namespace PacMan
 {
     public enum Direction {Left, Right, Up, Down}
 
-    public enum GhostState { Scared, Chase, Release}
+    public enum GhostState { Scared, Chase, Released}
 
     public class GameState
     {

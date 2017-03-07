@@ -12,8 +12,8 @@ namespace PacMan
         private ICollidable member;
         public override ICollidable Member
         {
-            get;
-            set;
+            get { return member; }
+            set { member = value; }
         }
 
         public Path(int x, int y, ICollidable member) : base(x, y)

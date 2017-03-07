@@ -16,7 +16,7 @@ namespace PacMan
         public Energizer(GhostPack ghosts, int point)
         {
             this.ghosts = ghosts;
-            Collision += this.ghosts.ScareGhost;
+            Collision += this.ghosts.ScareGhosts;
             this.points = point;
         }
 

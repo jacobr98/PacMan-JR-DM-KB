@@ -28,7 +28,7 @@ namespace PacMan
             throw new NotImplementedException();
         }
 
-        public void ScareGhost()
+        public void ScareGhosts(ICollidable ic)
         {
             foreach (Ghost g in ghosts) {
                 g.ChangeState()
