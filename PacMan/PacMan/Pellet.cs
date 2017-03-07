@@ -20,10 +20,7 @@ namespace PacMan
 
         public void Collide()
         {
-            if(Collision != null)
-            {
-                Collision(this);
-            }
+            Collision?.Invoke(this);
         }
     }
 }

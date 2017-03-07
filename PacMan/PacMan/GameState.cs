@@ -77,7 +77,7 @@ namespace PacMan
                             break;
                         case "P":
                             array[x, y] = new Path(x, y,null);
-                            g.pacman.position = new Vector2(x,y);
+                            g.pacman.Position = new Vector2(x,y);
                             break;
                         case "1":
                             Ghost go = new Ghost(g,x,y,new Vector2(1,1),GhostState.Chase, new Color(255,0,0));

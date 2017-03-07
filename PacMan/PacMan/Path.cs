@@ -10,6 +10,11 @@ namespace PacMan
     public class Path : Tile
     {
         private ICollidable member;
+        public override ICollidable Member
+        {
+            get;
+            set;
+        }
 
         public Path(int x, int y, ICollidable member) : base(x, y)
         {
@@ -18,7 +23,7 @@ namespace PacMan
 
         public override bool CanEnter()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override void Collide()
@@ -29,14 +34,12 @@ namespace PacMan
             }
         }
 
-        public override float GetDistance(Vector2 goal)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool isEmpty()
         {
-            throw new NotImplementedException();
+            if (member == null)
+                return true;
+            else
+                return false;
         }
     }
 }

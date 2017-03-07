@@ -63,5 +63,9 @@ namespace PacMan
 
         public void Collide(ICollidable ic) { }
 
+        public void Collide()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace PacMan
     public abstract class Tile
     {
         public Vector2 Position { get; set; }
-        public ICollidable Member { get; set; }
+        public abstract ICollidable Member { get; set; }
 
         public Tile(int x, int y)
         {
@@ -23,6 +23,9 @@ namespace PacMan
 
         public abstract bool isEmpty();
 
-        public abstract float GetDistance(Vector2 goal);
+        public float GetDistance(Vector2 goal)
+        {
+            return Vector2.Distance(this.Position, goal);
+        }
     }
 }
