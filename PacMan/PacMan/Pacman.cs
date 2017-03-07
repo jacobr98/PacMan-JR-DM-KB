@@ -59,7 +59,11 @@ namespace PacMan
 
             foreach (var g in controller.Ghostpack)
             {
-                if(controller.Ghostpack.CheckCollideGhosts(Position))
+                if (controller.Ghostpack.CheckCollideGhosts(Position))
+                {
+                    g.Collide();
+                    break;
+                }
             }
 
             ICollidable t = maze[(int)pos.X, (int)pos.Y].Member;
