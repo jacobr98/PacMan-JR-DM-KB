@@ -9,7 +9,7 @@ namespace PacMan
     public class Pellet : ICollidable
     {
         private int points;
-        public int Points { get; set; }
+        public int Points { get { return points; } set { this.points = value; } }
 
         public event Action<ICollidable> Collision;
 

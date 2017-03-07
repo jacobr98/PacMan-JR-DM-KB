@@ -64,7 +64,7 @@ namespace PacMan
                             array[x, y] = new Path(x, y, p);
                             break;
                         case "e":
-                            Energizer e = new Energizer(g.Ghostpack);
+                            Energizer e = new Energizer(g.Ghostpack, 100);
                             e.Collision += g.score.IncrementScore;
                             array[x, y] = new Path(x, y, e);
                             break;

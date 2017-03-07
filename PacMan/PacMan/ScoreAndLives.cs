@@ -15,10 +15,6 @@ namespace PacMan
         {
             this.Lives = game.Score.Lives;
             this.Score = game.Score.Score;
-            foreach(Ghost g in game.Ghostpack.....)
-            {
-                g.PacmanDied += deadPacman;
-            }
         }
 
         public void DeadPacman()
