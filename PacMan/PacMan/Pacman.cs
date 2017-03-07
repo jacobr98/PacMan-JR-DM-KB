@@ -56,6 +56,12 @@ namespace PacMan
 
         public void CheckCollisions()
         {
+
+            foreach (var g in controller.Ghostpack)
+            {
+                if(controller.Ghostpack.CheckCollideGhosts(Position))
+            }
+
             ICollidable t = maze[(int)pos.X, (int)pos.Y].Member;
             if(t != null)
             {

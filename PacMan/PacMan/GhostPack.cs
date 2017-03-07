@@ -18,7 +18,7 @@ namespace PacMan
             ghosts = new List<Ghost>();
         }
 
-        public void CheckCollideGhosts(Vector2 v)
+        public bool CheckCollideGhosts(Vector2 v)
         {
             throw new NotImplementedException();
         }
