@@ -30,8 +30,8 @@ namespace PacMan
 
         //Properties
         public Vector2 Position { get; set; }
-        public Direction Direction { get; set; }
-        public GhostState CurrentState { get; }
+        public Direction Direction { get { return this.direction; }set { this.direction = value;} }
+        public GhostState CurrentState { get; private set; }
         public int Points { get; set; }
 
         public Ghost(GameState g, int x, int y, Vector2 target, GhostState start, Color colour)
@@ -42,9 +42,16 @@ namespace PacMan
             this.maze = g.Maze;
             this.pacman = g.Pacman;
 
+            //set Timer 
+            scared = new Timer(10000);
+            scared.Elapsed += await StopFear();
             //to finish
         }
-
+        private async Task StopFear()
+        {
+            ChangeState(GhostState.Chase);
+            return
+        }
 
         public void Reset()
         {
@@ -53,12 +60,37 @@ namespace PacMan
 
         public void ChangeState(GhostState state)
         {
+
             this.CurrentState = state;
+            switch (state) {
+                case GhostState.Scared:
+                    currentState = new Scared(this, this.maze);
+                    scared.Set
+                    break;
+                case GhostState.Chase:
+                    currentState = new Chase(this, maze, target, pacman);
+                    
+                    break;
+            }
         }
 
         public void Move()
         {
-
+            currentState.Move();
+            switch (direction) {
+                case Direction.Up:
+                    Position = new Vector2(Position.X, Position.Y - 1);
+                    break;
+                case Direction.Down:
+                    Position = new Vector2(Position.X, Position.Y + 1);
+                    break;
+                case Direction.Left:
+                    Position = new Vector2(Position.X -1, Position.Y );
+                    break;
+                case Direction.Right:
+                    Position = new Vector2(Position.X + 1, Position.Y);
+                    break;
+            }
         }
 
         public void Collide(ICollidable ic) { }
