@@ -11,7 +11,8 @@ namespace PacMan
     {
         private GameState controller;
         private Maze maze;
-        public Vector2 position { get; set; }
+        public Vector2 Position { get { return pos; } set { pos = value; } }
+        private Vector2 pos;
         public Pacman(GameState controller)
         {
             this.controller = controller;
@@ -20,12 +21,47 @@ namespace PacMan
 
         public void Move (Direction dir)
         {
-
+            switch (dir)
+            {
+                case Direction.Up:
+                    if(maze[(int)pos.X,(int)pos.Y - 1] is Path)
+                    {
+                        pos = new Vector2(Position.X, Position.Y-1);
+                        CheckCollisions();
+                    }
+                    break;
+                case Direction.Down:
+                    if (maze[(int)pos.X, (int)pos.Y + 1] is Path)
+                    {
+                        pos = new Vector2(Position.X, Position.Y + 1);
+                        CheckCollisions();
+                    }
+                    break;
+                case Direction.Left:
+                    if (maze[(int)pos.X - 1, (int)pos.Y] is Path)
+                    {
+                        pos = new Vector2(Position.X - 1, Position.Y);
+                        CheckCollisions();
+                    }
+                    break;
+                case Direction.Right:
+                    if (maze[(int)pos.X + 1, (int)pos.Y] is Path)
+                    {
+                        pos = new Vector2(Position.X + 1, Position.Y);
+                        CheckCollisions();
+                    }
+                    break;
+            }
         }
 
         public void CheckCollisions()
         {
-
+            ICollidable t = maze[(int)pos.X, (int)pos.Y].Member;
+            if(t != null)
+            {
+                t.Collide();
+            }
+            
         }
     }
 }

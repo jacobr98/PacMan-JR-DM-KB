@@ -18,9 +18,12 @@ namespace PacMan
             this.points = point;
         }
 
-        public void Collide(ICollidable ic)
+        public void Collide()
         {
-            throw new NotImplementedException();
+            if(Collision != null)
+            {
+                Collision(this);
+            }
         }
     }
 }

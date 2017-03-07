@@ -13,6 +13,6 @@ namespace PacMan
 
         int Points { get; set; }
 
-        void Collide(ICollidable ic);
+        void Collide();
     }
 }
