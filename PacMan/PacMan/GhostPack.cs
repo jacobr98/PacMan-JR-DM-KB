@@ -31,7 +31,7 @@ namespace PacMan
         public void ScareGhost()
         {
             foreach (Ghost g in ghosts) {
-                g.ChangeState()
+                g.ChangeState(GhostState.Scared);
             }
         }
 
