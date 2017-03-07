@@ -17,12 +17,16 @@ namespace PacMan
 
         public Pacman Pacman { get { return this.pacman; } }
         private Pacman pacman;
+
         public GhostPack Ghostpack { get { return this.ghostpack; } }
         private GhostPack ghostpack;
+
         public Maze Maze { get { return this.maze; } }
         private Maze maze;
+
         public Pen Pen { get { return this.pen; } }
         private Pen pen;
+
         public ScoreAndLives Score { get { return this.score; } }
         private ScoreAndLives score; 
 
