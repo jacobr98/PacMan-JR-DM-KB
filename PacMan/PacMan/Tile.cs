@@ -17,24 +17,12 @@ namespace PacMan
             Position = new Vector2(x, y);
         }
 
-        public bool CanEnter()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool CanEnter();
 
-        public void Collide()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Collide();
 
-        public bool isEmpty()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool isEmpty();
 
-        public float GetDistance(Vector2 goal)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract float GetDistance(Vector2 goal);
     }
 }

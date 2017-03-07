@@ -21,7 +21,7 @@ namespace PacMan
             }
         }
 
-        private void deadPacman()
+        public void DeadPacman()
         {
             this.Lives--;
         }

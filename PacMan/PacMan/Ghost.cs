@@ -15,6 +15,7 @@ namespace PacMan
         private Pen pen;
         private Maze maze;
         private Direction direction;
+        public static Vector2 ReleasePosition;
 
         //pending type for GUI
         private Color colour;
@@ -25,7 +26,7 @@ namespace PacMan
 
         //Events
         public event Action PacmanDied;
-        public event Action Collision;
+        public event Action<ICollidable> Collision;
 
         //Properties
         public Vector2 Position { get; set; }
@@ -60,7 +61,7 @@ namespace PacMan
 
         }
 
-        public void Collide() { }
+        public void Collide(ICollidable ic) { }
 
     }
 }

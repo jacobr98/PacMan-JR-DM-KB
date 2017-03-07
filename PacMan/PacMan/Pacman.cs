@@ -11,12 +11,11 @@ namespace PacMan
     {
         private GameState controller;
         private Maze maze;
-        private Vector2 position;
-        public Pacman(GameState controller, int x, int y)
+        public Vector2 position { get; set; }
+        public Pacman(GameState controller)
         {
             this.controller = controller;
             this.maze = this.controller.Maze;
-            this.position = new Vector2(x, y);
         }
 
         public void Move (Direction dir)

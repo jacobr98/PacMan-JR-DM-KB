@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace PacMan
         public static GameState Parse(string filecontent)
         {
             GameState g = new GameState();
-            Pacman pac = new Pacman(g, 11,16);
+            Pacman pac = new Pacman(g);
             Pen pen = new Pen();
             Maze maze = new Maze();
             GhostPack gp = new GhostPack();
@@ -75,23 +76,33 @@ namespace PacMan
                             g.pen.AddTile(array[x, y]);
                             break;
                         case "P":
+                            array[x, y] = new Path(x, y,null);
+                            g.pacman.position = new Vector2(x,y);
                             break;
                         case "1":
-                        case "2":
+                            Ghost go = new Ghost(g,x,y,new Vector2(1,1),GhostState.Chase, new Color(255,0,0));
+                            Ghost.ReleasePosition = new Vector2(x,y);
+                            go.Collision += g.score.IncrementScore;
+                            go.PacmanDied += g.score.DeadPacman;
+                            g.ghostpack.Add(go);
+                            array[x, y] = new Path(x, y, null);
+                            break;
+                        case "2"://change the target/color later
                         case "3":
                         case "4":
+                            Ghost gh = new Ghost(g, x, y, new Vector2(1, 1), GhostState.Chase, new Color(255, 0, 0));
+                            gh.Collision += g.score.IncrementScore;
+                            gh.PacmanDied += g.score.DeadPacman;
+                            g.ghostpack.Add(gh);
+                            array[x, y] = new Path(x, y, null);
+                            g.pen.AddTile(array[x, y]);
+                            g.pen.AddToPen(gh);
                             break;
-                       
-
                     }
                 }
-            }   
-
-        }
-
-        public void addWall(Tile[,] t, int x,int y)
-        {
-            
+            }
+            g.maze.SetTiles(array);
+            return g;
         }
 
         public static string[][] getElements(string filecontent)
