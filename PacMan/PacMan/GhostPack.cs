@@ -8,12 +8,12 @@ using System.Collections;
 
 namespace PacMan
 {
-    public class GhostPack //: Ghost, IEnumerable<Ghost>
+    public class GhostPack : IEnumerable<Ghost>
     {
         private List<Ghost> ghosts;
 
         //look into it
-        public GhostPack() : base()
+        public GhostPack()
         {
             ghosts = new List<Ghost>();
         }
@@ -25,10 +25,12 @@ namespace PacMan
 
         public void ResetGhosts()
         {
-            throw new NotImplementedException();
+            foreach (Ghost g in ghosts) {
+                g.Reset();
+            }
         }
 
-        public void ScareGhosts(ICollidable ic)
+        public void ScareGhosts()
         {
             foreach (Ghost g in ghosts) {
                 g.ChangeState(GhostState.Scared);
@@ -37,7 +39,10 @@ namespace PacMan
 
         public void Move()
         {
-            throw new NotImplementedException();
+            foreach (Ghost g in ghosts)
+            {
+                g.Move();
+            }
         }
 
         public void Add(Ghost g)
@@ -50,9 +55,9 @@ namespace PacMan
             return ghosts.GetEnumerator();
         }
 
-        /*IEnumerator IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return ghosts.GetEnumerator();
-        }*/
+        }
     }
 }

@@ -41,17 +41,8 @@ namespace PacMan
             this.pen = g.Pen;
             this.maze = g.Maze;
             this.pacman = g.Pacman;
-
-            //set Timer 
-            scared = new Timer(10000);
-            //scared.Elapsed += await StopFear();
-            //to finish
+        //set tim
         }
-        /*private async Task StopFear()
-        {
-            ChangeState(GhostState.Chase);
-            //return
-        }*/
 
         public void Reset()
         {
@@ -65,7 +56,6 @@ namespace PacMan
             switch (state) {
                 case GhostState.Scared:
                     currentState = new Scared(this, this.maze);
-                    //scared.Set
                     break;
                 case GhostState.Chase:
                     currentState = new Chase(this, maze, target, pacman);
