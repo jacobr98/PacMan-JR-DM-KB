@@ -27,28 +27,28 @@ namespace PacMan
             switch (dir)
             {
                 case Direction.Up:
-                    if(maze[x,y- 1] is Path)
+                    if(maze[x,y- 1].CanEnter())
                     {
                         pos = new Vector2(Position.X, Position.Y-1);
                         CheckCollisions();
                     }
                     break;
                 case Direction.Down:
-                    if (maze[x, y + 1] is Path)
+                    if (maze[x, y + 1].CanEnter())
                     {
                         pos = new Vector2(Position.X, Position.Y + 1);
                         CheckCollisions();
                     }
                     break;
                 case Direction.Left:
-                    if (maze[x - 1, y] is Path)
+                    if (maze[x - 1, y].CanEnter())
                     {
                         pos = new Vector2(Position.X - 1, Position.Y);
                         CheckCollisions();
                     }
                     break;
                 case Direction.Right:
-                    if (maze[x + 1, y] is Path)
+                    if (maze[x + 1, y].CanEnter())
                     {
                         pos = new Vector2(Position.X + 1, Position.Y);
                         CheckCollisions();
@@ -69,7 +69,7 @@ namespace PacMan
                 }
             }*/
 
-            ICollidable t = maze[(int)pos.X, (int)pos.Y].Member;
+            Tile t = maze[(int)pos.X, (int)pos.Y];
             if(t != null)
             {
                 t.Collide();

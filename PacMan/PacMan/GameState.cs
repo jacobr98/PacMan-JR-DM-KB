@@ -12,9 +12,14 @@ namespace PacMan
 
     public enum GhostState { Scared, Chase, Released}
 
+    /// <summary>
+    /// The GameState represents all the business class
+    /// </summary>
     public class GameState
     {
-
+        /// <summary>
+        /// Variables contain the state of the game.
+        /// </summary>
         public Pacman Pacman { get { return this.pacman; } }
         private Pacman pacman;
 
@@ -30,23 +35,23 @@ namespace PacMan
         public ScoreAndLives Score { get { return this.score; } }
         private ScoreAndLives score; 
 
-        public GameState()
-        {
 
-        }
-
+        /// <summary>
+        /// Static method that returns a mapped gamestate instance by reading a specified file
+        /// </summary>
+        /// <param name="string">File path of the game file</param>
+        /// <returns>GameState instance</returns>
         public static GameState Parse(string filecontent)
         {
             GameState g = new GameState();
             Maze maze = new Maze();
             g.maze = maze;
-            Pacman pac = new Pacman(g);
             Pen pen = new Pen();
-            GhostPack gp = new GhostPack();
-
-            g.pacman = pac;
             g.pen = pen;
+            GhostPack gp = new GhostPack();
             g.ghostpack = gp;
+            Pacman pac = new Pacman(g);
+            g.pacman = pac;
             g.score = new ScoreAndLives(g);
             g.score.Lives = 3;
 

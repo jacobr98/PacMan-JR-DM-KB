@@ -10,22 +10,32 @@ namespace PacMan
     public class Path : Tile
     {
         private ICollidable member;
-        public override ICollidable Member
+        public override ICollidable Member //member which is ICollidable contained within the tile
         {
             get { return member; }
             set { member = value; }
         }
 
+        /// <summary>
+        /// Constructor instantiates the position in the base
+        /// </summary>
         public Path(int x, int y, ICollidable member) : base(x, y)
         {
             this.member = member;
         }
 
+        /// <summary>
+        /// The element defines whether anything can enter the tile.
+        /// </summary>
+        /// <returns>Returns true</returns>
         public override bool CanEnter()
         {
             return true;
         }
 
+        /// <summary>
+        /// Calls the member's collide method and deletes the meber afterwards
+        /// </summary>
         public override void Collide()
         {
             if(member != null)
@@ -35,6 +45,10 @@ namespace PacMan
             member = null;
         }
 
+        /// <summary>
+        /// The element defines whether there is a member within it.
+        /// </summary>
+        /// <returns>boolean</returns>
         public override bool isEmpty()
         {
             if (member == null)
