@@ -36,17 +36,20 @@ namespace PacMan
 
         public void IncrementScore(ICollidable collidable)
         {
-            if((collidable is Ghost))
+            if (collidable != null)
             {
-                if(((Ghost)collidable).CurrentState == GhostState.Scared)
+                if ((collidable is Ghost))
+                {
+                    if (((Ghost)collidable).CurrentState == GhostState.Scared)
+                    {
+                        this.Score += collidable.Points;
+                    }
+                }
+                else
                 {
                     this.Score += collidable.Points;
                 }
-            }else
-            {
-                this.Score += collidable.Points;
             }
-            
         }
     }
 }

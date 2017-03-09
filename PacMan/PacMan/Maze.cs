@@ -39,9 +39,15 @@ namespace PacMan
             }
         }
 
+        //can't do 180 turn
         public List<Tile> GetAvailableNeighbours(Vector2 position, Direction dir)
         {
-            throw new NotImplementedException();
+            switch (dir)
+            {
+                case Direction.Left:
+
+                    break;
+            }
         }
 
         public void CheckMembersLeft()
@@ -54,6 +60,7 @@ namespace PacMan
 
         protected void OnPacmanWon()
         {
+            //temporary for this phase
             PacmanWon?.Invoke(null);
         }
 
