@@ -22,7 +22,7 @@ namespace PacMan
         public void SetTiles(Tile[,] maze)
         {
             this.maze = maze;
-            this.Size = maze.Length;
+            this.Size = maze.GetLength(0);
         }
 
         public Tile this[int x, int y]
