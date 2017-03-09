@@ -13,16 +13,23 @@ namespace PacMan
         GhostPack ghosts;
 
         public event Action<ICollidable> Collision;
+        /// <summary>
+        /// Constructor instantiates the ghosts, the points 
+        /// and subscribe the ghosts to the Collision 
+        /// </summary>
         public Energizer(GhostPack ghosts, int point)
         {
             this.ghosts = ghosts;
-            Collision += this.ghosts.ScareGhosts;
             this.points = point;
         }
 
+        /// <summary>
+        /// Triggers the Collision event and scares the ghost
+        /// </summary>
         public void Collide()
         {
             onCollision(this);
+            this.ghosts.ScareGhosts();
         }
 
         protected void onCollision(ICollidable ic)

@@ -13,15 +13,22 @@ namespace PacMan
 
         public event Action<ICollidable> Collision;
 
+        /// <summary>
+        /// Constructor instantiates the points
+        /// </summary>
         public Pellet(int point)
         {
             this.points = point;
         }
 
+        /// <summary>
+        /// Triggers the Collision event
+        /// </summary>
         public void Collide()
         {
             onCollision(this);
         }
+
 
         protected void onCollision(ICollidable ic)
         {

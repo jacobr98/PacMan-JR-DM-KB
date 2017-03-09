@@ -15,14 +15,17 @@ namespace TestWithConsole
             
             GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
             Console.WriteLine(g.Pacman.Position);
-            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Left);
             Console.WriteLine(g.Pacman.Position);
 
             g.Pacman.Move(Direction.Left);
+            Console.WriteLine(g.Pacman.Position);
+            g.Pacman.Move(Direction.Right);
 
             Console.WriteLine(g.Pacman.Position);
-            Console.WriteLine(g.Maze[(int)g.Pacman.Position.X, (int)g.Pacman.Position.Y + 1].isEmpty());
-            Console.WriteLine(g.Maze[(int)g.Pacman.Position.X, (int)g.Pacman.Position.Y + 1].CanEnter());
+            Console.WriteLine(g.Score.Score);
+
+
 
             /*for(int i=0; i<g.Maze.Size; i++)
             {

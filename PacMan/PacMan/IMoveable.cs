@@ -9,10 +9,15 @@ namespace PacMan
 {
     interface IMoveable
     {
-        Direction Direction { get; set; }
+        
+        Direction Direction { get; set; }//defines in which direction the implemented object is going
 
-        Vector2 Position { get; set; }
+        Vector2 Position { get; set; }//the position of the implemented object can be update
 
+        /// <summary>
+        /// Move should update the position according to specific criterea
+        /// </summary>
+        /// <returns></returns>
         void Move();
     }
 }

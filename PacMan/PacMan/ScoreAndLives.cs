@@ -40,8 +40,7 @@ namespace PacMan
             {
                 if(((Ghost)collidable).CurrentState == GhostState.Scared)
                 {
-                    //hardcode?
-                    this.Score += 200;
+                    this.Score += collidable.Points;
                 }
             }else
             {

@@ -69,11 +69,9 @@ namespace PacMan
                 }
             }*/
 
-            Tile t = maze[(int)pos.X, (int)pos.Y];
-            if(t != null)
-            {
-                t.Collide();
-            }
+            maze[(int)pos.X, (int)pos.Y].Collide(); 
+
+
             
         }
     }
