@@ -12,14 +12,14 @@ namespace TestWithConsole
         static void Main(string[] args)
         {
             GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
-            Console.WriteLine(g.Maze.Size);
-            for(int i=0; i<g.Maze.Size; i++)
+            //Console.WriteLine(g.Maze.Size);
+            /*for(int i=0; i<g.Maze.Size; i++)
             {
                 for(int j=0; j<g.Maze.Size; j++)
                 {
                     Console.WriteLine(i + "," + j + "," + g.Maze[i,j]);
                 }
-            }
+            }*/
         }
     }
 }

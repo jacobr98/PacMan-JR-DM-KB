@@ -50,8 +50,19 @@ namespace PacMan
             g.score = new ScoreAndLives(g);
             Ghost gh;
             string[][] parse = getElements(filecontent);
+            Console.WriteLine("In GameState");
+            foreach(var sa in parse)
+            {
+                foreach(string s in sa)
+                {
+                    Console.Write(s);
+                }
+                Console.WriteLine();
+            }
+
+            //Console.WriteLine(parse.Rank);
             Tile[,] array = new Tile[parse[0].Length,parse.Length];
-            Console.WriteLine(parse[0].Length + "," + parse.Length);
+            //Console.WriteLine(parse[1].Length + "," + parse.Length);
             for (int y=0; y<parse.Length; y++)
             {
                 for(int x=0; x<parse[0].Length; x++)
@@ -133,7 +144,8 @@ namespace PacMan
             char[] c = new char[] {' ', '\n'};
             for (int i=0; i<stringLines.Length; i++)
             {
-                parseStr[i] = stringLines[i].Split(c, StringSplitOptions.RemoveEmptyEntries);
+                parseStr[i] = stringLines[i].Split(',');
+                //Console.WriteLine(stringLines[i]);
             }
 
             return parseStr;
