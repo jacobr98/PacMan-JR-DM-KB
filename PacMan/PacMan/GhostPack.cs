@@ -18,15 +18,17 @@ namespace PacMan
             ghosts = new List<Ghost>();
         }
 
-        public void CheckCollideGhosts(Vector2 v)
+        public bool CheckCollideGhosts(Vector2 v)
         {
             foreach(var g in ghosts)
             {
                 if(g.Position == v)
                 {
                     g.Collide();
+                    return true;
                 }
             }
+            return false;
         }
 
         public void ResetGhosts()

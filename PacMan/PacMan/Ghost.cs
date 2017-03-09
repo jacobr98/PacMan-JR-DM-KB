@@ -16,6 +16,7 @@ namespace PacMan
         private Maze maze;
         private Direction direction;
         public static Vector2 ReleasePosition;
+        private Vector2 position;
 
         //pending type for GUI
         private Color colour;
@@ -29,7 +30,7 @@ namespace PacMan
         public event Action<ICollidable> Collision;
 
         //Properties
-        public Vector2 Position { get; set; }
+        public Vector2 Position { get { return this.position; } set { this.position = value; } }
         public Direction Direction { get { return this.direction; }set { this.direction = value;} }
         public GhostState CurrentState { get; private set; }
         public int Points { get; set; }
@@ -41,11 +42,22 @@ namespace PacMan
             this.pen = g.Pen;
             this.maze = g.Maze;
             this.pacman = g.Pacman;
+            this.position = new Vector2(x, y);
+
+            switch (start)
+            {
+                case GhostState.Chase:
+                    this.currentState = new Chase(this, maze, target, pacman);
+                    break;
+                case GhostState.Scared:
+                    this.currentState = new Scared(this,maze);
+                    break;
+            }
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            pen.AddToPen(this);
         }
 
         public void ChangeState(GhostState state)
@@ -58,7 +70,10 @@ namespace PacMan
                     break;
                 case GhostState.Chase:
                     currentState = new Chase(this, maze, target, pacman);
-                    
+                    break;
+                case GhostState.Released:
+                    position = ReleasePosition;
+                    currentState = new Chase(this, maze, target, pacman);
                     break;
             }
         }
@@ -66,26 +81,25 @@ namespace PacMan
         public void Move()
         {
             currentState.Move();
-            switch (direction) {
-                case Direction.Up:
-                    Position = new Vector2(Position.X, Position.Y - 1);
-                    break;
-                case Direction.Down:
-                    Position = new Vector2(Position.X, Position.Y + 1);
-                    break;
-                case Direction.Left:
-                    Position = new Vector2(Position.X -1, Position.Y );
-                    break;
-                case Direction.Right:
-                    Position = new Vector2(Position.X + 1, Position.Y);
-                    break;
-            }
         }
 
 
         public void Collide()
         {
-            OnCollision(this);
+
+            if (CurrentState == GhostState.Scared)
+            {
+                OnCollision(this);
+            }
+            else if(CurrentState == GhostState.Chase)
+            {
+                OnPacmanDied();
+            }
+        }
+
+        protected void OnPacmanDied()
+        {
+            PacmanDied?.Invoke();
         }
 
         protected void OnCollision(ICollidable i)

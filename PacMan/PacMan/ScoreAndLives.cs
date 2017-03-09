@@ -20,12 +20,10 @@ namespace PacMan
 
         public void DeadPacman()
         {
-            if(this.Lives == 0)
+            this.Lives--;
+            if (this.Lives == 0)
             {
                 onOver("Dead");
-            }else
-            {
-                this.Lives--;
             }
         }
 
@@ -43,6 +41,7 @@ namespace PacMan
                     if (((Ghost)collidable).CurrentState == GhostState.Scared)
                     {
                         this.Score += collidable.Points;
+                        ((Ghost)collidable).Reset();
                     }
                 }
                 else

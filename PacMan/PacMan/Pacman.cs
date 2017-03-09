@@ -60,14 +60,14 @@ namespace PacMan
         public void CheckCollisions()
         {
 
-            /*foreach (var g in controller.Ghostpack)
+            foreach (var g in controller.Ghostpack)
             {
                 if (controller.Ghostpack.CheckCollideGhosts(Position))
                 {
                     g.Collide();
                     break;
                 }
-            }*/
+            }
 
             maze[(int)pos.X, (int)pos.Y].Collide(); 
 
