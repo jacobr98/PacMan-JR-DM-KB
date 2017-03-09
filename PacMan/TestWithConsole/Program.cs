@@ -14,10 +14,21 @@ namespace TestWithConsole
         {
             
             GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
-            foreach(var s  in g.Ghostpack)
+            Console.WriteLine(g.Pacman.Position);
+            g.Pacman.Move(Direction.Left);
+            Console.WriteLine(g.Pacman.Position);
+            Console.WriteLine(g.Maze[(int)g.Pacman.Position.X, (int)g.Pacman.Position.Y].Member == null);
+
+            /*for(int i=0; i<g.Maze.Size; i++)
             {
-                Console.WriteLine(s);
-            }
+                for(int j=0; j<g.Maze.Size; j++)
+                {
+                    Console.Write(g.Maze[j,i]);
+                }
+
+                Console.WriteLine();
+            }*/
+            
         }
     }
 }

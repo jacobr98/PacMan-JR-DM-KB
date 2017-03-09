@@ -35,7 +35,7 @@ namespace PacMan
             }
             set
             {
-                this.maze[x, y] = value;
+                maze[x, y] = value;
             }
         }
 
@@ -46,7 +46,7 @@ namespace PacMan
 
         public void CheckMembersLeft()
         {
-
+            
         }
         
     }

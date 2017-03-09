@@ -21,31 +21,34 @@ namespace PacMan
 
         public void Move (Direction dir)
         {
+            int x = (int)pos.X;
+            int y = (int)pos.Y;
+
             switch (dir)
             {
                 case Direction.Up:
-                    if(maze[(int)pos.X,(int)pos.Y - 1] is Path)
+                    if(maze[x,y- 1] is Path)
                     {
                         pos = new Vector2(Position.X, Position.Y-1);
                         CheckCollisions();
                     }
                     break;
                 case Direction.Down:
-                    if (maze[(int)pos.X, (int)pos.Y + 1] is Path)
+                    if (maze[x, y + 1] is Path)
                     {
                         pos = new Vector2(Position.X, Position.Y + 1);
                         CheckCollisions();
                     }
                     break;
                 case Direction.Left:
-                    if (maze[(int)pos.X - 1, (int)pos.Y] is Path)
+                    if (maze[x - 1, y] is Path)
                     {
                         pos = new Vector2(Position.X - 1, Position.Y);
                         CheckCollisions();
                     }
                     break;
                 case Direction.Right:
-                    if (maze[(int)pos.X + 1, (int)pos.Y] is Path)
+                    if (maze[x + 1, y] is Path)
                     {
                         pos = new Vector2(Position.X + 1, Position.Y);
                         CheckCollisions();
@@ -57,14 +60,14 @@ namespace PacMan
         public void CheckCollisions()
         {
 
-            foreach (var g in controller.Ghostpack)
+            /*foreach (var g in controller.Ghostpack)
             {
                 if (controller.Ghostpack.CheckCollideGhosts(Position))
                 {
                     g.Collide();
                     break;
                 }
-            }
+            }*/
 
             ICollidable t = maze[(int)pos.X, (int)pos.Y].Member;
             if(t != null)

@@ -32,6 +32,7 @@ namespace PacMan
             {
                 member.Collide();
             }
+            member = null;
         }
 
         public override bool isEmpty()

@@ -38,14 +38,14 @@ namespace PacMan
         public static GameState Parse(string filecontent)
         {
             GameState g = new GameState();
+            Maze maze = new Maze();
+            g.maze = maze;
             Pacman pac = new Pacman(g);
             Pen pen = new Pen();
-            Maze maze = new Maze();
             GhostPack gp = new GhostPack();
 
             g.pacman = pac;
             g.pen = pen;
-            g.maze = maze;
             g.ghostpack = gp;
             g.score = new ScoreAndLives(g);
             g.score.Lives = 3;
@@ -133,7 +133,6 @@ namespace PacMan
         {
             string[] stringLines = File.ReadAllLines(filecontent);
             string[][] parseStr = new string[stringLines.Length][];
-            char[] c = new char[] {' ', '\n'};
             for (int i=0; i<stringLines.Length; i++)
             {
                 parseStr[i] = stringLines[i].Split(',');
