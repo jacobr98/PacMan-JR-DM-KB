@@ -51,6 +51,7 @@ namespace PacMan
             Ghost gh;
             string[][] parse = getElements(filecontent);
             Tile[,] array = new Tile[parse[0].Length,parse.Length];
+            Console.WriteLine(parse[0].Length + "," + parse.Length);
             for (int y=0; y<parse.Length; y++)
             {
                 for(int x=0; x<parse[0].Length; x++)
@@ -61,7 +62,7 @@ namespace PacMan
                             array[x, y] = new Wall(x, y);
                             break;
                         case "p":
-                            Pellet p = new PacMan.Pellet(10);
+                            Pellet p = new Pellet(10);
                             p.Collision += g.score.IncrementScore;
                             array[x, y] = new Path(x, y, p);
                             break;
@@ -121,6 +122,7 @@ namespace PacMan
                 }
             }
             g.maze.SetTiles(array);
+            g.maze.PacmanWon += g.Score.IncrementScore;
             return g;
         }
 

@@ -11,7 +11,7 @@ namespace PacMan
     {
         private Tile[,] maze;
 
-        public event Action PacmanWon;
+        public event Action<ICollidable> PacmanWon;
         public int Size { get; set; }
 
         public Maze()
@@ -22,14 +22,15 @@ namespace PacMan
         public void SetTiles(Tile[,] maze)
         {
             this.maze = maze;
+            this.Size = maze.Length;
         }
 
         public Tile this[int x, int y]
         {
             get
             {
-                if (x < 0 || x > maze.GetLength(1) || y < 0 || y > maze.GetLength(0))
-                    throw new ArgumentOutOfRangeException("The indeces are out of range ({0},{1})", x, y.ToString());
+                if (x < 0 || x >= Size || y < 0 || y >= Size)
+                    throw new ArgumentOutOfRangeException("The indeces are out of range (" + x + ", " + y + ")");
                 return maze[x, y];
             }
             set

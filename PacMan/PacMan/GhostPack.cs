@@ -30,7 +30,7 @@ namespace PacMan
             }
         }
 
-        public void ScareGhosts()
+        public void ScareGhosts(ICollidable ic)
         {
             foreach (Ghost g in ghosts) {
                 g.ChangeState(GhostState.Scared);
