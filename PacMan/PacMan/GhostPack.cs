@@ -12,15 +12,21 @@ namespace PacMan
     {
         private List<Ghost> ghosts;
 
-        //look into it
+        
         public GhostPack()
         {
             ghosts = new List<Ghost>();
         }
 
-        public bool CheckCollideGhosts(Vector2 v)
+        public void CheckCollideGhosts(Vector2 v)
         {
-            throw new NotImplementedException();
+            foreach(var g in ghosts)
+            {
+                if(g.Position == v)
+                {
+                    g.Collide();
+                }
+            }
         }
 
         public void ResetGhosts()
@@ -32,9 +38,12 @@ namespace PacMan
 
         public void ScareGhosts()
         {
-            foreach (Ghost g in ghosts) {
+
+            foreach (Ghost g in ghosts)
+            {
                 g.ChangeState(GhostState.Scared);
             }
+            Ghost.scared = new System.Timers.Timer();
         }
 
         public void Move()

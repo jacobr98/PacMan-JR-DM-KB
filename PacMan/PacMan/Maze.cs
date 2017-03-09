@@ -46,7 +46,31 @@ namespace PacMan
 
         public void CheckMembersLeft()
         {
-            
+            if (areMembersNull())
+            {
+                OnPacmanWon();
+            }
+        }
+
+        protected void OnPacmanWon()
+        {
+            PacmanWon?.Invoke(null);
+        }
+
+        private bool areMembersNull()
+        {
+            foreach (Tile t in maze)
+            {
+                if (t is Path)
+                {
+                    if (t.Member != null)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
         
     }

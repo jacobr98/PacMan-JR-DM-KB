@@ -43,6 +43,37 @@ namespace Test2
             //To be done when ghost is done
         }
 
+        [TestMethod]
+        public void TestScoreAfterCollision()
+        {
+            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+
+            Console.WriteLine(g.Pacman.Position);
+
+            //Trying to get to an energizer
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Down);
+            g.Pacman.Move(Direction.Down);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+
+            Console.WriteLine(g.Pacman.Position);
+            Console.WriteLine(g.Score.Score);
+
+            Assert.AreEqual(g.Score.Score, 230);
+
+        }
+
+        [TestMethod]
         public void Test
     }
 }

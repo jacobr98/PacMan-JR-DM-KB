@@ -12,8 +12,30 @@ namespace TestWithConsole
     {
         static void Main(string[] args)
         {
-            
+
             GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+
+            Console.WriteLine(g.Pacman.Position);
+
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Down);
+            g.Pacman.Move(Direction.Down);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+
+            Console.WriteLine(g.Pacman.Position);
+            Console.WriteLine(g.Score.Score);
+
+            /*GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
             Console.WriteLine(g.Pacman.Position);
             g.Pacman.Move(Direction.Left);
             Console.WriteLine(g.Pacman.Position);
@@ -23,7 +45,7 @@ namespace TestWithConsole
             g.Pacman.Move(Direction.Right);
 
             Console.WriteLine(g.Pacman.Position);
-            Console.WriteLine(g.Score.Score);
+            Console.WriteLine(g.Score.Score);*/
 
 
 
@@ -36,7 +58,7 @@ namespace TestWithConsole
 
                 Console.WriteLine();
             }*/
-            
+
         }
     }
 }

@@ -41,7 +41,7 @@ namespace PacMan
         /// </summary>
         /// <param name="string">File path of the game file</param>
         /// <returns>GameState instance</returns>
-        public static GameState Parse(string filecontent)
+        public static GameState Parse(string filePath)
         {
             GameState g = new GameState();
             Maze maze = new Maze();
@@ -56,7 +56,7 @@ namespace PacMan
             g.score.Lives = 3;
 
             Ghost gh;
-            string[][] parse = getElements(filecontent);
+            string[][] parse = getElements(filePath);
             
             Tile[,] array = new Tile[parse[0].Length,parse.Length];
 
@@ -93,7 +93,6 @@ namespace PacMan
                         case "1":
                             gh = new Ghost(g,x,y,new Vector2(1,1),GhostState.Chase, new Color(255,0,0));
                             Ghost.ReleasePosition = new Vector2(x,y);
-                            //set timer
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);
@@ -134,9 +133,9 @@ namespace PacMan
             return g;
         }
 
-        private static string[][] getElements(string filecontent)
+        private static string[][] getElements(string filePath)
         {
-            string[] stringLines = File.ReadAllLines(filecontent);
+            string[] stringLines = File.ReadAllLines(filePath);
             string[][] parseStr = new string[stringLines.Length][];
             for (int i=0; i<stringLines.Length; i++)
             {

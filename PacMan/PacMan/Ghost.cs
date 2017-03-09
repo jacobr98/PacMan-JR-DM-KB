@@ -22,7 +22,7 @@ namespace PacMan
         public Color Colour { get; }
 
         private IGhostState currentState;
-        private static Timer scared;
+        public static Timer scared;
 
         //Events
         public event Action PacmanDied;
@@ -41,9 +41,6 @@ namespace PacMan
             this.pen = g.Pen;
             this.maze = g.Maze;
             this.pacman = g.Pacman;
-            //dont set timer in constructor it is supposed to be static so can't instantate it
-            //I'll set it in the gamestate
-        //set tim
         }
 
         public void Reset()
@@ -88,7 +85,12 @@ namespace PacMan
 
         public void Collide()
         {
-            throw new NotImplementedException();
+            OnCollision(this);
+        }
+
+        protected void OnCollision(ICollidable i)
+        {
+            Collision?.Invoke(i);
         }
     }
 }
