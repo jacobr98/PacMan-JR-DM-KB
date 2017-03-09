@@ -84,6 +84,7 @@ namespace PacMan
                         case "1":
                             gh = new Ghost(g,x,y,new Vector2(1,1),GhostState.Chase, new Color(255,0,0));
                             Ghost.ReleasePosition = new Vector2(x,y);
+                            //set timer
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);

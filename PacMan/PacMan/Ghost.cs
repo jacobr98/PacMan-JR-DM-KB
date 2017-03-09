@@ -41,6 +41,8 @@ namespace PacMan
             this.pen = g.Pen;
             this.maze = g.Maze;
             this.pacman = g.Pacman;
+            //dont set timer in constructor it is supposed to be static so can't instantate it
+            //I'll set it in the gamestate
         //set tim
         }
 
@@ -83,7 +85,6 @@ namespace PacMan
             }
         }
 
-        public void Collide(ICollidable ic) { }
 
         public void Collide()
         {
