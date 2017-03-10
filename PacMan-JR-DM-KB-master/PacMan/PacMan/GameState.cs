@@ -44,7 +44,7 @@ namespace PacMan
         /// </summary>
         /// <param name="string">File path of the game file</param>
         /// <returns>GameState instance</returns>
-        public static GameState Parse(string filePath)
+        public static GameState Parse(string fileContent)
         {
             GameState g = new GameState();
             Maze maze = new Maze();
@@ -61,7 +61,7 @@ namespace PacMan
             g.Pacman.Position = new Vector2(11, 17);
 
             Ghost gh;
-            string[][] parse = getElements(filePath);
+            string[][] parse = getElements(fileContent);
             
             Tile[,] array = new Tile[parse[0].Length,parse.Length];
 
@@ -148,9 +148,9 @@ namespace PacMan
         /// Method that parse the .csv file into a jagged array
         /// </summary>
         /// <param name="filePath">The file path of the maze</param>
-        private static string[][] getElements(string filePath)
+        private static string[][] getElements(string fileContent)
         {
-            string[] stringLines = File.ReadAllLines(filePath);
+            string[] stringLines = fileContent.Split('\n');
             string[][] parseStr = new string[stringLines.Length][];
             for (int i=0; i<stringLines.Length; i++)
             {

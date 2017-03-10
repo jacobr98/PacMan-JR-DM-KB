@@ -2,6 +2,7 @@
 using PacMan;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,8 @@ namespace TestWithConsole
     {
         static void Main(string[] args)
         {
-            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            string s = File.ReadAllText("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(s);
 
             bool triggered = false;
 
@@ -23,7 +25,7 @@ namespace TestWithConsole
             {
                 for (int j = 0; j < g.Maze.Size; j++)
                 {
-                    if (g.Maze[j, i].Member is Path)
+                    if (g.Maze[j, i] is PacMan.Path)
                     {
                         g.Maze[j, i].Collide();
                     }

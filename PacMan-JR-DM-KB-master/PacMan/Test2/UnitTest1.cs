@@ -2,23 +2,26 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PacMan;
 using Microsoft.Xna.Framework;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Test2
 {
     [TestClass]
     public class UnitTest1
     {
+        string level1 = File.ReadAllText("../../../PacMan/levelsPen.csv"); 
         [TestMethod]
         public void TestStaticParseGS()
         {
-            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(level1);
             //A lot of the testing for the gamestate was done in TestWithConsole (Console Application)
         }
 
         [TestMethod]
         public void TestPacmanMove()
         {
-            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(level1);
 
 
             Assert.AreEqual(g.Pacman.Position, new Vector2(11,17));
@@ -39,7 +42,7 @@ namespace Test2
         [TestMethod]
         public void TestScoreAfterCollision()
         {
-            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(level1);
 
             Console.WriteLine(g.Pacman.Position);
 
@@ -67,7 +70,7 @@ namespace Test2
         [TestMethod]
         public void TestPacmanCheckCollision()
         {
-            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(level1);
             Vector2 v = g.Pacman.Position;
             g.Pacman.Move(Direction.Right);
             g.Pacman.Move(Direction.Up);
@@ -107,7 +110,7 @@ namespace Test2
         [TestMethod]
         public void TestPacmanCheckCollisionWithEnergizer()
         {
-            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(level1);
             Vector2 v = g.Pacman.Position;
             g.Pacman.Move(Direction.Right);
             g.Pacman.Move(Direction.Up);
@@ -148,7 +151,7 @@ namespace Test2
         [TestMethod]
         public void TestPacmanAtNoLives()
         {
-            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(level1);
             Vector2 v = g.Pacman.Position;
 
             //move pacman a little
@@ -179,18 +182,18 @@ namespace Test2
         [TestMethod]
         public void TestPacmanWon()
         {
-            GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(level1);
 
             bool triggered = false;
 
             g.Maze.PacmanWon += (x) => triggered = true;
 
             //collide with all the pellets and energizer to check win
-            for(int i=0; i<g.Maze.Size; i++)
+            for (int i = 0; i < g.Maze.Size; i++)
             {
-                for(int j=0; j<g.Maze.Size; j++)
+                for (int j = 0; j < g.Maze.Size; j++)
                 {
-                    if(g.Maze[j,i].Member is Path)
+                    if (g.Maze[j, i] is PacMan.Path)
                     {
                         g.Maze[j, i].Collide();
                     }
@@ -200,6 +203,19 @@ namespace Test2
             g.Maze.CheckMembersLeft();
 
             Assert.AreEqual(triggered, true);
+        }
+
+        [TestMethod]
+        public void TestMazeNeighboursMethod()
+        {
+            GameState g = GameState.Parse(level1);
+
+            //test getNeighbours independently from ghost with a specified position and direction
+            List<Tile> t = g.Maze.GetAvailableNeighbours(g.Pacman.Position, Direction.Right);
+
+            Assert.AreEqual(t.Count, 1);
+            Assert.AreEqual(t[0].Position, new Vector2(g.Pacman.Position.X + 1, g.Pacman.Position.Y));
+
         }
         
     }
