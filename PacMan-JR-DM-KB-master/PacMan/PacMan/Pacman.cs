@@ -82,9 +82,6 @@ namespace PacMan
             controller.Ghostpack.CheckCollideGhosts(Position);
 
             maze[(int)pos.X, (int)pos.Y].Collide(); 
-
-
-            
         }
     }
 }

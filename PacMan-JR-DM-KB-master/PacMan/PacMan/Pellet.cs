@@ -11,7 +11,14 @@ namespace PacMan
     /// </summary>
     public class Pellet : ICollidable
     {
+        /// <summary>
+        /// Variable
+        /// </summary>
         private int points;
+
+        /// <summary>
+        /// Indexer for points
+        /// </summary>
         public int Points { get { return points; } set { this.points = value; } }
 
         public event Action<ICollidable> Collision;

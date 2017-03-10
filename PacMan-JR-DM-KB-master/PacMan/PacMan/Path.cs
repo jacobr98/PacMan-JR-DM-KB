@@ -12,7 +12,11 @@ namespace PacMan
     /// </summary>
     public class Path : Tile
     {
+        /// <summary>
+        /// Variable
+        /// </summary>
         private ICollidable member;
+
         public override ICollidable Member //member which is ICollidable contained within the tile
         {
             get { return member; }

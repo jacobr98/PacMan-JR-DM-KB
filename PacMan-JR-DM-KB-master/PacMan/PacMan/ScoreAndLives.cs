@@ -6,18 +6,30 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
+    /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+    /// </summary>
     public class ScoreAndLives
     {
+        /// <summary>
+        /// Property
+        /// </summary>
         public int Lives { get; set; }
         public int Score { get; set; }
 
         public event Action<string> GameOver;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ScoreAndLives(GameState game)
         {
             
         }
 
+        /// <summary>
+        /// When pacman has no more lives, triggers the event Over
+        /// </summary>
         public void DeadPacman()
         {
             this.Lives--;
@@ -27,11 +39,18 @@ namespace PacMan
             }
         }
 
+        /// <summary>
+        /// Event handler when Pacman dies
+        /// </summary>
         protected void onOver(string state)
         {
             GameOver?.Invoke(state);
         }
 
+        /// <summary>
+        /// Increments the score everytime Pacman hits a dot, Energizer or scares ghosts
+        /// </summary>
+        /// <param name="collidable">The ICollidable that got hit</param>
         public void IncrementScore(ICollidable collidable)
         {
             if (collidable != null)

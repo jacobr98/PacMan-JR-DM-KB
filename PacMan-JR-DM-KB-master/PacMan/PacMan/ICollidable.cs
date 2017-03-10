@@ -13,6 +13,9 @@ namespace PacMan
     public interface ICollidable
     {
 
+        /// <summary>
+        /// Event for collision
+        /// </summary>
         event Action<ICollidable> Collision;
 
         int Points { get; set; }//worth of the element in points

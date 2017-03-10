@@ -12,12 +12,14 @@ namespace PacMan
     /// </summary>
     class Chase : IGhostState
     {
-        
-
+        /// <summary>
+        /// Variables
+        /// </summary>
         private Ghost ghost;
         private Maze maze;
         private Vector2 target;
         private Pacman pacman;
+
         /// <summary>
         /// Constructor instantiates the ghost, maze, target and pacman.
         /// </summary>

@@ -11,6 +11,9 @@ namespace PacMan
     /// </summary>
     public class Energizer : ICollidable
     {
+        /// <summary>
+        /// Variables and Indexer
+        /// </summary>
         private int points;
         public int Points { get { return points; } set { this.points = value; } }
         GhostPack ghosts;
