@@ -13,10 +13,43 @@ namespace TestWithConsole
     {
         static void Main(string[] args)
         {
-            string s = File.ReadAllText("../../../PacMan/levelsPen.csv");
+            string level1 = File.ReadAllText("../../../PacMan/levelsPen.csv");
+            GameState g = GameState.Parse(level1);
+
+            Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+            gh.Direction = Direction.Left;
+            //make the ghost move
+            //Assert.AreEqual(gh.Position, new Vector2(14, 15));
+            gh.Move();
+            gh.Move();
+            gh.Move();
+            gh.Move();
+            //Assert.AreEqual(gh.Position, new Vector2(12, 17));
+
+            //then reset the ghost to the pen
+            gh.Reset();
+            Console.WriteLine(gh.Position);
+
+            for (int i = 0; i < g.Maze.Size; i++)
+            {
+                for (int j = 0; j < g.Maze.Size; j++)
+                {
+                    Console.Write(g.Maze[j, i]+ "," +  g.Maze[j,i]?.Position);
+                }
+                Console.WriteLine();
+            }
+
+
+            /*string s = File.ReadAllText("../../../PacMan/levelsPen.csv");
             GameState g = GameState.Parse(s);
 
-            bool triggered = false;
+            List<Tile> t2 = g.Maze.GetAvailableNeighbours(new Vector2(15, 4), Direction.Left);
+            foreach(Tile t in t2)
+            {
+                Console.WriteLine(t.Position);
+            }*/
+
+            /*bool triggered = false;
 
             g.Maze.PacmanWon += (x) => triggered = true;
 
@@ -34,7 +67,7 @@ namespace TestWithConsole
 
             g.Maze.CheckMembersLeft();
 
-            Console.WriteLine(triggered);
+            Console.WriteLine(triggered);*/
 
             /*GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
             Vector2 v = g.Pacman.Position;

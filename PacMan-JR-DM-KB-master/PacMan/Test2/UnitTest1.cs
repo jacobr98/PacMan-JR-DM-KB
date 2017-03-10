@@ -216,6 +216,69 @@ namespace Test2
             Assert.AreEqual(t.Count, 1);
             Assert.AreEqual(t[0].Position, new Vector2(g.Pacman.Position.X + 1, g.Pacman.Position.Y));
 
+
+            List<Tile> t2 = g.Maze.GetAvailableNeighbours(new Vector2(15,4), Direction.Left);
+            Assert.AreEqual(t2.Count, 2);
+            foreach(var t1 in t2)
+            {
+                if (t1.Position != new Vector2(14,4) && t1.Position != new Vector2(15,5))
+                {
+                    throw new Exception();
+                }
+            }
+
+        }
+
+        [TestMethod]
+        public void TestChaseMoveGhost()
+        {
+            GameState g = GameState.Parse(level1);
+
+            //Create our own ghost so I can manipulate it
+            Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+            gh.Direction = Direction.Left;
+            Assert.AreEqual(gh.Position, new Vector2(14, 15));
+            gh.Move();
+            gh.Move();
+            Assert.AreEqual(gh.Position, new Vector2(12, 15));
+            gh.Move();
+            Assert.AreEqual(gh.Position, new Vector2(12, 16));
+            Assert.AreEqual(gh.Direction, Direction.Down);
+            gh.Move();
+            Assert.AreEqual(gh.Position, new Vector2(12, 17));
+            //The ghost is going to its target which is pacman because he is not moving
+
+            
+        }
+
+        [TestMethod]
+        public void TestResetGhost()
+        {
+            GameState g = GameState.Parse(level1);
+
+            Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+            gh.Direction = Direction.Left;
+            //make the ghost move
+            Assert.AreEqual(gh.Position, new Vector2(14, 15));
+            gh.Move();
+            gh.Move();
+            gh.Move();
+            gh.Move();
+            Assert.AreEqual(gh.Position, new Vector2(12, 17));
+
+            //then reset the ghost to the pen
+            gh.Reset();
+            Assert.IsTrue(g.Pen.IsGhostInPen(gh));
+        }
+
+        [TestMethod]
+        public void TestChangeGhostState()
+        {
+            GameState g = GameState.Parse(level1);
+
+            Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+
+
         }
         
     }

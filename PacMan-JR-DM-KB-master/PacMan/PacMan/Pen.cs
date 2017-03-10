@@ -71,5 +71,17 @@ namespace PacMan
             t.Elapsed += Release;
             timers.Add(t);
         }
+
+        public bool IsGhostInPen(Ghost g)
+        {
+            foreach(var gh in ghosts)
+            {
+                if(gh == g)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
