@@ -32,10 +32,11 @@ namespace PacMan
         {
             foreach(var g in ghosts)
             {
+                //Checks to see if each ghosts position matches the V (pacmans position)
                 if(g.Position == v)
                 {
+                    //Calls collide if matches 
                     g.Collide();
-                    ResetGhosts();
                     return true;
                 }
             }

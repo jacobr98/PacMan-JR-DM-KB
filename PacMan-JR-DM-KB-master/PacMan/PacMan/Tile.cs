@@ -48,7 +48,7 @@ namespace PacMan
         public float GetDistance(Vector2 goal)
         {
             if (goal == null)
-                Console.WriteLine("null");
+                throw new ArgumentNullException();
             return Vector2.Distance(this.Position, goal);
         }
     }

@@ -57,6 +57,7 @@ namespace PacMan
             {
                 if ((collidable is Ghost))
                 {
+                    //If Ghost is scared sends him to the pen.
                     if (((Ghost)collidable).CurrentState == GhostState.Scared)
                     {
                         this.Score += collidable.Points;

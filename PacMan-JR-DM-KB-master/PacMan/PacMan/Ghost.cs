@@ -102,10 +102,12 @@ namespace PacMan
         /// </summary>
         public void Move()
         {
+            //Changes Target positions once it passes the previous target
             if(target == position)
             {
                 target = pacman.Position; 
             }
+            //Use the state objec to decide how to move
             currentState.Move();
         }
 

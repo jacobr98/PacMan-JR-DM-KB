@@ -13,7 +13,7 @@ namespace PacMan
     public class Path : Tile
     {
         /// <summary>
-        /// Variable
+        /// Variable for contained member
         /// </summary>
         private ICollidable member;
 
