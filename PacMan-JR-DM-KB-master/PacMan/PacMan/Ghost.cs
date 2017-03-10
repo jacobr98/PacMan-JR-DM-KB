@@ -134,6 +134,7 @@ namespace PacMan
         /// </summary>
         protected void OnPacmanDied()
         {
+            Console.WriteLine("collide with pacman and died");
             PacmanDied?.Invoke();
         }
 
@@ -143,6 +144,7 @@ namespace PacMan
         /// <param name="i">The ICollidable that collides with the ghost</param>
         protected void OnCollision(ICollidable i)
         {
+            
             Collision?.Invoke(i);
         }
     }

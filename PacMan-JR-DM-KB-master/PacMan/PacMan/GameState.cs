@@ -53,10 +53,11 @@ namespace PacMan
             g.pen = pen;
             GhostPack gp = new GhostPack();
             g.ghostpack = gp;
-            Pacman pac = new Pacman(g);
-            g.pacman = pac;
             g.score = new ScoreAndLives(g);
             g.score.Lives = 3;
+            Pacman pac = new Pacman(g);
+            g.pacman = pac;
+            
             g.Pacman.Position = new Vector2(11, 17);
 
             Ghost gh;
@@ -93,6 +94,7 @@ namespace PacMan
                         case "P":
                             array[x, y] = new Path(x, y,null);
                             g.pacman.Position = new Vector2(x,y);
+                            g.pacman.initPosition = new Vector2(x, y);
                             break;
                         case "1":
                             gh = new Ghost(g,x,y,g.pacman.Position,GhostState.Chase, new Color(255,0,0));
@@ -138,6 +140,7 @@ namespace PacMan
             }
             g.maze.SetTiles(array);
             g.maze.PacmanWon += g.Score.IncrementScore;
+            g.pacman.SubToGhosts();
             return g;
         }
 

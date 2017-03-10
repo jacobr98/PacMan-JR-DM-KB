@@ -37,7 +37,7 @@ namespace PacMan
             this.Lives--;
             if (this.Lives == 0)
             {
-                onOver("Dead");
+                onOver("dead");
             }
         }
 
@@ -46,6 +46,7 @@ namespace PacMan
         /// </summary>
         protected void onOver(string state)
         {
+            Console.WriteLine(state);
             GameOver?.Invoke(state);
         }
 

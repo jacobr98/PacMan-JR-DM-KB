@@ -20,6 +20,8 @@ namespace PacMan
         public Vector2 Position { get { return pos; } set { pos = value; } }
         private Vector2 pos;
 
+        public Vector2 initPosition;
+
         /// <summary>
         /// Constructor that instantiates the controller and maze
         /// </summary>
@@ -28,7 +30,20 @@ namespace PacMan
         {
             this.controller = controller;
             this.maze = this.controller.Maze;
+            //added event handlers to reset pacman position
+            this.controller.Score.GameOver += (x) => pos = initPosition;
+            this.controller.Maze.PacmanWon += (x) => pos = initPosition;
+            
         }
+
+        public void SubToGhosts()
+        {
+            foreach (var g in this.controller.Ghostpack)
+            {
+                g.PacmanDied += () => { pos = initPosition; };
+            }
+        }
+
 
         /// <summary>
         /// Checks if pacman can move in a given direction and checks for

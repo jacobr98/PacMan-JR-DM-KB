@@ -125,6 +125,7 @@ namespace PacMan
         {
             //temporary for this phase
             PacmanWon?.Invoke(null);
+            Console.WriteLine("Won");
         }
 
         /// <summary>
@@ -136,8 +137,9 @@ namespace PacMan
             {
                 if (t is Path)
                 {
-                    if (t.Member != null)
+                    if (!t.isEmpty())
                     {
+                        Console.WriteLine(t.Position + " is not null" );
                         return false;
                     }
                 }

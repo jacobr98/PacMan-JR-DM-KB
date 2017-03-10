@@ -13,7 +13,30 @@ namespace TestWithConsole
         static void Main(string[] args)
         {
             GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+
+            bool triggered = false;
+
+            g.Maze.PacmanWon += (x) => triggered = true;
+
+            //collide with all the pellets and energizer to check win
+            for (int i = 0; i < g.Maze.Size; i++)
+            {
+                for (int j = 0; j < g.Maze.Size; j++)
+                {
+                    if (g.Maze[j, i].Member is Path)
+                    {
+                        g.Maze[j, i].Collide();
+                    }
+                }
+            }
+
+            g.Maze.CheckMembersLeft();
+
+            Console.WriteLine(triggered);
+
+            /*GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
             Vector2 v = g.Pacman.Position;
+            Console.WriteLine(g.Pacman.Position + " initial");
             g.Pacman.Move(Direction.Right);
             g.Pacman.Move(Direction.Up);
             g.Pacman.Move(Direction.Up);
@@ -29,17 +52,17 @@ namespace TestWithConsole
             g.Pacman.Move(Direction.Up);
             g.Pacman.Move(Direction.Left);
             g.Pacman.Move(Direction.Left);
-            g.Maze[21, 3].Collide();
+            //g.Maze[21, 3].Collide();
             g.Pacman.Move(Direction.Left);
             g.Pacman.Move(Direction.Left);
 
-            Console.WriteLine(g.Pacman.Position);
+            Console.WriteLine(g.Pacman.Position + " after");
             Console.WriteLine(g.Score.Lives + ", " + g.Score.Score);
 
             foreach(var gh in g.Ghostpack)
             {
                 Console.WriteLine(gh.Position +  ", " + gh.CurrentState);
-            }
+            }*/
 
             /*GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
 
