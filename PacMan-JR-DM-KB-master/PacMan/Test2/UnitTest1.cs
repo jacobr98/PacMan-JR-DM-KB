@@ -116,7 +116,7 @@ namespace Test2
 
             Console.WriteLine(g.Pacman.Position);
 
-            //Trying to get to an energizer
+            //Trying to get to an energizer and adding the pellets in the path
             g.Pacman.Move(Direction.Right);
             g.Pacman.Move(Direction.Right);
             g.Pacman.Move(Direction.Right);

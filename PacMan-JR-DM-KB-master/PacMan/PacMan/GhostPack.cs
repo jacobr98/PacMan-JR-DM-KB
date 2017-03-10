@@ -35,9 +35,18 @@ namespace PacMan
                 //Checks to see if each ghosts position matches the V (pacmans position)
                 if(g.Position == v)
                 {
-                    //Calls collide if matches 
-                    g.Collide();
-                    return true;
+                    if(g.CurrentState == GhostState.Chase)
+                    {
+                        g.Collide();
+                        ResetGhosts();
+                        return true;
+                    }
+                    else if(g.CurrentState == GhostState.Scared)
+                    {
+                        g.Collide();
+                        return true;
+                    }
+                    
                 }
             }
             return false;
@@ -106,15 +115,17 @@ namespace PacMan
         }
 
         /// <summary>
-        /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+        /// Implements the IEnumerable
         /// </summary>
+        /// <returns name="Enumerator"> Ghosts enumerators</returns>
         public IEnumerator<Ghost> GetEnumerator()
         {
             return ghosts.GetEnumerator();
         }
         /// <summary>
-        /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+        /// Implements the IEnumerable
         /// </summary>
+        /// <returns name="Enumerator"> Ghosts enumerators</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ghosts.GetEnumerator();

@@ -13,12 +13,12 @@ namespace PacMan
     class Chase : IGhostState
     {
         /// <summary>
-        /// Variables
+        /// Variables used in the for the ghost to be able to chase
         /// </summary>
-        private Ghost ghost;
-        private Maze maze;
-        private Vector2 target;
-        private Pacman pacman;
+        private Ghost ghost;//used to change position
+        private Maze maze;//used to acces available neighbours
+        private Vector2 target;//used to chase that target 
+        //private Pacman pacman; Not used.
 
         /// <summary>
         /// Constructor instantiates the ghost, maze, target and pacman.
@@ -28,7 +28,6 @@ namespace PacMan
             this.ghost = ghost;
             this.maze = maze;
             this.target = target;
-            this.pacman = pacman;
         }
         /// <summary>
         /// Calculates the shortest distance for the ghosts to catch pacman

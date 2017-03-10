@@ -11,17 +11,14 @@ namespace PacMan
     /// </summary>
     public class Energizer : ICollidable
     {
-        /// <summary>
-        /// Variables and Indexer
-        /// </summary>
         private int points;
-        public int Points { get { return points; } set { this.points = value; } }
-        GhostPack ghosts;
+        public int Points { get { return points; } set { this.points = value; } }//value of the energizer for the score
+        GhostPack ghosts;//used to trigger their scared mode when event is raise.
 
-        public event Action<ICollidable> Collision;
+        public event Action<ICollidable> Collision;//raised when collision happens with pacman
+
         /// <summary>
         /// Constructor instantiates the ghosts, the points 
-        /// and subscribe the ghosts to the Collision 
         /// </summary>
         public Energizer(GhostPack ghosts, int point)
         {
@@ -39,7 +36,7 @@ namespace PacMan
         }
 
         /// <summary>
-        /// Event handler for collision
+        /// Event raise for collision
         /// </summary>
         protected void onCollision(ICollidable ic)
         {

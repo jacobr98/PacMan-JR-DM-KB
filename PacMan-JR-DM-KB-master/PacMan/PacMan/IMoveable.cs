@@ -20,7 +20,6 @@ namespace PacMan
         /// <summary>
         /// Move should update the position according to specific criterea
         /// </summary>
-        /// <returns></returns>
         void Move();
     }
 }

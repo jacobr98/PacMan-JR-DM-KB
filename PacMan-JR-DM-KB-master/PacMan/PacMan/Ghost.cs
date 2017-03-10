@@ -16,13 +16,13 @@ namespace PacMan
         /// <summary>
         /// Variables for the Ghost class
         /// </summary>
-        private Pacman pacman;
-        private Vector2 target;
-        private Pen pen;
+        private Pacman pacman;//used to update the target
+        private Vector2 target;//used in chasing mode
+        private Pen pen;//tiles in which the ghosts are contained when they are penned 
         private Maze maze;
         private Direction direction;
-        public static Vector2 ReleasePosition;
-        private Vector2 position;
+        public static Vector2 ReleasePosition;//used for release
+        private Vector2 position;//ghosts position
 
         //pending type for GUI
         private Color colour;
@@ -121,6 +121,7 @@ namespace PacMan
             if (CurrentState == GhostState.Scared)
             {
                 OnCollision(this);
+                Reset();
             }
             else if(CurrentState == GhostState.Chase)
             {

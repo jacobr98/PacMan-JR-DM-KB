@@ -11,12 +11,12 @@ namespace PacMan
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
     /// </summary>
-    public enum Direction {Left, Right, Up, Down}
+    public enum Direction {Left, Right, Up, Down}//Represent direction in which entity is moving
 
-    public enum GhostState { Scared, Chase, Released}
+    public enum GhostState { Scared, Chase, Released}//Represents the state of the ghost
 
     /// <summary>
-    /// The GameState represents all the business class
+    /// The GameState represents all the business classes
     /// </summary>
     public class GameState
     {

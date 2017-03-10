@@ -18,7 +18,7 @@ namespace PacMan
         private Tile[,] maze;
         public event Action<ICollidable> PacmanWon;
 
-        //property
+        //property Length of the Tile[,]
         public int Size { get; set; }
 
         /// <summary>
@@ -59,11 +59,11 @@ namespace PacMan
         }
 
         /// <summary>
-        /// Method that gets all available neighouring Tiles of the current position
+        /// Method that gets all available neighouring Tiles of the current position if it can enter
         /// and adds it into a List
         /// </summary>
         /// <param name="position">The current vector</param>
-        /// <param name="dir">The currect direction</param>
+        /// <param name="dir">The current direction</param>
         public List<Tile> GetAvailableNeighbours(Vector2 position, Direction dir)
         {
             List<Tile> t = new List<Tile>(); 
@@ -119,7 +119,7 @@ namespace PacMan
         }
 
         /// <summary>
-        /// Event handler when Pacman wins
+        /// Event raise when Pacman wins
         /// </summary>
         protected void OnPacmanWon()
         {
