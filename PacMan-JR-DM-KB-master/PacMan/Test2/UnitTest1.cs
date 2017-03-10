@@ -277,7 +277,9 @@ namespace Test2
             GameState g = GameState.Parse(level1);
 
             Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+            gh.ChangeState(GhostState.Scared);
 
+            Assert.AreEqual(gh.CurrentState, GhostState.Scared);
 
         }
         
