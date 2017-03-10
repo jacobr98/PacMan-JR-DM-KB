@@ -7,18 +7,34 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
+    /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+    /// </summary>
     public class Pacman
     {
+        /// <summary>
+        /// Variables and indexer
+        /// </summary>
         private GameState controller;
         private Maze maze;
         public Vector2 Position { get { return pos; } set { pos = value; } }
         private Vector2 pos;
+
+        /// <summary>
+        /// Constructor that instantiates the controller and maze
+        /// </summary>
+        /// <param name="controller">The controller to be instantianted</param>
         public Pacman(GameState controller)
         {
             this.controller = controller;
             this.maze = this.controller.Maze;
         }
 
+        /// <summary>
+        /// Checks if pacman can move in a given direction and checks for
+        /// collisions
+        /// </summary>
+        /// <param name="dir">The direction to move in</param>
         public void Move (Direction dir)
         {
             int x = (int)pos.X;
@@ -57,17 +73,13 @@ namespace PacMan
             }
         }
 
+        /// <summary>
+        /// Checks for collisions
+        /// </summary>
         public void CheckCollisions()
         {
 
-            foreach (var g in controller.Ghostpack)
-            {
-                if (controller.Ghostpack.CheckCollideGhosts(Position))
-                {
-                    g.Collide();
-                    break;
-                }
-            }
+            controller.Ghostpack.CheckCollideGhosts(Position);
 
             maze[(int)pos.X, (int)pos.Y].Collide(); 
 

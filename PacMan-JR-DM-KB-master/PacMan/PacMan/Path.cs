@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace PacMan
 {
+    /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+    /// </summary>
     public class Path : Tile
     {
         private ICollidable member;

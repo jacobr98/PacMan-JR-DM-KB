@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace PacMan
 {
     /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
     /// The Tile represents 1 element in the maze which defines its behaviour and position.
     /// </summary>
     public abstract class Tile
@@ -41,8 +42,9 @@ namespace PacMan
         public abstract bool isEmpty();
 
         /// <summary>
-        /// XXXXXXXXXXXXXXXXXXX Dont get it
+        /// Gets the distance to the goal
         /// </summary>
+        /// <returns>float distance between 2 vectors</returns>
         public float GetDistance(Vector2 goal)
         {
             if (goal == null)

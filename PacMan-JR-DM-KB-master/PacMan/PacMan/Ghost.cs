@@ -8,8 +8,14 @@ using System.Timers;
 
 namespace PacMan
 {
+    /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+    /// </summary>
     public class Ghost : ICollidable, IMoveable
     {
+        /// <summary>
+        /// Variables for the Ghost class
+        /// </summary>
         private Pacman pacman;
         private Vector2 target;
         private Pen pen;
@@ -35,6 +41,10 @@ namespace PacMan
         public GhostState CurrentState { get; private set; }
         public int Points { get; set; }
 
+        /// <summary>
+        /// Constructor instantiates the gamestate, the location, the target, the ghoststate and color
+        /// of the ghost.
+        /// </summary>
         public Ghost(GameState g, int x, int y, Vector2 target, GhostState start, Color colour)
         {
             this.target = target;
@@ -53,13 +63,22 @@ namespace PacMan
                     this.currentState = new Scared(this,maze);
                     break;
             }
+
+            this.CurrentState = start;
         }
 
+        /// <summary>
+        /// Puts all the ghosts into Pen.
+        /// </summary>
         public void Reset()
         {
             pen.AddToPen(this);
         }
 
+        /// <summary>
+        /// Changes the state of a ghost
+        /// </summary>
+        /// <param name="state">The state in which the ghost is changed to</param>
         public void ChangeState(GhostState state)
         {
 
@@ -78,15 +97,25 @@ namespace PacMan
             }
         }
 
+        /// <summary>
+        /// Method that moves the ghost towards pacman
+        /// </summary>
         public void Move()
         {
+            if(target == position)
+            {
+                target = pacman.Position; 
+            }
             currentState.Move();
         }
 
-
+        /// <summary>
+        /// Check whether the collision with pacman was scared or chase
+        /// </summary>
         public void Collide()
         {
 
+            Console.WriteLine(CurrentState);
             if (CurrentState == GhostState.Scared)
             {
                 OnCollision(this);
@@ -97,11 +126,18 @@ namespace PacMan
             }
         }
 
+        /// <summary>
+        /// Event handler for pacman's death
+        /// </summary>
         protected void OnPacmanDied()
         {
             PacmanDied?.Invoke();
         }
 
+        /// <summary>
+        /// Event handler for collision
+        /// </summary>
+        /// <param name="i">The ICollidable that collides with the ghost</param>
         protected void OnCollision(ICollidable i)
         {
             Collision?.Invoke(i);

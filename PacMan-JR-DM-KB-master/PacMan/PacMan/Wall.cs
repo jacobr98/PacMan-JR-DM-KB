@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace PacMan
 {
+    /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+    /// </summary>
     public class Wall : Tile
     {
         //The member of a wall should be null and can't be set

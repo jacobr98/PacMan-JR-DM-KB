@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
+    /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+    /// </summary>
     public enum Direction {Left, Right, Up, Down}
 
     public enum GhostState { Scared, Chase, Released}
@@ -54,6 +57,7 @@ namespace PacMan
             g.pacman = pac;
             g.score = new ScoreAndLives(g);
             g.score.Lives = 3;
+            g.Pacman.Position = new Vector2(11, 17);
 
             Ghost gh;
             string[][] parse = getElements(filePath);
@@ -91,7 +95,8 @@ namespace PacMan
                             g.pacman.Position = new Vector2(x,y);
                             break;
                         case "1":
-                            gh = new Ghost(g,x,y,new Vector2(1,1),GhostState.Chase, new Color(255,0,0));
+                            gh = new Ghost(g,x,y,g.pacman.Position,GhostState.Chase, new Color(255,0,0));
+                            gh.Points = 200;
                             Ghost.ReleasePosition = new Vector2(x,y);
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
@@ -99,7 +104,8 @@ namespace PacMan
                             array[x, y] = new Path(x, y, null);
                             break;
                         case "2":
-                            gh = new Ghost(g, x, y, new Vector2(2, 1), GhostState.Chase, new Color(255, 192, 203));
+                            gh = new Ghost(g, x, y, g.pacman.Position, GhostState.Chase, new Color(255, 192, 203));
+                            gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);
@@ -108,7 +114,8 @@ namespace PacMan
                             g.pen.AddToPen(gh);
                             break;
                         case "3":
-                            gh = new Ghost(g, x, y, new Vector2(3, 1), GhostState.Chase, new Color(64, 224, 208));
+                            gh = new Ghost(g, x, y, g.pacman.Position, GhostState.Chase, new Color(64, 224, 208));
+                            gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);
@@ -117,7 +124,8 @@ namespace PacMan
                             g.pen.AddToPen(gh);
                             break;
                         case "4":
-                            gh = new Ghost(g, x, y, new Vector2(4, 1), GhostState.Chase, new Color(255, 165, 0));
+                            gh = new Ghost(g, x, y, g.pacman.Position, GhostState.Chase, new Color(255, 165, 0));
+                            gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);
@@ -133,6 +141,10 @@ namespace PacMan
             return g;
         }
 
+        /// <summary>
+        /// Method that parse the .csv file into a jagged array
+        /// </summary>
+        /// <param name="filePath">The file path of the maze</param>
         private static string[][] getElements(string filePath)
         {
             string[] stringLines = File.ReadAllLines(filePath);

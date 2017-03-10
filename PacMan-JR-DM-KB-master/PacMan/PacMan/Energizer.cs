@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
+    /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+    /// </summary>
     public class Energizer : ICollidable
     {
         private int points;
@@ -32,6 +35,9 @@ namespace PacMan
             this.ghosts.ScareGhosts();
         }
 
+        /// <summary>
+        /// Event handler for collision
+        /// </summary>
         protected void onCollision(ICollidable ic)
         {
             Collision?.Invoke(this);

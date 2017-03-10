@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
+    /// <summary>
+    /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
+    /// </summary>
     public class Pellet : ICollidable
     {
         private int points;
@@ -29,7 +32,9 @@ namespace PacMan
             onCollision(this);
         }
 
-
+        /// <summary>
+        /// Event handler for collision
+        /// </summary>
         protected void onCollision(ICollidable ic)
         {
             Collision?.Invoke(this);

@@ -12,8 +12,36 @@ namespace TestWithConsole
     {
         static void Main(string[] args)
         {
-
             GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
+            Vector2 v = g.Pacman.Position;
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Right);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Up);
+            g.Pacman.Move(Direction.Left);
+            g.Pacman.Move(Direction.Left);
+            g.Maze[21, 3].Collide();
+            g.Pacman.Move(Direction.Left);
+            g.Pacman.Move(Direction.Left);
+
+            Console.WriteLine(g.Pacman.Position);
+            Console.WriteLine(g.Score.Lives + ", " + g.Score.Score);
+
+            foreach(var gh in g.Ghostpack)
+            {
+                Console.WriteLine(gh.Position +  ", " + gh.CurrentState);
+            }
+
+            /*GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
 
             Console.WriteLine(g.Pacman.Position);
 
@@ -33,7 +61,7 @@ namespace TestWithConsole
             g.Pacman.Move(Direction.Right);
 
             Console.WriteLine(g.Pacman.Position);
-            Console.WriteLine(g.Score.Score);
+            Console.WriteLine(g.Score.Score);*/
 
             /*GameState g = GameState.Parse("../../../PacMan/levelsPen.csv");
             Console.WriteLine(g.Pacman.Position);
