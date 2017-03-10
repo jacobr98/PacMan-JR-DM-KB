@@ -20,8 +20,10 @@ namespace PacMan
         public event Action<string> GameOver;
 
         /// <summary>
-        /// Constructor
+        /// Constructor thats takes in the gamestate but does nothing with it
+        /// Implementation of subscribing to events have changed to the gamestate
         /// </summary>
+        [Obsolete]
         public ScoreAndLives(GameState game)
         {
             

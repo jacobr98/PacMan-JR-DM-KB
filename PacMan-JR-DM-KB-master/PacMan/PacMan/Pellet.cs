@@ -11,10 +11,8 @@ namespace PacMan
     /// </summary>
     public class Pellet : ICollidable
     {
-        /// <summary>
-        /// Variable
-        /// </summary>
-        private int points;
+        
+        private int points;//represents the value of the pellet
 
         /// <summary>
         /// Indexer for points
