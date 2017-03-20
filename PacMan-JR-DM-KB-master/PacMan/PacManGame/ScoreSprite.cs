@@ -13,10 +13,7 @@ namespace PacManGame
         {
         }
 
-        public MazeSprite(Game game) : base(game)
-        {
-        }
-
+ 
         public override void Initialize()
         {
         }
