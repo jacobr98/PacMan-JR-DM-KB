@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PacMan
@@ -150,7 +151,7 @@ namespace PacMan
         /// <param name="filePath">The file path of the maze</param>
         private static string[][] getElements(string fileContent)
         {
-            string[] stringLines = fileContent.Split('\n');
+            string[] stringLines = Regex.Split(fileContent, @"\r\n");
             string[][] parseStr = new string[stringLines.Length][];
             for (int i=0; i<stringLines.Length; i++)
             {
