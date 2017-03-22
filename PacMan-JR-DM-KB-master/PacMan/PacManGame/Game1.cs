@@ -12,6 +12,10 @@ namespace PacManGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        private GhostSprite ghostSprite;
+        private MazeSprite mazeSprite;
+        private ScoreSprite scoreSprite;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -26,7 +30,7 @@ namespace PacManGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            //code
 
             base.Initialize();
         }
@@ -78,6 +82,11 @@ namespace PacManGame
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        private void gameOver()
+        {
+            Components.Remove(ghostSprite);
         }
     }
 }
