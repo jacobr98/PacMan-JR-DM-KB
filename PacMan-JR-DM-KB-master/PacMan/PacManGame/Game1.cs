@@ -23,6 +23,9 @@ namespace PacManGame
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 750;
+            graphics.PreferredBackBufferWidth = 900;
+ 
             Content.RootDirectory = "Content";
         }
 
@@ -35,9 +38,10 @@ namespace PacManGame
         protected override void Initialize()
         {
             //code
-            string level1 = File.ReadAllText("../../../PacMan/levelsPen.csv");
+            string level1 = File.ReadAllText("../../../../../PacMan/levelsPen.csv");
             this.gameState = GameState.Parse(level1);
             this.mazeSprite = new MazeSprite(this);
+            Components.Add(mazeSprite);
             base.Initialize();
         }
 
@@ -83,7 +87,7 @@ namespace PacManGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 

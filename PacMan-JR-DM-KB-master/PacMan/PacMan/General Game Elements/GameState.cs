@@ -62,7 +62,7 @@ namespace PacMan
 
             Ghost gh;
             string[][] parse = getElements(fileContent);
-            
+      
             Tile[,] array = new Tile[parse[0].Length,parse.Length];
 
             for (int y=0; y<parse.Length; y++)

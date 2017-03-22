@@ -26,7 +26,7 @@ namespace PacManGame
         public MazeSprite(Game1 game) : base(game)
         {
             this.game = game;
-            this.maze = game.PacManGame.Maze; 
+          
         }
 
         public override void Initialize()
@@ -41,6 +41,7 @@ namespace PacManGame
             wall = game.Content.Load<Texture2D>("wall");
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
+            this.maze = game.PacManGame.Maze;
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -49,6 +50,7 @@ namespace PacManGame
         }
         public override void Draw(GameTime gameTime)
         {
+            spriteBatch.Begin();
             for (int i = 0; i < maze.Size; i++)
             {
                 
@@ -57,21 +59,22 @@ namespace PacManGame
                     {
                         spriteBatch.Draw(wall, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
                     }
-                    else if (maze[i, j] is Pellet) {
-                        spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                    
+                    else if (maze[i, j] is Tile) {
+                        if (maze[i,j].Member is Pellet)
+                            spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                        else if(maze[i,j].Member is Energizer)
+                            spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                        else
+                            spriteBatch.Draw(empty, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
                     }
-                    else if (maze[i, j] is Energizer)
-                    {
-                        spriteBatch.Draw(energizer, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
-                    }
-                    else 
-                    {
-                        spriteBatch.Draw(empty, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
-                    }
+                    
+                   
                 }
             }
-          
-            spriteBatch.Begin();
+
+            spriteBatch.End();
+            base.Draw(gameTime);
 
 
         }
