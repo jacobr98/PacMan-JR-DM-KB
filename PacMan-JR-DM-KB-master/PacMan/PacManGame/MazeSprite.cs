@@ -67,16 +67,12 @@ namespace PacManGame
                             spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
                         else
                             spriteBatch.Draw(empty, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
-                    }
-                    
-                   
+                    } 
                 }
             }
 
             spriteBatch.End();
             base.Draw(gameTime);
-
-
         }
     }
 }

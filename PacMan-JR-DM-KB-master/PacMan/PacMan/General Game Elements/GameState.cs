@@ -63,7 +63,7 @@ namespace PacMan
 
             Ghost gh;
             string[][] parse = getElements(fileContent);
-      
+
             Tile[,] array = new Tile[parse[0].Length,parse.Length];
 
             for (int y=0; y<parse.Length; y++)
@@ -151,7 +151,7 @@ namespace PacMan
         /// <param name="filePath">The file path of the maze</param>
         private static string[][] getElements(string fileContent)
         {
-            string[] stringLines = Regex.Split(fileContent, @"\r\n");
+            string[] stringLines = Regex.Split(fileContent, @"\n");
             string[][] parseStr = new string[stringLines.Length][];
             for (int i=0; i<stringLines.Length; i++)
             {
