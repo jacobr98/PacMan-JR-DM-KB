@@ -15,16 +15,18 @@ namespace PacManGame
 {
     class MazeSprite : DrawableGameComponent
     {
-        private Game game;
+        private Game1 game;
         private SpriteBatch spriteBatch;
         private Texture2D empty;
         private Texture2D wall;
         private Texture2D pellet;
         private Texture2D energizer;
+        private Maze maze;
 
-        public MazeSprite(Game game) : base(game)
+        public MazeSprite(Game1 game) : base(game)
         {
             this.game = game;
+            this.maze = game.PacManGame.Maze; 
         }
 
         public override void Initialize()
@@ -47,6 +49,28 @@ namespace PacManGame
         }
         public override void Draw(GameTime gameTime)
         {
+            for (int i = 0; i < maze.Size; i++)
+            {
+                
+                for (int j = 0; j < maze.Size; j++) {
+                    if (maze[i, j] is Wall)
+                    {
+                        spriteBatch.Draw(wall, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                    }
+                    else if (maze[i, j] is Pellet) {
+                        spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                    }
+                    else if (maze[i, j] is Energizer)
+                    {
+                        spriteBatch.Draw(energizer, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                    }
+                    else 
+                    {
+                        spriteBatch.Draw(empty, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                    }
+                }
+            }
+          
             spriteBatch.Begin();
 
 

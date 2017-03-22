@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PacMan;
+using System.IO;
 
 namespace PacManGame
 {
@@ -15,6 +17,8 @@ namespace PacManGame
         private GhostSprite ghostSprite;
         private MazeSprite mazeSprite;
         private ScoreSprite scoreSprite;
+        private GameState gameState;
+        public GameState PacManGame { get { return this.gameState; } }
 
         public Game1()
         {
@@ -31,7 +35,9 @@ namespace PacManGame
         protected override void Initialize()
         {
             //code
-
+            string level1 = File.ReadAllText("../../../PacMan/levelsPen.csv");
+            this.gameState = GameState.Parse(level1);
+            this.mazeSprite = new MazeSprite(this);
             base.Initialize();
         }
 
