@@ -23,9 +23,10 @@ namespace PacManGame
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = 750;
+            graphics.PreferredBackBufferHeight = 950;
             graphics.PreferredBackBufferWidth = 900;
- 
+            graphics.ApplyChanges();
+
             Content.RootDirectory = "Content";
         }
 
@@ -37,11 +38,13 @@ namespace PacManGame
         /// </summary>
         protected override void Initialize()
         {
-            //code
             string level1 = File.ReadAllText("../../../../../PacMan/levelsPen.csv");
             this.gameState = GameState.Parse(level1);
             this.mazeSprite = new MazeSprite(this);
+            GhostPack gp = new GhostPack();
+            this.ghostSprite = new GhostSprite(this, gp);
             Components.Add(mazeSprite);
+            Components.Add(ghostSprite);
             base.Initialize();
         }
 
