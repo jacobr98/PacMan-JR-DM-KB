@@ -33,7 +33,7 @@ namespace PacManGame
             oldState = Keyboard.GetState();
             threshold = 10;
             movecounter = 0;
-            movethreshold = 5;
+            movethreshold = 10;
             base.Initialize();
         }
 
@@ -56,6 +56,7 @@ namespace PacManGame
                     {
                         pacman.Move(Direction.Right);
                         counter = 0;
+
                     }
                     else
                     {
