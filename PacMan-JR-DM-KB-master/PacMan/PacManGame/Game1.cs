@@ -17,6 +17,7 @@ namespace PacManGame
         private GhostSprite ghostSprite;
         private MazeSprite mazeSprite;
         private ScoreSprite scoreSprite;
+        private PacManSprite pacmanSprite;
         private GameState gameState;
         public GameState PacManGame { get { return this.gameState; } }
 
@@ -41,10 +42,11 @@ namespace PacManGame
             string level1 = File.ReadAllText("../../../../../PacMan/levelsPen.csv");
             this.gameState = GameState.Parse(level1);
             this.mazeSprite = new MazeSprite(this);
-            GhostPack gp = new GhostPack();
-            this.ghostSprite = new GhostSprite(this, gp);
+            this.ghostSprite = new GhostSprite(this);
+            this.pacmanSprite = new PacManSprite(this);
             Components.Add(mazeSprite);
             Components.Add(ghostSprite);
+            Components.Add(pacmanSprite);
             base.Initialize();
         }
 

@@ -26,7 +26,7 @@ namespace PacMan
 
         //pending type for GUI
         private Color colour;
-        public Color Colour { get; }
+        public Color Colour { get { return this.colour; } set { this.colour = value; } }
 
         private IGhostState currentState;
         public static Timer scared;

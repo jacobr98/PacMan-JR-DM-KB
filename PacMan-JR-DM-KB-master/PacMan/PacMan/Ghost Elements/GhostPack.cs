@@ -72,7 +72,7 @@ namespace PacMan
             {
                 g.ChangeState(GhostState.Scared);
             }
-            Ghost.scared = new Timer(6);
+            Ghost.scared = new Timer(6000);
             Ghost.scared.Elapsed += DisableScared;
             Ghost.scared.Start();
         }
@@ -92,6 +92,7 @@ namespace PacMan
             }
 
             Ghost.scared = null;
+            
         }
 
         /// <summary>
@@ -118,6 +119,7 @@ namespace PacMan
         /// Implements the IEnumerable
         /// </summary>
         /// <returns name="Enumerator"> Ghosts enumerators</returns>
+        
         public IEnumerator<Ghost> GetEnumerator()
         {
             return ghosts.GetEnumerator();

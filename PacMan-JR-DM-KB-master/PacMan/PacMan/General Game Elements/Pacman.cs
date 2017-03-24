@@ -87,7 +87,7 @@ namespace PacMan
                     break;
             }
         }
-
+        
         /// <summary>
         /// Checks for collisions
         /// </summary>

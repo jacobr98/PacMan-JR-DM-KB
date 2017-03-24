@@ -64,7 +64,7 @@ namespace PacManGame
                         if (maze[i,j].Member is Pellet)
                             spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
                         else if(maze[i,j].Member is Energizer)
-                            spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                            spriteBatch.Draw(energizer, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
                         else
                             spriteBatch.Draw(empty, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
                     } 
