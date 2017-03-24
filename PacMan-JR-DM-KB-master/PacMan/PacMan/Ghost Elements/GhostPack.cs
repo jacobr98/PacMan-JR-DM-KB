@@ -94,7 +94,22 @@ namespace PacMan
             Ghost.scared = null;
             
         }
+        private void checkCollideGhost(Ghost g)
+        {
+            if (g.Position == g.PacmanPosition)
+            {
+                if (g.CurrentState == GhostState.Chase)
+                {
+                    g.Collide();
+                    ResetGhosts();
+                }
+                else if (g.CurrentState == GhostState.Scared)
+                {
+                    g.Collide();
+                }
 
+            }
+        }
         /// <summary>
         /// Tells the ghosts where to move
         /// </summary>
@@ -103,6 +118,7 @@ namespace PacMan
             foreach (Ghost g in ghosts)
             {
                 g.Move();
+                checkCollideGhost(g);
             }
         }
 

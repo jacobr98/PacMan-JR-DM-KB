@@ -16,26 +16,27 @@ namespace PacManGame
     class ScoreSprite : DrawableGameComponent
     {
         private ScoreAndLives scoreAndLives;
-        private Game game;
+        private Game1 game;
         private SpriteBatch spriteBatch;
-        private Boolean isGameOver;
-
-        public ScoreSprite(Game game, ScoreAndLives scoreAndLives) : base(game)
+        private SpriteFont font;
+        public ScoreSprite(Game1 game) : base(game)
         {
             this.game = game;
-            this.scoreAndLives = scoreAndLives;
-            isGameOver = false;
+            
         }
 
  
         public override void Initialize()
         {
+           
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = game.Content.Load<SpriteFont>("score");
+
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -44,22 +45,15 @@ namespace PacManGame
         }
         public override void Draw(GameTime gameTime)
         {
-            if (isGameOver)
-            {
-                //do something
-            }
+           
             spriteBatch.Begin();
-
-            //code
+            spriteBatch.DrawString(font, "" + game.PacManGame.Score.Score, new Vector2(800, 100), Color.White);
+         
 
             spriteBatch.End();
             base.Draw(gameTime);
 
 
-        }
-        public void GameOver()
-        {
-            isGameOver = true;
         }
     }
 }

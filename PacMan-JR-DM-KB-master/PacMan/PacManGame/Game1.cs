@@ -44,6 +44,8 @@ namespace PacManGame
             this.mazeSprite = new MazeSprite(this);
             this.ghostSprite = new GhostSprite(this);
             this.pacmanSprite = new PacManSprite(this);
+            this.scoreSprite = new ScoreSprite(this);
+            Components.Add(scoreSprite);
             Components.Add(mazeSprite);
             Components.Add(ghostSprite);
             Components.Add(pacmanSprite);

@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ghost Elements\Chase.cs" />
-    <Compile Include="Ghost Elements\Dead.cs" />
     <Compile Include="Maze Elements\Energizer.cs" />
     <Compile Include="Ghost Elements\Ghost.cs" />
     <Compile Include="Ghost Elements\GhostPack.cs" />

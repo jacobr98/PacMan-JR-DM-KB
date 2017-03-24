@@ -27,7 +27,7 @@ namespace PacMan
         //pending type for GUI
         private Color colour;
         public Color Colour { get { return this.colour; } set { this.colour = value; } }
-
+        public Vector2 PacmanPosition { get { return pacman.Position; } }
         private IGhostState currentState;
         public static Timer scared;
 
@@ -93,6 +93,7 @@ namespace PacMan
                 case GhostState.Released:
                     position = ReleasePosition;
                     currentState = new Chase(this, maze, target, pacman);
+                    this.CurrentState = GhostState.Chase;
                     break;
             }
         }

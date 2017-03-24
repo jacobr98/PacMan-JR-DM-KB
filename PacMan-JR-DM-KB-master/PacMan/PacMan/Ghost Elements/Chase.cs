@@ -59,6 +59,11 @@ namespace PacMan
                 ghost.Direction = Direction.Down;
 
             ghost.Position = shortestDistance.Position;
+
+            if (ghost.Position == target) {
+                target = ghost.PacmanPosition;
+            }
+            
         }
 
     }
