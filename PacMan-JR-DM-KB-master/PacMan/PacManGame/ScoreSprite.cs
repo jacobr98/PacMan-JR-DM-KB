@@ -66,7 +66,7 @@ namespace PacManGame
                 spriteBatch.Draw(lives, new Rectangle(780, 200, 40, 40), Color.White);
             } else if (game.PacManGame.Score.Lives == 0)
             {
-                spriteBatch.Draw(gameOver, new Rectangle(0, 0, 950, 736), Color.White);
+                spriteBatch.Draw(gameOver, new Rectangle(0, 0, 736, 736), Color.White);
             } 
             spriteBatch.End();
             base.Draw(gameTime);

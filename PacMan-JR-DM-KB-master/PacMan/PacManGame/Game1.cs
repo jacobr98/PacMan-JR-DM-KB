@@ -128,9 +128,8 @@ namespace PacManGame
 
         private void Reset()
         {
-            this.PacManGame.Score.Lives = 3;
-            this.PacManGame.Score.Score = 0;
-            Initialize();
+            Exit();
+
         }
     }
 }
