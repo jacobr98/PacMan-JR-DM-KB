@@ -118,6 +118,15 @@ namespace PacMan
             }
         }
 
+        public bool gameWon()
+        {
+            if (areMembersNull())
+            {
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Event raise when Pacman wins
         /// </summary>

@@ -76,9 +76,11 @@ namespace PacMan
                             array[x, y] = new Wall(x, y);
                             break;
                         case "p":
-                            Pellet p = new Pellet(10);
-                            p.Collision += g.score.IncrementScore;
-                            array[x, y] = new Path(x, y, p);
+                            /* Pellet p = new Pellet(10);
+                             p.Collision += g.score.IncrementScore;
+                             array[x, y] = new Path(x, y, p);
+                             */
+                            goto case "m";
                             break;
                         case "e":
                             Energizer e = new Energizer(g.Ghostpack, 100);
@@ -151,7 +153,7 @@ namespace PacMan
         /// <param name="filePath">The file path of the maze</param>
         private static string[][] getElements(string fileContent)
         {
-            string[] stringLines = Regex.Split(fileContent, @"\n");
+            string[] stringLines = Regex.Split(fileContent, @"\r\n");
             string[][] parseStr = new string[stringLines.Length][];
             for (int i=0; i<stringLines.Length; i++)
             {

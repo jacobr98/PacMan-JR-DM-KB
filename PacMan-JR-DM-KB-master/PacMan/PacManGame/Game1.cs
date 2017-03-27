@@ -23,8 +23,6 @@ namespace PacManGame
         private ScoreSprite scoreSprite;
         private PacManSprite pacmanSprite;
         private GameState gameState;
-        private SoundEffect backgroundMusic;
-        private Song test;
         public GameState PacManGame { get { return this.gameState; } }
 
         public Game1()
@@ -71,7 +69,8 @@ namespace PacManGame
 
         private void Maze_PacmanWon(ICollidable obj)
         {
-            
+            Components.Remove(ghostSprite);
+            Components.Remove(pacmanSprite);
         }
 
         /// <summary>
@@ -123,8 +122,6 @@ namespace PacManGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
