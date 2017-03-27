@@ -16,8 +16,8 @@ tl,w,w,w,cr,p,w,m,w,w,w,w,w,w,w,m,w,p,cl,w,w,w,tr
 ww,p,p,p,p,p,p,p,p,p,p,w,p,p,p,p,p,p,p,p,p,p,ww
 ww,p,w,w,w,p,w,w,w,w,p,w,p,w,w,w,w,p,w,w,w,p,ww
 ww,e,p,p,w,p,p,p,p,p,p,P,p,p,p,p,p,p,w,p,p,e,ww
-tl,w,w,p,w,p,w,p,cl,w,w,w,w,w,cr,p,w,p,w,p,w,w,tr
-ww,p,p,p,p,p,w,p,p,p,p,w,p,p,p,p,w,p,p,p,p,p,ww
+tl,w,cr,p,w,p,cu,p,cl,w,w,w,w,w,cr,p,cu,p,w,p,cl,w,tr
+ww,p,p,p,p,p,ww,p,p,p,p,w,p,p,p,p,ww,p,p,p,p,p,ww
 ww,p,cl,w,w,w,w,w,w,cr,p,w,p,cl,w,w,w,w,w,w,cr,p,ww
 ww,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,ww
 w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w,w

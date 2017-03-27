@@ -93,7 +93,10 @@ namespace PacManGame
                                 spriteBatch.Draw(connectorhorizontal, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                                 break;
                             case WallType.ClosedD:
-                                
+                                spriteBatch.Draw(closedvertical, new Rectangle(i * 32, j * 32, 32, 32),Color.White);
+                                break;
+                            case WallType.ClosedU:
+                                spriteBatch.Draw(closedvertical, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
                                 break;
                         }
                         
