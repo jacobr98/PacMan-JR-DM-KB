@@ -64,7 +64,7 @@ namespace PacManGame
         {
             Components.Remove(ghostSprite);
             Components.Remove(pacmanSprite);
-            Components.Remove(mazeSprite);           
+            //Components.Remove(mazeSprite);           
         }
 
         private void Maze_PacmanWon(ICollidable obj)
