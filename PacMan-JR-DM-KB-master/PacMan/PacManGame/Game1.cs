@@ -1,6 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Storage;
 using PacMan;
 using System.IO;
 
@@ -19,13 +23,15 @@ namespace PacManGame
         private ScoreSprite scoreSprite;
         private PacManSprite pacmanSprite;
         private GameState gameState;
+        private SoundEffect backgroundMusic;
+        private Song test;
         public GameState PacManGame { get { return this.gameState; } }
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = 950;
-            graphics.PreferredBackBufferWidth = 900;
+            graphics.PreferredBackBufferHeight = 736;
+            graphics.PreferredBackBufferWidth = 950;
             graphics.ApplyChanges();
 
             Content.RootDirectory = "Content";
@@ -50,6 +56,22 @@ namespace PacManGame
             Components.Add(ghostSprite);
             Components.Add(pacmanSprite);
             base.Initialize();
+
+            this.PacManGame.Maze.PacmanWon += Maze_PacmanWon;
+            this.PacManGame.Score.GameOver += Score_GameOver;
+           
+        }
+
+        private void Score_GameOver(string obj)
+        {
+            Components.Remove(ghostSprite);
+            Components.Remove(pacmanSprite);
+            Components.Remove(mazeSprite);           
+        }
+
+        private void Maze_PacmanWon(ICollidable obj)
+        {
+            
         }
 
         /// <summary>
@@ -59,6 +81,8 @@ namespace PacManGame
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            //backgroundMusic = Content.Load<SoundEffect>("pacman_beginning");
+            //backgroundMusic.Play();
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
@@ -83,7 +107,11 @@ namespace PacManGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            KeyboardState newState = Keyboard.GetState();
+            if (newState.IsKeyDown(Keys.Enter))
+            {
+                this.Reset();
+            }
 
             base.Update(gameTime);
         }
@@ -101,9 +129,11 @@ namespace PacManGame
             base.Draw(gameTime);
         }
 
-        private void gameOver()
+        private void Reset()
         {
-            Components.Remove(ghostSprite);
+            this.PacManGame.Score.Lives = 3;
+            this.PacManGame.Score.Score = 0;
+            Initialize();
         }
     }
 }

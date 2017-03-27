@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Input;
+using System;
+using PacMan;
+using PacManGame;
 
 namespace PacManGame
 {
@@ -15,7 +18,10 @@ namespace PacManGame
         static void Main()
         {
             using (var game = new Game1())
+            {
                 game.Run();
+            }
+
         }
     }
 #endif

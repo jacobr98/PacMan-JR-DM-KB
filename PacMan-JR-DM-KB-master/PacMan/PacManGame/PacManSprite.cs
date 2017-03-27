@@ -1,6 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Storage;
 using PacMan;
 using System;
 using System.Collections.Generic;
@@ -26,7 +30,7 @@ namespace PacManGame
             this.game = game;
         }
 
-    
+
 
         public override void Initialize()
         {
@@ -52,6 +56,7 @@ namespace PacManGame
                 KeyboardState newState = Keyboard.GetState();
                 if (newState.IsKeyDown(Keys.Right))
                 {
+                    
                     if (!oldState.IsKeyDown(Keys.Right))
                     {
                         pacman.Move(Direction.Right);
@@ -112,6 +117,7 @@ namespace PacManGame
                 }
             }
             else { movecounter++; }
+
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -121,5 +127,7 @@ namespace PacManGame
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
+
     }
 }
