@@ -17,14 +17,21 @@ namespace PacManGame
     class PacManSprite : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;
-        private Texture2D pacmanImage;
+        private Texture2D pacmanHorizontal;
+        private Texture2D pacmanVertical;
+
         private Game1 game;
         private Pacman pacman;
+
         private KeyboardState oldState;
         private int counter;
         private int threshold;
+
         private int movecounter;
         private int movethreshold;
+
+        private int frame;
+        private int animationcounter;
         public PacManSprite(Game1 game) : base(game)
         {
             this.game = game;
@@ -38,18 +45,21 @@ namespace PacManGame
             threshold = 10;
             movecounter = 0;
             movethreshold = 10;
+            frame = 0;
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            pacmanImage = game.Content.Load<Texture2D>("pacman");
+            pacmanHorizontal = game.Content.Load<Texture2D>("pacman");
+            pacmanVertical = game.Content.Load<Texture2D>("pacman2");
             this.pacman = game.PacManGame.Pacman;
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {
+
             if (movecounter > movethreshold)
             {
                 movecounter = 0;
@@ -123,7 +133,31 @@ namespace PacManGame
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(pacmanImage, new Rectangle((int)pacman.Position.X * 32, (int)pacman.Position.Y * 32, 32, 32), Color.White);
+            switch (pacman.PacmanDirection) {
+                case Direction.Right:
+                    spriteBatch.Draw(pacmanHorizontal, new Rectangle((int)pacman.Position.X * 32, (int)pacman.Position.Y * 32, 32, 32), new Rectangle(0, 32 * frame, 32, 32), Color.White);
+                    break;
+                case Direction.Left:
+                    spriteBatch.Draw(pacmanHorizontal, new Rectangle((int)pacman.Position.X * 32, (int)pacman.Position.Y * 32, 32, 32), new Rectangle(0, 32 * frame, 32, 32), Color.White,0, new Vector2(0,0),SpriteEffects.FlipHorizontally,0);
+                    break;
+                case Direction.Up:
+                    spriteBatch.Draw(pacmanVertical, new Rectangle((int)pacman.Position.X * 32, (int)pacman.Position.Y * 32, 32, 32), new Rectangle(32 * frame, 0 , 32, 32), Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
+                    break;
+   
+                case Direction.Down:
+                    spriteBatch.Draw(pacmanVertical, new Rectangle((int)pacman.Position.X * 32, (int)pacman.Position.Y * 32, 32, 32), new Rectangle(32 *frame, 0, 32, 32), Color.White, 0, new Vector2(0, 0), SpriteEffects.None, 0);
+                    break;
+            }
+            if (animationcounter > 5)
+            {
+                frame++;
+                animationcounter = 0;
+            }
+            else
+                animationcounter++;
+
+            if (frame > 2)
+                frame = 0;
             spriteBatch.End();
             base.Draw(gameTime);
         }
