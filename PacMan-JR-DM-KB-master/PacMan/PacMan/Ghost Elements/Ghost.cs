@@ -95,6 +95,9 @@ namespace PacMan
                     currentState = new Chase(this, maze, target, pacman);
                     this.CurrentState = GhostState.Chase;
                     break;
+                case GhostState.Zombie:
+                    currentState = new Zombie(this, this.maze, pen.Entrance);
+                    break;
             }
         }
 
@@ -117,12 +120,10 @@ namespace PacMan
         /// </summary>
         public void Collide()
         {
-
-            Console.WriteLine(CurrentState);
             if (CurrentState == GhostState.Scared)
             {
                 OnCollision(this);
-                Reset();
+                ChangeState(GhostState.Zombie);
             }
             else if(CurrentState == GhostState.Chase)
             {

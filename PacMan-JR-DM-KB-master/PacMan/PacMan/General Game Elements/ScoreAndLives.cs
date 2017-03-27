@@ -64,7 +64,7 @@ namespace PacMan
                     if (((Ghost)collidable).CurrentState == GhostState.Scared)
                     {
                         this.Score += collidable.Points;
-                        ((Ghost)collidable).Reset();
+                        ((Ghost)collidable).ChangeState(GhostState.Zombie);
                     }
                 }
                 else

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace PacMan
         private Queue<Ghost> ghosts; //fifo structure to release the appropriate ghost
         private List<Timer> timers; //multiple times since more than 1 Ghost may be in teh Pen
         private List<Tile> pen; //list of the Tiles that make up the Pen, so two ghosts aren't placed on teh same Tile
+        public Vector2 Entrance { get; set; }
 
         /// <summary>
         /// Constructor instantiates the internal data structures to empty

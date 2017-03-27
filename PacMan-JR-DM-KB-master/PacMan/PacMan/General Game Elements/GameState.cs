@@ -14,7 +14,7 @@ namespace PacMan
     /// </summary>
     public enum Direction {Left, Right, Up, Down}//Represent direction in which entity is moving
 
-    public enum GhostState { Scared, Chase, Released}//Represents the state of the ghost
+    public enum GhostState { Scared, Chase, Released, Zombie}//Represents the state of the ghost
 
     /// <summary>
     /// The GameState represents all the business classes
@@ -115,11 +115,9 @@ namespace PacMan
                             array[x, y] = new Wall(x, y, WallType.ConnectorU);
                             break;
                         case "p":
-                            /* Pellet p = new Pellet(10);
+                            Pellet p = new Pellet(10);
                              p.Collision += g.score.IncrementScore;
                              array[x, y] = new Path(x, y, p);
-                             */
-                            goto case "m";
                             break;
                         case "e":
                             Energizer e = new Energizer(g.Ghostpack, 100);
@@ -140,6 +138,7 @@ namespace PacMan
                             break;
                         case "1":
                             gh = new Ghost(g,x,y,g.pacman.Position,GhostState.Chase, new Color(255,0,0));
+                            pen.Entrance = new Vector2(x, y);
                             gh.Points = 200;
                             Ghost.ReleasePosition = new Vector2(x,y);
                             gh.Collision += g.score.IncrementScore;

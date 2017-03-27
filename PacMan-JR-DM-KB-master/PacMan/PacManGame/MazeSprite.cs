@@ -24,6 +24,9 @@ namespace PacManGame
         private Texture2D closedhorizontal;
         private Texture2D connectorhorizontal;
         private Texture2D closedvertical;
+        private Texture2D connectorvertical;
+        private Texture2D cornertop;
+        private Texture2D cornerbot;
 
         private Texture2D pellet;
         private Texture2D energizer;
@@ -51,7 +54,10 @@ namespace PacManGame
             closedhorizontal = game.Content.Load<Texture2D>("closedhorizontal");
             connectorhorizontal = game.Content.Load<Texture2D>("connectorhorizontal");
             closedvertical = game.Content.Load<Texture2D>("closedvertical");
-
+            connectorvertical = game.Content.Load<Texture2D>("connectorvertical");
+            cornertop = game.Content.Load<Texture2D>("cornertop");
+            cornerbot = game.Content.Load<Texture2D>("cornerbot");
+        
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
             victory = game.Content.Load<Texture2D>("victory");
@@ -97,6 +103,24 @@ namespace PacManGame
                                 break;
                             case WallType.ClosedU:
                                 spriteBatch.Draw(closedvertical, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
+                                break;
+                            case WallType.ConnectorD:
+                                spriteBatch.Draw(connectorvertical, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                break;
+                            case WallType.ConnectorU:
+                                spriteBatch.Draw(connectorvertical, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
+                                break;
+                            case WallType.CornerUR:
+                                spriteBatch.Draw(cornertop, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                break;
+                            case WallType.CornerUL:
+                                spriteBatch.Draw(cornertop, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                                break;
+                            case WallType.CornerDR:
+                                spriteBatch.Draw(cornerbot, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                break;
+                            case WallType.CornerDL:
+                                spriteBatch.Draw(cornerbot, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                                 break;
                         }
                         
