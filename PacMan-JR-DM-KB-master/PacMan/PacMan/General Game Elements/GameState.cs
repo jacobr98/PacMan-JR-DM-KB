@@ -115,9 +115,11 @@ namespace PacMan
                             array[x, y] = new Wall(x, y, WallType.ConnectorU);
                             break;
                         case "p":
-                            Pellet p = new Pellet(10);
-                            p.Collision += g.score.IncrementScore;
-                            array[x, y] = new Path(x, y, p);
+                            /* Pellet p = new Pellet(10);
+                             p.Collision += g.score.IncrementScore;
+                             array[x, y] = new Path(x, y, p);
+                             */
+                            goto case "m";
                             break;
                         case "e":
                             Energizer e = new Energizer(g.Ghostpack, 100);

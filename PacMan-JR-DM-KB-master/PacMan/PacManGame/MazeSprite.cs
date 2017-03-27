@@ -27,6 +27,7 @@ namespace PacManGame
 
         private Texture2D pellet;
         private Texture2D energizer;
+        private Texture2D victory;
         private Maze maze;
 
         public MazeSprite(Game1 game) : base(game)
@@ -53,11 +54,13 @@ namespace PacManGame
 
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
+            victory = game.Content.Load<Texture2D>("victory");
             this.maze = game.PacManGame.Maze;
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {
+            game.PacManGame.Maze.CheckMembersLeft();
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -107,7 +110,12 @@ namespace PacManGame
                 }
             }
 
+            if (game.PacManGame.Maze.gameWon() == true && game.PacManGame.Score.Lives > 0)
+            {
+                spriteBatch.Draw(victory, new Rectangle(0, 0, 736, 736), Color.White);
+            }
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }
