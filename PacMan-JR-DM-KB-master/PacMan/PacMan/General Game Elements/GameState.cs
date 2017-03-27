@@ -151,7 +151,7 @@ namespace PacMan
         /// <param name="filePath">The file path of the maze</param>
         private static string[][] getElements(string fileContent)
         {
-            string[] stringLines = Regex.Split(fileContent, @"\n");
+            string[] stringLines = Regex.Split(fileContent, @"\r\n");
             string[][] parseStr = new string[stringLines.Length][];
             for (int i=0; i<stringLines.Length; i++)
             {
