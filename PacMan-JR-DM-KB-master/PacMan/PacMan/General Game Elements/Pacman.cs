@@ -19,7 +19,7 @@ namespace PacMan
         private Maze maze;
         public Vector2 Position { get { return pos; } set { pos = value; } }
         private Vector2 pos;
-
+        public Direction PacmanDirection { get; private set; }
         public Vector2 initPosition;
 
         /// <summary>
@@ -30,6 +30,7 @@ namespace PacMan
         {
             this.controller = controller;
             this.maze = this.controller.Maze;
+            this.PacmanDirection = Direction.Right;
             //added event handlers to reset pacman position
             this.controller.Score.GameOver += (x) => pos = initPosition;
             this.controller.Maze.PacmanWon += (x) => pos = initPosition;
@@ -54,7 +55,7 @@ namespace PacMan
         {
             int x = (int)pos.X;
             int y = (int)pos.Y;
-
+            PacmanDirection = dir;
             switch (dir)
             {
                 case Direction.Up:

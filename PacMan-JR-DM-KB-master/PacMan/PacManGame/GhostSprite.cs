@@ -32,7 +32,7 @@ namespace PacManGame
         public override void Initialize()
         {
             counter = 0;
-            threshold = 20;
+            threshold = 10;
             base.Initialize();
         }
 
