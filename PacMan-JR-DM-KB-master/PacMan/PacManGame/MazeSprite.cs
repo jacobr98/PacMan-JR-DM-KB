@@ -24,10 +24,7 @@ namespace PacManGame
         private Texture2D closedhorizontal;
         private Texture2D connectorhorizontal;
         private Texture2D closedvertical;
-        private Texture2D connectorvertical;
-        private Texture2D cornertop;
-        private Texture2D cornerbot;
-
+        private Texture2D gameOver;
         private Texture2D pellet;
         private Texture2D energizer;
         private Texture2D victory;
@@ -54,10 +51,7 @@ namespace PacManGame
             closedhorizontal = game.Content.Load<Texture2D>("closedhorizontal");
             connectorhorizontal = game.Content.Load<Texture2D>("connectorhorizontal");
             closedvertical = game.Content.Load<Texture2D>("closedvertical");
-            connectorvertical = game.Content.Load<Texture2D>("connectorvertical");
-            cornertop = game.Content.Load<Texture2D>("cornertop");
-            cornerbot = game.Content.Load<Texture2D>("cornerbot");
-        
+
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
             victory = game.Content.Load<Texture2D>("victory");
@@ -139,8 +133,14 @@ namespace PacManGame
 
             if (game.PacManGame.Maze.gameWon() == true && game.PacManGame.Score.Lives > 0)
             {
-                spriteBatch.Draw(victory, new Rectangle(0, 0, 736, 736), Color.White);
+                spriteBatch.Draw(victory, new Rectangle(190, 200, 360, 270), Color.White);
             }
+
+            if (game.PacManGame.Score.Lives == 0)
+            {
+                spriteBatch.Draw(gameOver, new Rectangle(190, 200, 360, 166), Color.White);
+            }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
