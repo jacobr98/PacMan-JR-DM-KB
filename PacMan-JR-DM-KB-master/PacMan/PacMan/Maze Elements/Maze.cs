@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
+
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
     /// </summary>

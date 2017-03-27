@@ -18,7 +18,13 @@ namespace PacManGame
         private Game1 game;
         private SpriteBatch spriteBatch;
         private Texture2D empty;
+
         private Texture2D wall;
+        private Texture2D vertical;
+        private Texture2D closedhorizontal;
+        private Texture2D connectorhorizontal;
+        private Texture2D closedvertical;
+
         private Texture2D pellet;
         private Texture2D energizer;
         private Maze maze;
@@ -38,7 +44,13 @@ namespace PacManGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             empty = game.Content.Load<Texture2D>("empty");
+
             wall = game.Content.Load<Texture2D>("wall");
+            vertical = game.Content.Load<Texture2D>("wallvertical");
+            closedhorizontal = game.Content.Load<Texture2D>("closedhorizontal");
+            connectorhorizontal = game.Content.Load<Texture2D>("connectorhorizontal");
+            closedvertical = game.Content.Load<Texture2D>("closedvertical");
+
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
             this.maze = game.PacManGame.Maze;
@@ -57,7 +69,31 @@ namespace PacManGame
                 for (int j = 0; j < maze.Size; j++) {
                     if (maze[i, j] is Wall)
                     {
-                        spriteBatch.Draw(wall, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                        switch (((Wall)maze[i, j]).Type)
+                        {
+                            case WallType.Horizontal:
+                                spriteBatch.Draw(wall, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                break;
+                            case WallType.Vertical:
+                                spriteBatch.Draw(vertical, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                break;
+                            case WallType.ClosedR:
+                                spriteBatch.Draw(closedhorizontal, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                break;
+                            case WallType.ClosedL:
+                                spriteBatch.Draw(closedhorizontal, new Rectangle(i * 32, j * 32, 32, 32),null, Color.White,0,new Vector2(0,0),SpriteEffects.FlipHorizontally,0);
+                                break;
+                            case WallType.ConnectorR:
+                                spriteBatch.Draw(connectorhorizontal, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                break;
+                            case WallType.ConnectorL:
+                                spriteBatch.Draw(connectorhorizontal, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                                break;
+                            case WallType.ClosedD:
+                                
+                                break;
+                        }
+                        
                     }
                     
                     else if (maze[i, j] is Tile) {

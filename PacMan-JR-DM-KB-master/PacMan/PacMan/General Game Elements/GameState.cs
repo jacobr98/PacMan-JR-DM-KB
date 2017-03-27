@@ -73,7 +73,46 @@ namespace PacMan
                     switch (parse[y][x])
                     {
                         case "w":
-                            array[x, y] = new Wall(x, y);
+                            array[x, y] = new Wall(x, y,WallType.Horizontal);
+                            break;
+                        case "ww":
+                            array[x, y] = new Wall(x, y, WallType.Vertical);
+                            break;
+                        case "cur":
+                            array[x, y] = new Wall(x, y, WallType.CornerUR);
+                            break;
+                        case "cul":
+                            array[x, y] = new Wall(x, y, WallType.CornerUL);
+                            break;
+                        case "cdr":
+                            array[x, y] = new Wall(x, y, WallType.CornerDR);
+                            break;
+                        case "cdl":
+                            array[x, y] = new Wall(x, y, WallType.CornerDL);
+                            break;
+                        case "cr":
+                            array[x, y] = new Wall(x, y, WallType.ClosedR);
+                            break;
+                        case "cl":
+                            array[x, y] = new Wall(x, y, WallType.ClosedL);
+                            break;
+                        case "cu":
+                            array[x, y] = new Wall(x, y, WallType.ClosedU);
+                            break;
+                        case "cd":
+                            array[x, y] = new Wall(x, y, WallType.ClosedD);
+                            break;
+                        case "tr":
+                            array[x, y] = new Wall(x, y, WallType.ConnectorR);
+                            break;
+                        case "tl":
+                            array[x, y] = new Wall(x, y, WallType.ConnectorL);
+                            break;
+                        case "td":
+                            array[x, y] = new Wall(x, y, WallType.ConnectorD);
+                            break;
+                        case "tu":
+                            array[x, y] = new Wall(x, y, WallType.ConnectorU);
                             break;
                         case "p":
                             Pellet p = new Pellet(10);

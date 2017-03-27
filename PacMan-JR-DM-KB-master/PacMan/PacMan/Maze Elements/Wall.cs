@@ -9,9 +9,16 @@ namespace PacMan
 {
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
-    /// </summary>
-    public class Wall : Tile
+    /// </summary>    
+    /// 
+   public enum WallType
     {
+        Horizontal, Vertical, CornerUR, CornerUL, CornerDR, CornerDL,
+        ClosedR, ClosedL, ClosedD, ClosedU, ConnectorR, ConnectorL, ConnectorU, ConnectorD
+}
+public class Wall : Tile
+    {
+        public WallType Type { get; private set;}
         //The member of a wall should be null and can't be set
         //because a wall should not contain something
         public override ICollidable Member {
@@ -22,9 +29,9 @@ namespace PacMan
         /// <summary>
         /// Constructor instantiates the position in the base
         /// </summary>
-        public Wall(int x, int y) : base(x, y)
+        public Wall(int x, int y, WallType type) : base(x, y)
         {
-
+            this.Type = type;
         }
 
         /// <summary>
