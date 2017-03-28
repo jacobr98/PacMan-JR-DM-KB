@@ -70,6 +70,7 @@ namespace PacMan
 
             foreach (Ghost g in ghosts)
             {
+                if (g.CurrentState == GhostState.Chase)
                 g.ChangeState(GhostState.Scared);
             }
             Ghost.scared = new Timer(6000);
@@ -88,6 +89,7 @@ namespace PacMan
             t.Enabled = false;
 
             foreach(var g in ghosts) {
+                if(g.CurrentState == GhostState.Scared)
                 g.ChangeState(GhostState.Chase);
             }
 
