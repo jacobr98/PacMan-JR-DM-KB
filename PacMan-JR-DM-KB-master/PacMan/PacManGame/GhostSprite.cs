@@ -80,7 +80,7 @@ namespace PacManGame
                 }
                 else if (g.CurrentState == GhostState.Zombie)
                 {
-                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), Color.Black);
+                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), Color.White);
                 }
                 else
                 {
