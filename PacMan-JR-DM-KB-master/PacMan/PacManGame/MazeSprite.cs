@@ -166,7 +166,7 @@ namespace PacManGame
                 }
             }
 
-            if (animationcounter > 5)
+            if (animationcounter > 10)
             {
                 frame++;
                 animationcounter = 0;
