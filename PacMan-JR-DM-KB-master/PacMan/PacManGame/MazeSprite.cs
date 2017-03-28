@@ -33,10 +33,10 @@ namespace PacManGame
         private Texture2D pellet;
         private Texture2D energizer;
 
-        //game state
-        private Texture2D gameOver;
-        private Texture2D victory;
         private Maze maze;
+
+        //sounds
+        private SoundEffect eat;
 
         public MazeSprite(Game1 game) : base(game)
         {
@@ -67,6 +67,9 @@ namespace PacManGame
             //game items
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
+
+            //sound
+            eat = game.Content.Load<SoundEffect>("pacmaneatfruit");
 
             this.maze = game.PacManGame.Maze;
             base.LoadContent();
