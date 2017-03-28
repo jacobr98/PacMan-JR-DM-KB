@@ -20,7 +20,7 @@ namespace PacMan
         private Maze maze;
         public Vector2 Position { get { return pos; } set { pos = value; } }
         private Vector2 pos;
-        public Direction PacmanDirection { get; private set; }
+        public Direction PacmanDirection { get; set; }
         public Vector2 initPosition;
 
         /// <summary>

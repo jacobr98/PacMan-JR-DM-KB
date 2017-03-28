@@ -18,6 +18,7 @@ namespace PacManGame
     {
         private SpriteBatch spriteBatch;
         private Texture2D ghostImage;
+        private Texture2D eyeImage;
         private Game1 game;
         //we will create the ghosts in the constructor 
         private GhostPack ghostPack;
@@ -51,11 +52,12 @@ namespace PacManGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ghostImage = game.Content.Load<Texture2D>("ghost");
             eat = game.Content.Load<SoundEffect>("pacmaneatghost");
+            eyeImage = game.Content.Load<Texture2D>("ghosteye");
             //scared = game.Content.Load<SoundEffect>("ghostscared");
             this.ghostPack = game.PacManGame.Ghostpack;
             foreach (Ghost g in ghostPack)
             {
-                g.Collision += Eaten;
+                //g.Collision += Eaten;
             }
             base.LoadContent();
         }
@@ -80,13 +82,14 @@ namespace PacManGame
                 }
                 else if (g.CurrentState == GhostState.Zombie)
                 {
-                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), Color.White);
+                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), Color.Black);
                 }
                 else
                 {
                     spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), g.Colour);
                 }
 
+                spriteBatch.Draw(eyeImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), Color.White);
             }
             spriteBatch.End();
 

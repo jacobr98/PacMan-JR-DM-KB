@@ -25,6 +25,7 @@ namespace PacMan
         public static Vector2 ReleasePosition;//used for release
         private Vector2 position;//ghosts position
         private GhostName name;
+        public Ghost GhostAssistant { get; set; }
         //pending type for GUI
         private Color colour;
         public Color Colour { get { return this.colour; } set { this.colour = value; } }
@@ -85,15 +86,15 @@ namespace PacMan
                     switch (Name)
                     {
                         case GhostName.Blinky:
-                            //this.currentState = new Chase(this, maze, pacman);
-                            this.currentState = new Predict(this, maze, pacman);
+                            this.currentState = new Chase(this, maze, pacman);
+                            
                             break;
                         case GhostName.Speedy:
                             this.currentState = new Ambush(this, maze, pacman);
                             //this.currentState = new Chase(this, maze, pacman);
                             break;
                         case GhostName.Inky:
-                            this.currentState = new Predict(this,maze,pacman);
+                            this.currentState = new Predict(this, GhostAssistant,maze, pacman);
                             break;
                         case GhostName.Clyde:
                             this.currentState = new Proximity(this, maze, pacman);

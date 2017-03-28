@@ -60,7 +60,7 @@ namespace PacMan
             g.pacman = pac;
             
             g.Pacman.Position = new Vector2(11, 17);
-
+            Ghost assistant = null;
             Ghost gh;
             string[][] parse = getElements(fileContent);
 
@@ -139,6 +139,7 @@ namespace PacMan
                         case "1":
                   
                             gh = new Ghost(g,x,y,GhostState.Chase, new Color(255,0,0),GhostName.Blinky);
+                            assistant = gh;
                             pen.Entrance = new Vector2(x, y);
                             gh.Points = 200;
                             Ghost.ReleasePosition = new Vector2(x,y);
@@ -159,6 +160,7 @@ namespace PacMan
                             break;
                         case "3":
                             gh = new Ghost(g, x, y,GhostState.Chase, new Color(64, 224, 208),GhostName.Inky);
+                            gh.GhostAssistant = assistant;
                             gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
@@ -169,6 +171,7 @@ namespace PacMan
                             break;
                         case "4":
                             gh = new Ghost(g, x, y,GhostState.Chase, new Color(255, 165, 0),GhostName.Clyde);
+                      
                             gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;

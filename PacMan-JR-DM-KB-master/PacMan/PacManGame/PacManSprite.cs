@@ -35,7 +35,8 @@ namespace PacManGame
 
         //sounds
         private SoundEffect eatEnergizer;
-
+        private SoundEffect eatGhost;
+        private SoundEffect eatPellet;
 
         public PacManSprite(Game1 game) : base(game)
         {
@@ -62,83 +63,94 @@ namespace PacManGame
 
             //sound
             eatEnergizer = game.Content.Load<SoundEffect>("pacmaneatfruit");
-
+            eatGhost = game.Content.Load<SoundEffect>("pacmaneatghost");
+            eatPellet = game.Content.Load<SoundEffect>("pacmanchomp");
+            game.PacManGame.Score.Eats += eat;
             this.pacman = game.PacManGame.Pacman;
             base.LoadContent();
         }
+
+        public void eat(ICollidable c)
+        {
+            if (c is Energizer)
+                eatEnergizer.Play();
+            else if (c is Ghost)
+                eatGhost.Play();
+            //else
+                //eatPellet.Play();
+        }
         public override void Update(GameTime gameTime)
         {
+                KeyboardState newState = Keyboard.GetState();
+                if (newState.IsKeyDown(Keys.Right))
+                {
+                    
+                    if (!oldState.IsKeyDown(Keys.Right))
+                    {
+                    pacman.PacmanDirection = Direction.Right;
+                        counter = 0;
 
-             if (movecounter > movethreshold)
-             {
-                 movecounter = 0;
-                 KeyboardState newState = Keyboard.GetState();
-                 if (newState.IsKeyDown(Keys.Right))
-                 {
+                    }
+                    else
+                    {
+                        counter++;
+                        if (counter > threshold)
+                        pacman.PacmanDirection = Direction.Right;
+                }
 
-                     if (!oldState.IsKeyDown(Keys.Right))
-                     {
-                         pacman.Move(Direction.Right);
-                         counter = 0;
-
-                     }
-                     else
-                     {
-                         counter++;
-                         if (counter > threshold)
-                             pacman.Move(Direction.Right);
-                     }
-                 }
-                 //Left
-                 if (newState.IsKeyDown(Keys.Left))
-                 {
-                     if (!oldState.IsKeyDown(Keys.Left))
-                     {
-                         pacman.Move(Direction.Left);
-                         counter = 0;
-                     }
-                     else
-                     {
-                         counter++;
-                         if (counter > threshold)
-                             pacman.Move(Direction.Left);
-                     }
-                 }
-                 //Up
-                 if (newState.IsKeyDown(Keys.Up))
-                 {
-                     if (!oldState.IsKeyDown(Keys.Up))
-                     {
-                         pacman.Move(Direction.Up);
-                         counter = 0;
-                     }
-                     else
-                     {
-                         counter++;
-                         if (counter > threshold)
-                             pacman.Move(Direction.Up);
-                     }
-                 }
-                 //Down
-                 if (newState.IsKeyDown(Keys.Down))
-                 {
-                     if (!oldState.IsKeyDown(Keys.Down))
-                     {
-                         pacman.Move(Direction.Down);
-                         counter = 0;
-                     }
-                     else
-                     {
-                         counter++;
-                         if (counter > threshold)
-                             pacman.Move(Direction.Down);
-                     }
-                 }
-             }
-             else { movecounter++; }
-
-
-                base.Update(gameTime);
+                }
+                //Left
+                if (newState.IsKeyDown(Keys.Left))
+                {
+                    if (!oldState.IsKeyDown(Keys.Left))
+                    {
+                    pacman.PacmanDirection = Direction.Left;
+                    counter = 0;
+                    }
+                    else
+                    {
+                        counter++;
+                    if (counter > threshold)
+                        pacman.PacmanDirection = Direction.Left;
+                    }
+                }
+                //Up
+                if (newState.IsKeyDown(Keys.Up))
+                {
+                    if (!oldState.IsKeyDown(Keys.Up))
+                    {
+                    pacman.PacmanDirection = Direction.Up;
+                   counter = 0;
+                    }
+                    else
+                    {
+                        counter++;
+                    if (counter > threshold)
+                        pacman.PacmanDirection = Direction.Up;
+                    }
+                }
+                //Down
+                if (newState.IsKeyDown(Keys.Down))
+                {
+                    if (!oldState.IsKeyDown(Keys.Down))
+                    {
+                    pacman.PacmanDirection = Direction.Down;
+                   counter = 0;
+                    }
+                    else
+                    {
+                        counter++;
+                    if (counter > threshold)
+                        pacman.PacmanDirection = Direction.Down;
+                    }
+                }
+            if (movecounter > movethreshold)
+            {
+                pacman.Move(pacman.PacmanDirection);
+                movecounter = 0;
+            } 
+            else { movecounter++; }
+            base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
         {
