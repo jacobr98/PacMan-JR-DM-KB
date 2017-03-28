@@ -29,11 +29,16 @@ namespace PacManGame
         private Texture2D cornerbot;
         private Texture2D cornertop;
 
+        //test
+        private Texture2D energizerAnimation;
+
         //maze items
         private Texture2D pellet;
         private Texture2D energizer;
 
         private Maze maze;
+        private int frame;
+        private int animationcounter;
 
         //sounds
         private SoundEffect eat;
@@ -63,6 +68,9 @@ namespace PacManGame
             connectorvertical = game.Content.Load<Texture2D>("connectorvertical");
             cornerbot = game.Content.Load<Texture2D>("cornerbot");
             cornertop = game.Content.Load<Texture2D>("cornertop");
+
+            //test
+            energizerAnimation = game.Content.Load<Texture2D>("energizeranimation");
 
             //game items
             pellet = game.Content.Load<Texture2D>("pellet");
@@ -141,13 +149,33 @@ namespace PacManGame
                         if (maze[i,j].Member is Pellet)
                             spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
                         else if(maze[i,j].Member is Energizer)
-                            spriteBatch.Draw(energizer, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                        {
+                            if (frame == 0)
+                            {
+                                spriteBatch.Draw(energizer, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                            } else if (frame == 1)
+                            {
+                                spriteBatch.Draw(energizerAnimation, new Rectangle(i * 32, j * 32, 32, 32), new Rectangle(i * 32, (j * 32) * frame, 32, 32), Color.White);
+                            }                                 
+                        }
+
                         else
                             spriteBatch.Draw(empty, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+
                     } 
                 }
             }
-    
+
+            if (animationcounter > 5)
+            {
+                frame++;
+                animationcounter = 0;
+            }
+            else
+                animationcounter++;
+
+            if (frame > 1)
+                frame = 0;
 
             spriteBatch.End();
 
