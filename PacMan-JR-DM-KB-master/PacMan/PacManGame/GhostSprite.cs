@@ -25,6 +25,10 @@ namespace PacManGame
         private SoundEffect eat;
         private int threshold;
         private int counter;
+        //private bool hasPlayed = false;
+
+        //sounds
+        //private SoundEffect scared;
 
         public GhostSprite(Game1 game) : base(game)
         {
@@ -47,6 +51,7 @@ namespace PacManGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ghostImage = game.Content.Load<Texture2D>("ghost");
             eat = game.Content.Load<SoundEffect>("pacmaneatghost");
+            //scared = game.Content.Load<SoundEffect>("ghostscared");
             this.ghostPack = game.PacManGame.Ghostpack;
             foreach (Ghost g in ghostPack)
             {
@@ -60,9 +65,8 @@ namespace PacManGame
             {
                 ghostPack.Move();
                 counter = 0;
-            }
+            } else { counter++; }
 
-            else { counter++; }
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)

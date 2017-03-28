@@ -289,3 +289,9 @@
 /processorParam:Quality=Best
 /build:Song.mp3
 
+#begin ghostscared.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ghostscared.wav
+

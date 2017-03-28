@@ -152,7 +152,6 @@ namespace PacManGame
                 case Direction.Up:
                     spriteBatch.Draw(pacmanVertical, new Rectangle((int)pacman.Position.X * 32, (int)pacman.Position.Y * 32, 32, 32), new Rectangle(32 * frame, 0 , 32, 32), Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
                     break;
-   
                 case Direction.Down:
                     spriteBatch.Draw(pacmanVertical, new Rectangle((int)pacman.Position.X * 32, (int)pacman.Position.Y * 32, 32, 32), new Rectangle(32 *frame, 0, 32, 32), Color.White, 0, new Vector2(0, 0), SpriteEffects.None, 0);
                     break;
