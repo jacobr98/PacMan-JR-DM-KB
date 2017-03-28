@@ -10,6 +10,7 @@ namespace PacMan
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
     /// </summary>
+    public enum Items { Empty, Pellet, Energizer}
     public class Pacman
     {
         /// <summary>

@@ -49,11 +49,12 @@ namespace PacManGame
             this.ghostSprite = new GhostSprite(this);
             this.pacmanSprite = new PacManSprite(this);
             this.scoreSprite = new ScoreSprite(this);
-            Components.Add(scoreSprite);
             Components.Add(mazeSprite);
+            Components.Add(scoreSprite);
             Components.Add(ghostSprite);
             Components.Add(pacmanSprite);
             base.Initialize();
+
 
             this.PacManGame.Maze.PacmanWon += Maze_PacmanWon;
             this.PacManGame.Score.GameOver += Score_GameOver;

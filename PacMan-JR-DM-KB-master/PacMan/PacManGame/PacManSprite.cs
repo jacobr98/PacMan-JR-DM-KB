@@ -32,6 +32,11 @@ namespace PacManGame
 
         private int frame;
         private int animationcounter;
+
+        //sounds
+        private SoundEffect eatEnergizer;
+
+
         public PacManSprite(Game1 game) : base(game)
         {
             this.game = game;
@@ -44,7 +49,7 @@ namespace PacManGame
             oldState = Keyboard.GetState();
             threshold = 10;
             movecounter = 0;
-            movethreshold = 10;
+            movethreshold = 8;
             frame = 0;
             base.Initialize();
         }
@@ -54,6 +59,10 @@ namespace PacManGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             pacmanHorizontal = game.Content.Load<Texture2D>("pacman");
             pacmanVertical = game.Content.Load<Texture2D>("pacman2");
+
+            //sound
+            eatEnergizer = game.Content.Load<SoundEffect>("pacmaneatfruit");
+
             this.pacman = game.PacManGame.Pacman;
             base.LoadContent();
         }

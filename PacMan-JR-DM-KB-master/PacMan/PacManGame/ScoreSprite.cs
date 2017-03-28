@@ -22,6 +22,11 @@ namespace PacManGame
         private Texture2D livesTitle;
         private Texture2D score;
         private Texture2D gameOver;
+        private Texture2D victory;
+        
+        //sound
+        private SoundEffect death;
+        private SoundEffect beginning;
         public ScoreSprite(Game1 game) : base(game)
         {
             this.game = game;  
@@ -40,12 +45,28 @@ namespace PacManGame
             font = game.Content.Load<SpriteFont>("score");
             lives = game.Content.Load<Texture2D>("livesimage");
             score = game.Content.Load<Texture2D>("scoretitle");
+            
+            //game state
             gameOver = game.Content.Load<Texture2D>("gameover");
+            victory = game.Content.Load<Texture2D>("victory");
             livesTitle = game.Content.Load<Texture2D>("lives");
+
+            //sounds
+            death = game.Content.Load<SoundEffect>("pacmandeath");
+            beginning = game.Content.Load<SoundEffect>("pacmanbeginning");
+
+            beginning.Play();
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {
+            if (game.PacManGame.Score.Lives == 0)
+            {
+                death.Play();
+                game.PacManGame.Score.Lives = -1;
+            }
+
+            
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -67,6 +88,16 @@ namespace PacManGame
             } else if (game.PacManGame.Score.Lives == 1)
             {
                 spriteBatch.Draw(lives, new Rectangle(780, 200, 40, 40), Color.White);
+            }
+
+            if (game.PacManGame.Score.Lives == -1)
+            {
+                spriteBatch.Draw(gameOver, new Rectangle(190, 200, 360, 166), Color.White);
+            }
+
+            if (game.PacManGame.Maze.gameWon() == true && game.PacManGame.Score.Lives > 0)
+            {
+                spriteBatch.Draw(victory, new Rectangle(190, 200, 360, 270), Color.White);
             }
             spriteBatch.End();
             base.Draw(gameTime);

@@ -48,8 +48,10 @@ namespace PacMan
             if(member != null)
             {
                 member.Collide();
+                member = null;
             }
-            member = null;
+           
+            
         }
 
         /// <summary>

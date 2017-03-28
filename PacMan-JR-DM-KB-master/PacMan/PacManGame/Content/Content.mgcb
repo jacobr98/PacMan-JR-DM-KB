@@ -109,18 +109,6 @@
 /processorParam:TextureFormat=Color
 /build:gameover.png
 
-#begin pacman_chomp.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:pacman_chomp.wav
-
-#begin pacman_beginning.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:pacman_beginning.wav
-
 #begin pacman.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -264,4 +252,40 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:cornertop.png
+
+#begin pacmandeath.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacmandeath.wav
+
+#begin pacmaneatghost.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacmaneatghost.wav
+
+#begin pacmaneatfruit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacmaneatfruit.wav
+
+#begin pacmanbeginning.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacmanbeginning.wav
+
+#begin pacmanchomp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pacmanchomp.wav
+
+#begin Song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Song.mp3
 

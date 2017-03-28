@@ -19,6 +19,7 @@ namespace PacManGame
         private SpriteBatch spriteBatch;
         private Texture2D empty;
 
+        //maze walls
         private Texture2D wall;
         private Texture2D vertical;
         private Texture2D closedhorizontal;
@@ -28,9 +29,12 @@ namespace PacManGame
         private Texture2D cornerbot;
         private Texture2D cornertop;
 
-        private Texture2D gameOver;
+        //maze items
         private Texture2D pellet;
         private Texture2D energizer;
+
+        //game state
+        private Texture2D gameOver;
         private Texture2D victory;
         private Maze maze;
 
@@ -48,8 +52,9 @@ namespace PacManGame
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            empty = game.Content.Load<Texture2D>("empty");
 
+            //maze walls
+            empty = game.Content.Load<Texture2D>("empty");
             wall = game.Content.Load<Texture2D>("wall");
             vertical = game.Content.Load<Texture2D>("wallvertical");
             closedhorizontal = game.Content.Load<Texture2D>("closedhorizontal");
@@ -59,16 +64,17 @@ namespace PacManGame
             cornerbot = game.Content.Load<Texture2D>("cornerbot");
             cornertop = game.Content.Load<Texture2D>("cornertop");
 
-            gameOver = game.Content.Load<Texture2D>("gameover");
+            //game items
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
-            victory = game.Content.Load<Texture2D>("victory");
+
             this.maze = game.PacManGame.Maze;
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {
             game.PacManGame.Maze.CheckMembersLeft();
+
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -138,16 +144,7 @@ namespace PacManGame
                     } 
                 }
             }
-
-            if (game.PacManGame.Maze.gameWon() == true && game.PacManGame.Score.Lives > 0)
-            {
-                spriteBatch.Draw(victory, new Rectangle(190, 200, 360, 270), Color.White);
-            }
-
-            if (game.PacManGame.Score.Lives == 0)
-            {
-                spriteBatch.Draw(gameOver, new Rectangle(190, 200, 360, 166), Color.White);
-            }
+    
 
             spriteBatch.End();
 

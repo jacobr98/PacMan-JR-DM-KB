@@ -21,6 +21,8 @@ namespace PacManGame
         private Game1 game;
         //we will create the ghosts in the constructor 
         private GhostPack ghostPack;
+
+        private SoundEffect eat;
         private int threshold;
         private int counter;
 
@@ -32,16 +34,24 @@ namespace PacManGame
         public override void Initialize()
         {
             counter = 0;
-            threshold = 10;
+            threshold = 8;
             base.Initialize();
+        }
+        public void Eaten(ICollidable collidable)
+        {
+            eat.Play();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ghostImage = game.Content.Load<Texture2D>("ghost");
-            this.ghostPack = game.PacManGame.Ghostpack; 
-         
+            eat = game.Content.Load<SoundEffect>("pacmaneatghost");
+            this.ghostPack = game.PacManGame.Ghostpack;
+            foreach (Ghost g in ghostPack)
+            {
+                g.Collision += Eaten;
+            }
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -51,6 +61,7 @@ namespace PacManGame
                 ghostPack.Move();
                 counter = 0;
             }
+
             else { counter++; }
             base.Update(gameTime);
         }
