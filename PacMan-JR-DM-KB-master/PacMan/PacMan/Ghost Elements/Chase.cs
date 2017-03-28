@@ -18,20 +18,22 @@ namespace PacMan
         private Ghost ghost;//used to change position
         private Maze maze;//used to acces available neighbours
         private Vector2 target;//used to chase that target 
-        //private Pacman pacman; Not used.
-
+        private Pacman pacman;
         /// <summary>
         /// Constructor instantiates the ghost, maze, target and pacman.
         /// </summary>
-        public Chase(Ghost ghost, Maze maze, Vector2 target, Pacman pacman)
+        public Chase(Ghost ghost, Maze maze, Pacman pacman)
         {
             this.ghost = ghost;
             this.maze = maze;
-            this.target = target;
+            this.target = pacman.Position;
+            this.pacman = pacman;
         }
         /// <summary>
         /// Calculates the shortest distance for the ghosts to catch pacman
         /// </summary>
+        /// 
+        public Vector2 Target { get { return target; } }
         public void Move()
         {
             Tile current = maze[(int)ghost.Position.X, (int)ghost.Position.Y];
@@ -61,7 +63,7 @@ namespace PacMan
             ghost.Position = shortestDistance.Position;
 
             if (ghost.Position == target) {
-                target = ghost.PacmanPosition;
+                target = pacman.Position; 
             }
             
         }

@@ -8,6 +8,7 @@ using System.Timers;
 
 namespace PacMan
 {
+    public enum GhostName { Blinky, Speedy, Inky, Clyde}
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
     /// </summary>
@@ -23,48 +24,41 @@ namespace PacMan
         private Direction direction;
         public static Vector2 ReleasePosition;//used for release
         private Vector2 position;//ghosts position
-
+        private GhostName name;
         //pending type for GUI
         private Color colour;
         public Color Colour { get { return this.colour; } set { this.colour = value; } }
         public Vector2 PacmanPosition { get { return pacman.Position; } }
         private IGhostState currentState;
-        public static Timer scared;
-
+        
         //Events
         public event Action PacmanDied;
         public event Action<ICollidable> Collision;
 
+        public Vector2 GhostTarget { get { return currentState.Target; } }
         //Properties
         public Vector2 Position { get { return this.position; } set { this.position = value; } }
         public Direction Direction { get { return this.direction; }set { this.direction = value;} }
         public GhostState CurrentState { get; private set; }
         public int Points { get; set; }
-
+        public Vector2 HomePosition { get; set; }
+        public GhostName Name { get { return this.name; } }
         /// <summary>
         /// Constructor instantiates the gamestate, the location, the target, the ghoststate and color
         /// of the ghost.
         /// </summary>
-        public Ghost(GameState g, int x, int y, Vector2 target, GhostState start, Color colour)
+        public Ghost(GameState g, int x, int y, GhostState start, Color colour, GhostName name)
         {
-            this.target = target;
             this.colour = colour;
             this.pen = g.Pen;
             this.maze = g.Maze;
             this.pacman = g.Pacman;
             this.position = new Vector2(x, y);
+            this.name = name;
+            
 
-            switch (start)
-            {
-                case GhostState.Chase:
-                    this.currentState = new Chase(this, maze, target, pacman);
-                    break;
-                case GhostState.Scared:
-                    this.currentState = new Scared(this,maze);
-                    break;
-            }
 
-            this.CurrentState = start;
+            ChangeState(start);
         }
 
         /// <summary>
@@ -88,12 +82,27 @@ namespace PacMan
                     currentState = new Scared(this, this.maze);
                     break;
                 case GhostState.Chase:
-                    currentState = new Chase(this, maze, target, pacman);
+                    switch (Name)
+                    {
+                        case GhostName.Blinky:
+                            //this.currentState = new Chase(this, maze, pacman);
+                            this.currentState = new Predict(this, maze, pacman);
+                            break;
+                        case GhostName.Speedy:
+                            this.currentState = new Ambush(this, maze, pacman);
+                            //this.currentState = new Chase(this, maze, pacman);
+                            break;
+                        case GhostName.Inky:
+                            this.currentState = new Predict(this,maze,pacman);
+                            break;
+                        case GhostName.Clyde:
+                            this.currentState = new Proximity(this, maze, pacman);
+                            break;
+                    }
                     break;
                 case GhostState.Released:
                     position = ReleasePosition;
-                    currentState = new Chase(this, maze, target, pacman);
-                    this.CurrentState = GhostState.Chase;
+                    ChangeState(GhostState.Chase);
                     break;
                 case GhostState.Zombie:
                     currentState = new Zombie(this, this.maze, pen.Entrance);

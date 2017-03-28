@@ -74,7 +74,15 @@ namespace PacManGame
            
             spriteBatch.Begin();
             spriteBatch.Draw(score, new Vector2(770, 80), Color.White);
-            spriteBatch.DrawString(font, "" + game.PacManGame.Score.Score, new Vector2(780, 120), Color.White);
+            spriteBatch.DrawString(font, "" + game.PacManGame.Score.Score, new Vector2(800, 400), Color.White);
+            spriteBatch.DrawString(font, "" + game.PacManGame.Pacman.Position.X + ":" + game.PacManGame.Pacman.Position.Y, new Vector2(780, 350), Color.Yellow);
+            int counter = 0;
+            foreach (Ghost g in game.PacManGame.Ghostpack)
+            {
+                spriteBatch.DrawString(font, "" + g.GhostTarget.X + ":" + g.GhostTarget.Y, new Vector2(800, 450 + counter), g.Colour);
+                counter += 50;
+            }
+           // spriteBatch.DrawString(font, "" + game.PacManGame.Maze.Length + " " + game.PacManGame.Maze.Height, new Vector2(800, 650), Color.White);
             spriteBatch.Draw(livesTitle, new Vector2(780, 160), Color.White);
             if (game.PacManGame.Score.Lives == 3)
             {

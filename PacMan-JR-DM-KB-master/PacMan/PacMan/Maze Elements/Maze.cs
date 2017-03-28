@@ -20,8 +20,8 @@ namespace PacMan
         public event Action<ICollidable> PacmanWon;
 
         //property Length of the Tile[,]
-        public int Size { get; set; }
-
+        public int Length { get; set; }
+        public int Height { get; set; }
         /// <summary>
         /// No parameter constructor
         /// </summary>
@@ -37,7 +37,8 @@ namespace PacMan
         public void SetTiles(Tile[,] maze)
         {
             this.maze = maze;
-            this.Size = maze.GetLength(0);
+            this.Length = maze.GetLength(0);
+            this.Height = maze.GetLength(1);
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace PacMan
         {
             get
             {
-                if (x < 0 || x >= Size || y < 0 || y >= Size)
+                if (x < 0 || x >= Length || y < 0 || y >= Height)
                     throw new ArgumentOutOfRangeException("The indeces are out of range (" + x + ", " + y + ")");
                 return maze[x, y];
             }

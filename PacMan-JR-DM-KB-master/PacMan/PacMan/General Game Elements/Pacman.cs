@@ -100,5 +100,8 @@ namespace PacMan
 
             maze[(int)pos.X, (int)pos.Y].Collide(); 
         }
+
+        
+        
     }
 }

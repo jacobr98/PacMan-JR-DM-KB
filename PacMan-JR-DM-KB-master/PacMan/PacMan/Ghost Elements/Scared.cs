@@ -16,6 +16,7 @@ namespace PacMan
     /// </summary>
     public class Scared : IGhostState
     {
+        public Vector2 Target { get { return new Vector2(666,666); } }
         private Ghost ghost;
         private Maze maze;
 

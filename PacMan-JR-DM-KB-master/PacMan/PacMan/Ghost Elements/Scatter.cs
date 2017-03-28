@@ -10,22 +10,20 @@ namespace PacMan
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
     /// </summary>
-    class Zombie : IGhostState
+    class Scatter : IGhostState
     {
         /// <summary>
         /// Variables used in the for the ghost to be able to chase
         /// </summary>
-        /// 
-        public Vector2 Target { get { return target; } }
         private Ghost ghost;//used to change position
         private Maze maze;//used to acces available neighbours
-        private Vector2 target;//used to chase that target 
+        private Vector2 target;//home of the ghost 
         //private Pacman pacman; Not used.
-
+        public Vector2 Target { get { return target; } }
         /// <summary>
         /// Constructor instantiates the ghost, maze, target and pacman.
         /// </summary>
-        public Zombie(Ghost ghost, Maze maze, Vector2 target)
+        public Scatter (Ghost ghost, Maze maze, Vector2 target)
         {
             this.ghost = ghost;
             this.maze = maze;
@@ -61,12 +59,6 @@ namespace PacMan
                 ghost.Direction = Direction.Down;
 
             ghost.Position = shortestDistance.Position;
-
-            if (ghost.Position == target)
-            {
-                ghost.Reset();
-            }
-
         }
 
     }

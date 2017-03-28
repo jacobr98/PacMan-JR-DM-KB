@@ -14,7 +14,7 @@ namespace PacMan
     /// </summary>
     public enum Direction {Left, Right, Up, Down}//Represent direction in which entity is moving
 
-    public enum GhostState { Scared, Chase, Released, Zombie}//Represents the state of the ghost
+    public enum GhostState { Scared, Chase, Released, Zombie, Scatter}//Represents the state of the ghost
 
     /// <summary>
     /// The GameState represents all the business classes
@@ -128,7 +128,7 @@ namespace PacMan
                             array[x, y] = new Path(x,y,null);
                             break;
                         case "x":
-                            array[x, y] = new Path(x,y,null);
+                            array[x, y] = new PenPath(x,y);
                             g.pen.AddTile(array[x, y]);
                             break;
                         case "P":
@@ -137,7 +137,8 @@ namespace PacMan
                             g.pacman.initPosition = new Vector2(x, y);
                             break;
                         case "1":
-                            gh = new Ghost(g,x,y,g.pacman.Position,GhostState.Chase, new Color(255,0,0));
+                  
+                            gh = new Ghost(g,x,y,GhostState.Chase, new Color(255,0,0),GhostName.Blinky);
                             pen.Entrance = new Vector2(x, y);
                             gh.Points = 200;
                             Ghost.ReleasePosition = new Vector2(x,y);
@@ -147,7 +148,7 @@ namespace PacMan
                             array[x, y] = new Path(x, y, null);
                             break;
                         case "2":
-                            gh = new Ghost(g, x, y, g.pacman.Position, GhostState.Chase, new Color(255, 192, 203));
+                            gh = new Ghost(g, x, y, GhostState.Chase, new Color(255, 192, 203), GhostName.Speedy);
                             gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
@@ -157,7 +158,7 @@ namespace PacMan
                             g.pen.AddToPen(gh);
                             break;
                         case "3":
-                            gh = new Ghost(g, x, y, g.pacman.Position, GhostState.Chase, new Color(64, 224, 208));
+                            gh = new Ghost(g, x, y,GhostState.Chase, new Color(64, 224, 208),GhostName.Inky);
                             gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
@@ -167,7 +168,7 @@ namespace PacMan
                             g.pen.AddToPen(gh);
                             break;
                         case "4":
-                            gh = new Ghost(g, x, y, g.pacman.Position, GhostState.Chase, new Color(255, 165, 0));
+                            gh = new Ghost(g, x, y,GhostState.Chase, new Color(255, 165, 0),GhostName.Clyde);
                             gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
@@ -180,6 +181,21 @@ namespace PacMan
                 }
             }
             g.maze.SetTiles(array);
+            foreach (Ghost ghost in g.ghostpack)
+            {
+                switch (ghost.Name)
+                {
+                    case GhostName.Blinky:
+                        ghost.HomePosition = new Vector2(g.maze.Length -2 ,1);
+                        break;
+                    case GhostName.Speedy: ghost.HomePosition = new Vector2(1, 1);
+                        break;
+                    case GhostName.Inky: ghost.HomePosition = new Vector2(g.maze.Length - 2, g.maze.Height - 2);
+                        break;
+                    case GhostName.Clyde: ghost.HomePosition = new Vector2(1, g.maze.Height - 2);
+                        break;
+                }
+            }
             g.maze.PacmanWon += g.Score.IncrementScore;
             g.pacman.SubToGhosts();
             return g;

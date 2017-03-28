@@ -15,7 +15,8 @@ namespace PacMan
     public class GhostPack : IEnumerable<Ghost>
     {
         private List<Ghost> ghosts;
-
+        private Timer scared;
+        private Timer scatter;
         /// <summary>
         /// Constructor that instantiates a new List of ghosts.
         /// </summary>
@@ -73,9 +74,9 @@ namespace PacMan
                 if (g.CurrentState == GhostState.Chase)
                 g.ChangeState(GhostState.Scared);
             }
-            Ghost.scared = new Timer(6000);
-            Ghost.scared.Elapsed += DisableScared;
-            Ghost.scared.Start();
+            scared = new Timer(6000);
+            scared.Elapsed += DisableScared;
+            scared.Start();
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace PacMan
                 g.ChangeState(GhostState.Chase);
             }
 
-            Ghost.scared = null;
+            scared = null;
             
         }
         private void checkCollideGhost(Ghost g)
@@ -123,7 +124,30 @@ namespace PacMan
                 checkCollideGhost(g);
             }
         }
+        public void ScatterGhosts()
+        {
+            foreach (Ghost g in ghosts)
+            {
+                if (g.CurrentState == GhostState.Chase)
+                    g.ChangeState(GhostState.Scared);
+            }
+            scatter = new Timer(8000);
+            scatter.Elapsed += DisableScared;
+            scatter.Start();
+        }
+        public void DisableScatter(object sender, ElapsedEventArgs e)
+        {
+            Timer t = (Timer)sender;
+            t.Enabled = false;
 
+            foreach (var g in ghosts)
+            {
+                if (g.CurrentState == GhostState.Scatter)
+                    g.ChangeState(GhostState.Chase);
+            }
+
+            scared = null;
+        }
         /// <summary>
         /// Adds ghosts to the List
         /// </summary>

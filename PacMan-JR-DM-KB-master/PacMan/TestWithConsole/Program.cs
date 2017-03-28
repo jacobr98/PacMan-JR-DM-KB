@@ -16,7 +16,7 @@ namespace TestWithConsole
             string level1 = File.ReadAllText("../../../PacMan/levelsPen.csv");
             GameState g = GameState.Parse(level1);
 
-            Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+            Ghost gh = new Ghost(g, 14, 15, GhostState.Chase, new Color(255, 255, 255), GhostName.Blinky);
             gh.Direction = Direction.Left;
             //make the ghost move
             //Assert.AreEqual(gh.Position, new Vector2(14, 15));
@@ -30,9 +30,9 @@ namespace TestWithConsole
             gh.Reset();
             Console.WriteLine(gh.Position);
 
-            for (int i = 0; i < g.Maze.Size; i++)
+            for (int i = 0; i < g.Maze.Height; i++)
             {
-                for (int j = 0; j < g.Maze.Size; j++)
+                for (int j = 0; j < g.Maze.Length; j++)
                 {
                     Console.Write(g.Maze[j, i]+ "," +  g.Maze[j,i]?.Position);
                 }

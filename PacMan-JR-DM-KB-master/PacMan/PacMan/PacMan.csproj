@@ -44,7 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ghost Elements\Ambush.cs" />
     <Compile Include="Ghost Elements\Chase.cs" />
+    <Compile Include="Ghost Elements\Predict.cs" />
+    <Compile Include="Ghost Elements\Proximity.cs" />
+    <Compile Include="Ghost Elements\Scatter.cs" />
     <Compile Include="Ghost Elements\Zombie.cs" />
     <Compile Include="Maze Elements\Energizer.cs" />
     <Compile Include="Ghost Elements\Ghost.cs" />
@@ -60,6 +64,7 @@
     <Compile Include="General Game Elements\ScoreAndLives.cs" />
     <Compile Include="General Game Elements\GameState.cs" />
     <Compile Include="General Game Elements\Pacman.cs" />
+    <Compile Include="Maze Elements\PenPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Maze Elements\Tile.cs" />
     <Compile Include="Maze Elements\Wall.cs" />

@@ -189,9 +189,9 @@ namespace Test2
             g.Maze.PacmanWon += (x) => triggered = true;
 
             //collide with all the pellets and energizer to check win
-            for (int i = 0; i < g.Maze.Size; i++)
+            for (int i = 0; i < g.Maze.Height; i++)
             {
-                for (int j = 0; j < g.Maze.Size; j++)
+                for (int j = 0; j < g.Maze.Length; j++)
                 {
                     if (g.Maze[j, i] is PacMan.Path)
                     {
@@ -235,7 +235,7 @@ namespace Test2
             GameState g = GameState.Parse(level1);
 
             //Create our own ghost so I can manipulate it
-            Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+            Ghost gh = new Ghost(g, 14, 15, GhostState.Chase, new Color(255, 255, 255),GhostName.Blinky);
             gh.Direction = Direction.Left;
             Assert.AreEqual(gh.Position, new Vector2(14, 15));
             gh.Move();
@@ -256,7 +256,7 @@ namespace Test2
         {
             GameState g = GameState.Parse(level1);
 
-            Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+            Ghost gh = new Ghost(g, 14, 15, GhostState.Chase, new Color(255, 255, 255), GhostName.Blinky);
             gh.Direction = Direction.Left;
             //make the ghost move
             Assert.AreEqual(gh.Position, new Vector2(14, 15));
@@ -276,7 +276,7 @@ namespace Test2
         {
             GameState g = GameState.Parse(level1);
 
-            Ghost gh = new Ghost(g, 14, 15, g.Pacman.Position, GhostState.Chase, new Color(255, 255, 255));
+            Ghost gh = new Ghost(g, 14, 15, GhostState.Chase, new Color(255, 255, 255),GhostName.Blinky);
             gh.ChangeState(GhostState.Scared);
 
             Assert.AreEqual(gh.CurrentState, GhostState.Scared);

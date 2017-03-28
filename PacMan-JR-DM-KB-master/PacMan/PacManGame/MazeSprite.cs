@@ -83,10 +83,10 @@ namespace PacManGame
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            for (int i = 0; i < maze.Size; i++)
+            for (int i = 0; i < maze.Height; i++)
             {
                 
-                for (int j = 0; j < maze.Size; j++) {
+                for (int j = 0; j < maze.Length; j++) {
                     if (maze[i, j] is Wall)
                     {
                         switch (((Wall)maze[i, j]).Type)
