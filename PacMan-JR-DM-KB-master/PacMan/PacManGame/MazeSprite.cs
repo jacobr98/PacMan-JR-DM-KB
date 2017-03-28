@@ -24,6 +24,10 @@ namespace PacManGame
         private Texture2D closedhorizontal;
         private Texture2D connectorhorizontal;
         private Texture2D closedvertical;
+        private Texture2D connectorvertical;
+        private Texture2D cornerbot;
+        private Texture2D cornertop;
+
         private Texture2D gameOver;
         private Texture2D pellet;
         private Texture2D energizer;
@@ -51,7 +55,11 @@ namespace PacManGame
             closedhorizontal = game.Content.Load<Texture2D>("closedhorizontal");
             connectorhorizontal = game.Content.Load<Texture2D>("connectorhorizontal");
             closedvertical = game.Content.Load<Texture2D>("closedvertical");
+            connectorvertical = game.Content.Load<Texture2D>("connectorvertical");
+            cornerbot = game.Content.Load<Texture2D>("cornerbot");
+            cornertop = game.Content.Load<Texture2D>("cornertop");
 
+            gameOver = game.Content.Load<Texture2D>("gameover");
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
             victory = game.Content.Load<Texture2D>("victory");
