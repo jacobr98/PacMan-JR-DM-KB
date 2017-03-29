@@ -96,6 +96,7 @@ namespace PacManGame
                 SoundEffectInstance scaredInstance = scared.CreateInstance();
                 scaredInstance.Play();
         }
+
         /// <summary>
         /// Puts the ghost speed back to normal
         /// </summary>

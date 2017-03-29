@@ -77,6 +77,10 @@ namespace PacMan
                 }
             }
         }
+
+        /// <summary>
+        /// Calls the event to pause the game
+        /// </summary>
         public void PauseGame()
         {
             paused = !paused;
