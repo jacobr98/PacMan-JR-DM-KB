@@ -127,7 +127,7 @@ namespace PacManGame
 
             if (game.Paused)
             {
-                spriteBatch.DrawString(font, "Paused", new Vector2(184, 184), Color.White);
+                spriteBatch.DrawString(font, "Paused", new Vector2(130, 160), Color.White);
             }
             spriteBatch.End();
             base.Draw(gameTime);

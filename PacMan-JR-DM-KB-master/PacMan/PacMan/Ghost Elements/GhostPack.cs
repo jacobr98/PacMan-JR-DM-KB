@@ -17,9 +17,11 @@ namespace PacMan
         private List<Ghost> ghosts;
         private Timer scared;
         private Timer scatter;
+        private Boolean isScared = false;
 
         public event Action Fear;
         public event Action FearOff;
+        
         /// <summary>
         /// Constructor that instantiates a new List of ghosts.
         /// </summary>
@@ -73,18 +75,30 @@ namespace PacMan
         public void ScareGhosts()
         {
             Fear?.Invoke();
-            foreach (Ghost g in ghosts)
+            //Prolongs the duration of the scare if they are already scared 
+            if (isScared)
             {
-                if (g.CurrentState == GhostState.Chase)
-                {
-                    g.ChangeState(GhostState.Scared);
-                }
-                
+                scared.Stop();
+                scared = new Timer(5500);
+                scared.Elapsed += DisableScared;
+                scared.Start();
             }
+            else
+            {
+                isScared = true;
+                foreach (Ghost g in ghosts)
+                {
+                    if (g.CurrentState == GhostState.Chase)
+                    {
+                        g.ChangeState(GhostState.Scared);
+                    }
 
-            scared = new Timer(5500);
-            scared.Elapsed += DisableScared;
-            scared.Start();
+                }
+
+                scared = new Timer(5500);
+                scared.Elapsed += DisableScared;
+                scared.Start();
+            }
         }
 
         /// <summary>
@@ -97,6 +111,7 @@ namespace PacMan
             Timer t = (Timer)sender;
             t.Enabled = false;
             FearOff?.Invoke();
+            isScared = false;
             foreach (var g in ghosts)
             {
                 if (g.CurrentState == GhostState.Scared)
