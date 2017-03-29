@@ -52,7 +52,7 @@ namespace PacManGame
             counter = 0;
             originalthreshold = 8;
             threshold = 8;
-            scaredthreshold = 16;
+            scaredthreshold = 15;
             isScared = false;
             base.Initialize();
         }
@@ -96,7 +96,7 @@ namespace PacManGame
         /// <param name="c">The collidable</param>
         public void Scared()
         {
-
+            threshold = scaredthreshold;
             isScared = true;
             scaredInstance.Stop();
             scaredInstance = scared.CreateInstance();

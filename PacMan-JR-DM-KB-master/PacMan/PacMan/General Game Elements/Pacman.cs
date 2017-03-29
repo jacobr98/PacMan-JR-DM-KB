@@ -43,7 +43,7 @@ namespace PacMan
             foreach (var g in this.controller.Ghostpack)
             {
                 g.PacmanDied += () => { pos = initPosition; };
-            }
+            }   
         }
 
 

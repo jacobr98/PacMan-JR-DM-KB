@@ -207,12 +207,12 @@ namespace PacManGame
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            switch (pacman.PacmanDirection)
-            {
+            switch (pacman.PacmanDirection) {
                 case Direction.Right:
-                    spriteBatch.Draw(pacmanHorizontal,
-                        new Rectangle((int)pacman.Position.X * spriteSize, (int)pacman.Position.Y * spriteSize, spriteSize, spriteSize),
-                        new Rectangle(0, spriteSize * frame, spriteSize, spriteSize), Color.White);
+                     spriteBatch.Draw(pacmanHorizontal,
+                       new Rectangle((int)pacman.Position.X * spriteSize, (int)pacman.Position.Y * spriteSize, spriteSize, spriteSize),
+                     new Rectangle(0, spriteSize * frame, spriteSize, spriteSize), Color.White);
+               
                     break;
                 case Direction.Left:
                     spriteBatch.Draw(pacmanHorizontal,
@@ -244,5 +244,8 @@ namespace PacManGame
             base.Draw(gameTime);
         }
 
+     
+
+  
     }
 }
