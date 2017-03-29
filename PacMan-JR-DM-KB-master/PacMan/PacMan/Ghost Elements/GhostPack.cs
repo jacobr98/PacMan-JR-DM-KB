@@ -16,7 +16,6 @@ namespace PacMan
     {
         private List<Ghost> ghosts;
         private Timer scared;
-        private Timer continueScare;
         private Timer scatter;
         /// <summary>
         /// Constructor that instantiates a new List of ghosts.
