@@ -109,9 +109,8 @@ namespace PacManGame
             }
             //counterSound set to 4 because the sound is about 1 second
             //and pacman eats about 4 pellets in 1 second
-            else if (c is Pellet && counterSound == 4)
+            else if (c is Pellet && counterSound >= 4)
             {
-                counterSound++;
                 eatPellet.Play();
                 counterSound = 0;
             }
