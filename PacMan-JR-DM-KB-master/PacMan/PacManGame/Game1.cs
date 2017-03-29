@@ -28,10 +28,9 @@ namespace PacManGame
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = 736;
-            graphics.PreferredBackBufferWidth = 950;
+            graphics.PreferredBackBufferHeight = 450;
+            graphics.PreferredBackBufferWidth = 368;
             graphics.ApplyChanges();
-
             Content.RootDirectory = "Content";
         }
 
@@ -55,19 +54,24 @@ namespace PacManGame
             Components.Add(pacmanSprite);
             base.Initialize();
 
-
             this.PacManGame.Maze.PacmanWon += Maze_PacmanWon;
             this.PacManGame.Score.GameOver += Score_GameOver;
-           
         }
 
+        /// <summary>
+        /// Removes the ghostsprite and pacman sprite when 
+        /// pacman loses 3 lives and the gameover event is triggered.
+        /// </summary>
         private void Score_GameOver(string obj)
         {
             Components.Remove(ghostSprite);
             Components.Remove(pacmanSprite);
-            //Components.Remove(mazeSprite);           
         }
 
+        /// <summary>
+        /// Removes the ghostsprite and pacman sprite when 
+        /// pacman wins the game and the pacmanwon event is triggered.
+        /// </summary>
         private void Maze_PacmanWon(ICollidable obj)
         {
             Components.Remove(ghostSprite);
@@ -85,17 +89,13 @@ namespace PacManGame
             //backgroundMusic.Play();
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
         /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
+        protected override void UnloadContent() { }
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -108,9 +108,10 @@ namespace PacManGame
                 Exit();
 
             KeyboardState newState = Keyboard.GetState();
-            if (newState.IsKeyDown(Keys.Enter))
+            if ((PacManGame.Score.Lives == -1 && newState.IsKeyDown(Keys.Enter)) ||
+                PacManGame.Maze.gameWon() == true && newState.IsKeyDown(Keys.Enter))
             {
-                this.Reset();
+                Reset();
             }
 
             base.Update(gameTime);
@@ -127,10 +128,12 @@ namespace PacManGame
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Exits the game when called.
+        /// </summary>
         private void Reset()
         {
             Exit();
-
         }
     }
 }

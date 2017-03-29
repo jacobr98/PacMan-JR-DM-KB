@@ -25,10 +25,7 @@ namespace PacMan
         /// <summary>
         /// No parameter constructor
         /// </summary>
-        public Maze()
-        {
-
-        }
+        public Maze() { }
 
         /// <summary>
         /// Sets the maze and size
@@ -104,7 +101,6 @@ namespace PacMan
                         t.Add(maze[(int)position.X - 1, (int)position.Y]);
                     break; 
             }
-
             return t;
         }
 
@@ -120,6 +116,10 @@ namespace PacMan
             }
         }
 
+        /// <summary>
+        /// Checks if all the tiles are empty.
+        /// </summary>
+        /// <returns>A boolean value whether the members are null or not</returns>
         public bool gameWon()
         {
             if (areMembersNull())
@@ -155,9 +155,7 @@ namespace PacMan
                     }
                 }
             }
-
             return true;
-        }
-        
+        }  
     }
 }

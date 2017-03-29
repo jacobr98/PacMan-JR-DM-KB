@@ -31,23 +31,23 @@ namespace PacMan
         /// <param name="v">Vector in which the ghost is going</param>
         public bool CheckCollideGhosts(Vector2 v)
         {
-            foreach(var g in ghosts)
+            foreach (var g in ghosts)
             {
                 //Checks to see if each ghosts position matches the V (pacmans position)
-                if(g.Position == v)
+                if (g.Position == v)
                 {
-                    if(g.CurrentState == GhostState.Chase)
+                    if (g.CurrentState == GhostState.Chase)
                     {
                         g.Collide();
                         ResetGhosts();
                         return true;
                     }
-                    else if(g.CurrentState == GhostState.Scared)
+                    else if (g.CurrentState == GhostState.Scared)
                     {
                         g.Collide();
                         return true;
                     }
-                    
+
                 }
             }
             return false;
@@ -58,7 +58,8 @@ namespace PacMan
         /// </summary>
         public void ResetGhosts()
         {
-            foreach (Ghost g in ghosts) {
+            foreach (Ghost g in ghosts)
+            {
                 g.Reset();
             }
         }
@@ -68,11 +69,10 @@ namespace PacMan
         /// </summary>
         public void ScareGhosts()
         {
-
             foreach (Ghost g in ghosts)
             {
                 if (g.CurrentState == GhostState.Chase)
-                g.ChangeState(GhostState.Scared);
+                    g.ChangeState(GhostState.Scared);
             }
             scared = new Timer(6000);
             scared.Elapsed += DisableScared;
@@ -89,14 +89,19 @@ namespace PacMan
             Timer t = (Timer)sender;
             t.Enabled = false;
 
-            foreach(var g in ghosts) {
-                if(g.CurrentState == GhostState.Scared)
-                g.ChangeState(GhostState.Chase);
+            foreach (var g in ghosts)
+            {
+                if (g.CurrentState == GhostState.Scared)
+                    g.ChangeState(GhostState.Chase);
             }
-
             scared = null;
-            
         }
+
+        /// <summary>
+        /// When the timer is off, all ghosts turn back to chase state
+        /// </summary>
+        /// <param name="sender">The object that holds the timer</param>
+        /// <param name="e">The timer event</param>
         private void checkCollideGhost(Ghost g)
         {
             if (g.Position == g.PacmanPosition)
@@ -110,9 +115,9 @@ namespace PacMan
                 {
                     g.Collide();
                 }
-
             }
         }
+
         /// <summary>
         /// Tells the ghosts where to move
         /// </summary>
@@ -124,17 +129,25 @@ namespace PacMan
                 checkCollideGhost(g);
             }
         }
+
+        /// <summary>
+        /// Changes the states of the ghosts to Scatter mode
+        /// </summary>
         public void ScatterGhosts()
         {
             foreach (Ghost g in ghosts)
             {
                 if (g.CurrentState == GhostState.Chase)
-                    g.ChangeState(GhostState.Scared);
+                    g.ChangeState(GhostState.Scatter);
             }
             scatter = new Timer(8000);
             scatter.Elapsed += DisableScared;
             scatter.Start();
         }
+
+        /// <summary>
+        /// Disables the scatter mode
+        /// </summary>
         public void DisableScatter(object sender, ElapsedEventArgs e)
         {
             Timer t = (Timer)sender;
@@ -161,7 +174,7 @@ namespace PacMan
         /// Implements the IEnumerable
         /// </summary>
         /// <returns name="Enumerator"> Ghosts enumerators</returns>
-        
+
         public IEnumerator<Ghost> GetEnumerator()
         {
             return ghosts.GetEnumerator();

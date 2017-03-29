@@ -8,7 +8,7 @@ using System.Timers;
 
 namespace PacMan
 {
-    public enum GhostName { Blinky, Speedy, Inky, Clyde}
+    public enum GhostName { Blinky, Speedy, Inky, Clyde }
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
     /// </summary>
@@ -31,7 +31,7 @@ namespace PacMan
         public Color Colour { get { return this.colour; } set { this.colour = value; } }
         public Vector2 PacmanPosition { get { return pacman.Position; } }
         private IGhostState currentState;
-        
+
         //Events
         public event Action PacmanDied;
         public event Action<ICollidable> Collision;
@@ -39,7 +39,7 @@ namespace PacMan
         public Vector2 GhostTarget { get { return currentState.Target; } }
         //Properties
         public Vector2 Position { get { return this.position; } set { this.position = value; } }
-        public Direction Direction { get { return this.direction; }set { this.direction = value;} }
+        public Direction Direction { get { return this.direction; } set { this.direction = value; } }
         public GhostState CurrentState { get; private set; }
         public int Points { get; set; }
         public Vector2 HomePosition { get; set; }
@@ -56,8 +56,6 @@ namespace PacMan
             this.pacman = g.Pacman;
             this.position = new Vector2(x, y);
             this.name = name;
-            
-
 
             ChangeState(start);
         }
@@ -76,9 +74,9 @@ namespace PacMan
         /// <param name="state">The state in which the ghost is changed to</param>
         public void ChangeState(GhostState state)
         {
-
             this.CurrentState = state;
-            switch (state) {
+            switch (state)
+            {
                 case GhostState.Scared:
                     currentState = new Scared(this, this.maze);
                     break;
@@ -87,14 +85,12 @@ namespace PacMan
                     {
                         case GhostName.Blinky:
                             this.currentState = new Chase(this, maze, pacman);
-                            
                             break;
                         case GhostName.Speedy:
                             this.currentState = new Ambush(this, maze, pacman);
-                            //this.currentState = new Chase(this, maze, pacman);
                             break;
                         case GhostName.Inky:
-                            this.currentState = new Predict(this, GhostAssistant,maze, pacman);
+                            this.currentState = new Predict(this, GhostAssistant, maze, pacman);
                             break;
                         case GhostName.Clyde:
                             this.currentState = new Proximity(this, maze, pacman);
@@ -117,9 +113,9 @@ namespace PacMan
         public void Move()
         {
             //Changes Target positions once it passes the previous target
-            if(target == position)
+            if (target == position)
             {
-                target = pacman.Position; 
+                target = pacman.Position;
             }
             //Use the state objec to decide how to move
             currentState.Move();
@@ -135,7 +131,7 @@ namespace PacMan
                 OnCollision(this);
                 ChangeState(GhostState.Zombie);
             }
-            else if(CurrentState == GhostState.Chase)
+            else if (CurrentState == GhostState.Chase)
             {
                 OnPacmanDied();
             }
@@ -156,7 +152,7 @@ namespace PacMan
         /// <param name="i">The ICollidable that collides with the ghost</param>
         protected void OnCollision(ICollidable i)
         {
-            
+
             Collision?.Invoke(i);
         }
     }

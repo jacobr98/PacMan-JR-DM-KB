@@ -14,53 +14,60 @@ using System.Threading.Tasks;
 
 namespace PacManGame
 {
+    /// <summary>
+    /// Authors : Jacob Riendeau, Kevin Bui
+    /// </summary>
     class GhostSprite : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;
         private Texture2D ghostImage;
         private Texture2D eyeImage;
-        private Game1 game;
-        //we will create the ghosts in the constructor 
+        private Game1 game; 
         private GhostPack ghostPack;
 
-        private SoundEffect eat;
+        private SoundEffect scared;
         private int threshold;
         private int counter;
-        //private bool hasPlayed = false;
 
-        //sounds
-        //private SoundEffect scared;
+        private int spriteSize = 16;
 
+        /// <summary>
+        /// Constructor of ghostSprite
+        /// </summary>
         public GhostSprite(Game1 game) : base(game)
         {
             this.game = game;
         }
 
+        /// <summary>
+        /// Initializes the game
+        /// </summary>
         public override void Initialize()
         {
             counter = 0;
             threshold = 8;
             base.Initialize();
         }
-        public void Eaten(ICollidable collidable)
-        {
-            eat.Play();
-        }
 
+        /// <summary>
+        /// Loads the content of the game
+        /// </summary>
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ghostImage = game.Content.Load<Texture2D>("ghost");
-            eat = game.Content.Load<SoundEffect>("pacmaneatghost");
             eyeImage = game.Content.Load<Texture2D>("ghosteye");
-            //scared = game.Content.Load<SoundEffect>("ghostscared");
+            scared = game.Content.Load<SoundEffect>("ghostscared");
+            game.PacManGame.Score.Eats += Scared;
             this.ghostPack = game.PacManGame.Ghostpack;
-            foreach (Ghost g in ghostPack)
-            {
-                //g.Collision += Eaten;
-            }
+
             base.LoadContent();
         }
+
+        /// <summary>
+        /// Updates the game
+        /// </summary>
+        /// <param name="gameTime">The game time</param>
         public override void Update(GameTime gameTime)
         {
             if (counter > threshold)
@@ -71,6 +78,30 @@ namespace PacManGame
 
             base.Update(gameTime);
         }
+
+        /// <summary>
+        /// Plays the scared sound effect
+        /// </summary>
+        /// <param name="c">The collidable</param>
+        public void Scared(ICollidable c)
+        {
+            SoundEffectInstance scaredInstance = scared.CreateInstance();
+
+            if (c is Energizer)
+            {
+                scaredInstance.Play();
+            }
+
+            if (game.PacManGame.Score.Lives == -1)
+            {
+                scaredInstance.Stop();
+            }
+        }
+
+        /// <summary>
+        /// Draws the spritebatch
+        /// </summary>
+        /// <param name="gameTime">The game time</param>
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
@@ -78,18 +109,18 @@ namespace PacManGame
             foreach (Ghost g in ghostPack) {
                 if (g.CurrentState == GhostState.Scared)
                 {
-                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), Color.Blue);
+                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * spriteSize, (int)g.Position.Y * spriteSize, spriteSize, spriteSize), Color.Blue);
                 }
                 else if (g.CurrentState == GhostState.Zombie)
                 {
-                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), Color.Black);
+                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * spriteSize, (int)g.Position.Y * spriteSize, spriteSize, spriteSize), Color.Black);
                 }
                 else
                 {
-                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), g.Colour);
+                    spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * spriteSize, (int)g.Position.Y * spriteSize, spriteSize, spriteSize), g.Colour);
                 }
 
-                spriteBatch.Draw(eyeImage, new Rectangle((int)g.Position.X * 32, (int)g.Position.Y * 32, 32, 32), Color.White);
+                spriteBatch.Draw(eyeImage, new Rectangle((int)g.Position.X * spriteSize, (int)g.Position.Y * spriteSize, spriteSize, spriteSize), Color.White);
             }
             spriteBatch.End();
 

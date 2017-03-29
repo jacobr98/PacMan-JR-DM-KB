@@ -13,6 +13,9 @@ using PacMan;
 
 namespace PacManGame
 {
+    /// <summary>
+    /// Authors : Jacob Riendeau, Kevin Bui
+    /// </summary>
     class MazeSprite : DrawableGameComponent
     {
         private Game1 game;
@@ -40,20 +43,29 @@ namespace PacManGame
         private int frame;
         private int animationcounter;
 
-        //sounds
-        private SoundEffect eat;
+        private int spriteSize = 16;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="game">The game</param>
         public MazeSprite(Game1 game) : base(game)
         {
             this.game = game;
-          
+
         }
 
+        /// <summary>
+        /// Initializes the game
+        /// </summary>
         public override void Initialize()
         {
             base.Initialize();
         }
 
+        /// <summary>
+        /// Loads the content of the game
+        /// </summary>
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -68,101 +80,132 @@ namespace PacManGame
             connectorvertical = game.Content.Load<Texture2D>("connectorvertical");
             cornerbot = game.Content.Load<Texture2D>("cornerbot");
             cornertop = game.Content.Load<Texture2D>("cornertop");
-
-            //test
             energizerAnimation = game.Content.Load<Texture2D>("energizeranimation");
 
             //game items
             pellet = game.Content.Load<Texture2D>("pellet");
             energizer = game.Content.Load<Texture2D>("energizer");
 
-            //sound
-            eat = game.Content.Load<SoundEffect>("pacmaneatfruit");
-
             this.maze = game.PacManGame.Maze;
             base.LoadContent();
         }
+
+        /// <summary>
+        /// Updates the game
+        /// </summary>
+        /// <param name="gameTime">The game time</param>
         public override void Update(GameTime gameTime)
         {
             game.PacManGame.Maze.CheckMembersLeft();
 
             base.Update(gameTime);
         }
+
+        /// <summary>
+        /// Draws the sprites
+        /// </summary>
+        /// <param name="gameTime">The game time</param>
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
+
+            //for loop that draws all the maze and items inside it
             for (int i = 0; i < maze.Height; i++)
             {
-                
-                for (int j = 0; j < maze.Length; j++) {
+
+                for (int j = 0; j < maze.Length; j++)
+                {
                     if (maze[i, j] is Wall)
                     {
                         switch (((Wall)maze[i, j]).Type)
                         {
                             case WallType.Horizontal:
-                                spriteBatch.Draw(wall, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                spriteBatch.Draw(wall,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
                                 break;
                             case WallType.Vertical:
-                                spriteBatch.Draw(vertical, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                spriteBatch.Draw(vertical,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
                                 break;
                             case WallType.ClosedR:
-                                spriteBatch.Draw(closedhorizontal, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                spriteBatch.Draw(closedhorizontal,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
                                 break;
                             case WallType.ClosedL:
-                                spriteBatch.Draw(closedhorizontal, new Rectangle(i * 32, j * 32, 32, 32),null, Color.White,0,new Vector2(0,0),SpriteEffects.FlipHorizontally,0);
+                                spriteBatch.Draw(closedhorizontal,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), null, Color.White, 0,
+                                    new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                                 break;
                             case WallType.ConnectorR:
-                                spriteBatch.Draw(connectorhorizontal, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                spriteBatch.Draw(connectorhorizontal,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
                                 break;
                             case WallType.ConnectorL:
-                                spriteBatch.Draw(connectorhorizontal, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                                spriteBatch.Draw(connectorhorizontal,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), null, Color.White, 0,
+                                    new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                                 break;
                             case WallType.ClosedD:
-                                spriteBatch.Draw(closedvertical, new Rectangle(i * 32, j * 32, 32, 32),Color.White);
+                                spriteBatch.Draw(closedvertical,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
                                 break;
                             case WallType.ClosedU:
-                                spriteBatch.Draw(closedvertical, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
+                                spriteBatch.Draw(closedvertical,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), null, Color.White, 0,
+                                    new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
                                 break;
                             case WallType.ConnectorD:
-                                spriteBatch.Draw(connectorvertical, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                spriteBatch.Draw(connectorvertical,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
                                 break;
                             case WallType.ConnectorU:
-                                spriteBatch.Draw(connectorvertical, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
+                                spriteBatch.Draw(connectorvertical,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), null, Color.White, 0,
+                                    new Vector2(0, 0), SpriteEffects.FlipVertically, 0);
                                 break;
                             case WallType.CornerUR:
-                                spriteBatch.Draw(cornertop, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                spriteBatch.Draw(cornertop,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
                                 break;
                             case WallType.CornerUL:
-                                spriteBatch.Draw(cornertop, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                                spriteBatch.Draw(cornertop,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), null, Color.White, 0,
+                                    new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                                 break;
                             case WallType.CornerDR:
-                                spriteBatch.Draw(cornerbot, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                                spriteBatch.Draw(cornerbot,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
                                 break;
                             case WallType.CornerDL:
-                                spriteBatch.Draw(cornerbot, new Rectangle(i * 32, j * 32, 32, 32), null, Color.White, 0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+                                spriteBatch.Draw(cornerbot,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), null, Color.White, 0,
+                                    new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                                 break;
                         }
-                        
+
                     }
-                    
-                    else if (maze[i, j] is Tile) {
-                        if (maze[i,j].Member is Pellet)
-                            spriteBatch.Draw(pellet, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
-                        else if(maze[i,j].Member is Energizer)
+
+                    else if (maze[i, j] is Tile)
+                    {
+                        if (maze[i, j].Member is Pellet)
+                            spriteBatch.Draw(pellet, new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
+                        else if (maze[i, j].Member is Energizer)
                         {
                             if (frame == 0)
                             {
-                                spriteBatch.Draw(energizer, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
-                            } else if (frame == 1)
+                                spriteBatch.Draw(energizer, new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
+                            }
+                            else if (frame == 1)
                             {
-                                spriteBatch.Draw(energizerAnimation, new Rectangle(i * 32, j * 32, 32, 32), new Rectangle(i * 32, (j * 32) * frame, 32, 32), Color.White);
-                            }                                 
+                                spriteBatch.Draw(energizerAnimation, new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize),
+                                    new Rectangle(i * 32, (j * 32) * frame, spriteSize, spriteSize), Color.White);
+                            }
                         }
 
                         else
-                            spriteBatch.Draw(empty, new Rectangle(i * 32, j * 32, 32, 32), Color.White);
+                            spriteBatch.Draw(empty, new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
 
-                    } 
+                    }
                 }
             }
 

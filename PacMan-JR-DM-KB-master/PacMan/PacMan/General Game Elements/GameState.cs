@@ -12,9 +12,9 @@ namespace PacMan
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
     /// </summary>
-    public enum Direction {Left, Right, Up, Down}//Represent direction in which entity is moving
+    public enum Direction { Left, Right, Up, Down }//Represent direction in which entity is moving
 
-    public enum GhostState { Scared, Chase, Released, Zombie, Scatter}//Represents the state of the ghost
+    public enum GhostState { Scared, Chase, Released, Zombie, Scatter }//Represents the state of the ghost
 
     /// <summary>
     /// The GameState represents all the business classes
@@ -37,7 +37,7 @@ namespace PacMan
         private Pen pen;
 
         public ScoreAndLives Score { get { return this.score; } }
-        private ScoreAndLives score; 
+        private ScoreAndLives score;
 
 
         /// <summary>
@@ -58,22 +58,22 @@ namespace PacMan
             g.score.Lives = 3;
             Pacman pac = new Pacman(g);
             g.pacman = pac;
-            
+
             g.Pacman.Position = new Vector2(11, 17);
             Ghost assistant = null;
             Ghost gh;
             string[][] parse = getElements(fileContent);
 
-            Tile[,] array = new Tile[parse[0].Length,parse.Length];
+            Tile[,] array = new Tile[parse[0].Length, parse.Length];
 
-            for (int y=0; y<parse.Length; y++)
+            for (int y = 0; y < parse.Length; y++)
             {
-                for(int x=0; x<parse[0].Length; x++)
+                for (int x = 0; x < parse[0].Length; x++)
                 {
                     switch (parse[y][x])
                     {
                         case "w":
-                            array[x, y] = new Wall(x, y,WallType.Horizontal);
+                            array[x, y] = new Wall(x, y, WallType.Horizontal);
                             break;
                         case "ww":
                             array[x, y] = new Wall(x, y, WallType.Vertical);
@@ -116,8 +116,8 @@ namespace PacMan
                             break;
                         case "p":
                             Pellet p = new Pellet(10);
-                             p.Collision += g.score.IncrementScore;
-                             array[x, y] = new Path(x, y, p);
+                            p.Collision += g.score.IncrementScore;
+                            array[x, y] = new Path(x, y, p);
                             break;
                         case "e":
                             Energizer e = new Energizer(g.Ghostpack, 100);
@@ -125,24 +125,24 @@ namespace PacMan
                             array[x, y] = new Path(x, y, e);
                             break;
                         case "m":
-                            array[x, y] = new Path(x,y,null);
+                            array[x, y] = new Path(x, y, null);
                             break;
                         case "x":
-                            array[x, y] = new PenPath(x,y);
+                            array[x, y] = new PenPath(x, y);
                             g.pen.AddTile(array[x, y]);
                             break;
                         case "P":
-                            array[x, y] = new Path(x, y,null);
-                            g.pacman.Position = new Vector2(x,y);
+                            array[x, y] = new Path(x, y, null);
+                            g.pacman.Position = new Vector2(x, y);
                             g.pacman.initPosition = new Vector2(x, y);
                             break;
                         case "1":
-                  
-                            gh = new Ghost(g,x,y,GhostState.Chase, new Color(255,0,0),GhostName.Blinky);
+
+                            gh = new Ghost(g, x, y, GhostState.Chase, new Color(255, 0, 0), GhostName.Blinky);
                             assistant = gh;
                             pen.Entrance = new Vector2(x, y);
                             gh.Points = 200;
-                            Ghost.ReleasePosition = new Vector2(x,y);
+                            Ghost.ReleasePosition = new Vector2(x, y);
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
                             g.ghostpack.Add(gh);
@@ -159,7 +159,7 @@ namespace PacMan
                             g.pen.AddToPen(gh);
                             break;
                         case "3":
-                            gh = new Ghost(g, x, y,GhostState.Chase, new Color(64, 224, 208),GhostName.Inky);
+                            gh = new Ghost(g, x, y, GhostState.Chase, new Color(64, 224, 208), GhostName.Inky);
                             gh.GhostAssistant = assistant;
                             gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
@@ -170,8 +170,8 @@ namespace PacMan
                             g.pen.AddToPen(gh);
                             break;
                         case "4":
-                            gh = new Ghost(g, x, y,GhostState.Chase, new Color(255, 165, 0),GhostName.Clyde);
-                      
+                            gh = new Ghost(g, x, y, GhostState.Chase, new Color(255, 165, 0), GhostName.Clyde);
+
                             gh.Points = 200;
                             gh.Collision += g.score.IncrementScore;
                             gh.PacmanDied += g.score.DeadPacman;
@@ -189,13 +189,16 @@ namespace PacMan
                 switch (ghost.Name)
                 {
                     case GhostName.Blinky:
-                        ghost.HomePosition = new Vector2(g.maze.Length -2 ,1);
+                        ghost.HomePosition = new Vector2(g.maze.Length - 2, 1);
                         break;
-                    case GhostName.Speedy: ghost.HomePosition = new Vector2(1, 1);
+                    case GhostName.Speedy:
+                        ghost.HomePosition = new Vector2(1, 1);
                         break;
-                    case GhostName.Inky: ghost.HomePosition = new Vector2(g.maze.Length - 2, g.maze.Height - 2);
+                    case GhostName.Inky:
+                        ghost.HomePosition = new Vector2(g.maze.Length - 2, g.maze.Height - 2);
                         break;
-                    case GhostName.Clyde: ghost.HomePosition = new Vector2(1, g.maze.Height - 2);
+                    case GhostName.Clyde:
+                        ghost.HomePosition = new Vector2(1, g.maze.Height - 2);
                         break;
                 }
             }
@@ -212,7 +215,7 @@ namespace PacMan
         {
             string[] stringLines = Regex.Split(fileContent, @"\r\n");
             string[][] parseStr = new string[stringLines.Length][];
-            for (int i=0; i<stringLines.Length; i++)
+            for (int i = 0; i < stringLines.Length; i++)
             {
                 parseStr[i] = stringLines[i].Split(',');
             }

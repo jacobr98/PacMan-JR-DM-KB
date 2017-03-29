@@ -9,9 +9,12 @@ namespace PacMan
 {
     /// <summary>
     /// Authors : Danny Manzato-Tates, Jacob Riendeau, Kevin Bui
-    /// </summary>    
-    /// 
-   public enum WallType
+    /// </summary>   
+
+    /// <summary>
+    /// Enum type for all the walls inside the maze
+    /// </summary>  
+    public enum WallType
     {
         Horizontal, Vertical, CornerUR, CornerUL, CornerDR, CornerDL,
         ClosedR, ClosedL, ClosedD, ClosedU, ConnectorR, ConnectorL, ConnectorU, ConnectorD

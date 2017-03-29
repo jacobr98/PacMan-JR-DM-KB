@@ -67,7 +67,7 @@ namespace PacMan
         public void AddToPen(Ghost ghost)
         {
             ghosts.Enqueue(ghost);
-            ghost.Position = pen[ghosts.Count-1].Position;
+            ghost.Position = pen[ghosts.Count - 1].Position;
             Timer t = new Timer((ghosts.Count * 1250));
             t.Enabled = true;
             t.Elapsed += Release;
@@ -76,9 +76,9 @@ namespace PacMan
 
         public bool IsGhostInPen(Ghost g)
         {
-            foreach(var gh in ghosts)
+            foreach (var gh in ghosts)
             {
-                if(gh == g)
+                if (gh == g)
                 {
                     return true;
                 }

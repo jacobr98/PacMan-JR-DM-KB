@@ -26,7 +26,7 @@ namespace PacMan
         [Obsolete]
         public ScoreAndLives(GameState game)
         {
-            
+
         }
 
         /// <summary>
