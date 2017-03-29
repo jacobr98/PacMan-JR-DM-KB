@@ -206,6 +206,8 @@ namespace PacMan
             }
             g.maze.PacmanWon += g.Score.IncrementScore;
             g.pacman.SubToGhosts();
+            g.Score.Pause += g.Ghostpack.Pause;
+            g.Score.Pause += g.Pen.Pause;
             return g;
         }
 

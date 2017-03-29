@@ -19,6 +19,12 @@ namespace PacManGame
     class ScoreSprite : DrawableGameComponent
     {
         private Game1 game;
+        private ScoreAndLives sl;
+        //Used for showing the score when you eat a ghost
+        private Boolean ateGhost;
+        private List<Ghost> ghostEatenPosition;
+        private int ghostEatenCounter = 0;
+
         private SpriteBatch spriteBatch;
         private SpriteFont font;
         private Texture2D lives;
@@ -45,6 +51,7 @@ namespace PacManGame
         /// </summary>
         public override void Initialize()
         {
+            ghostEatenPosition = new List<Ghost>();
             base.Initialize();
         }
 
@@ -54,6 +61,8 @@ namespace PacManGame
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            sl = game.PacManGame.Score;
+            sl.Eats += eatGhost;
             font = game.Content.Load<SpriteFont>("score");
             lives = game.Content.Load<Texture2D>("livesimage");
             score = game.Content.Load<Texture2D>("scoretitle");
@@ -68,6 +77,8 @@ namespace PacManGame
             beginning = game.Content.Load<SoundEffect>("pacmanbeginning");
 
             beginning.Play();
+
+            
             base.LoadContent();
         }
 
@@ -77,10 +88,10 @@ namespace PacManGame
         /// <param name="gameTime">The game time</param>
         public override void Update(GameTime gameTime)
         {
-            if (game.PacManGame.Score.Lives == 0)
+            if (sl.Lives == 0)
             {
                 death.Play();
-                game.PacManGame.Score.Lives = -1;
+                sl.Lives = -1;
             }
 
 
@@ -96,41 +107,53 @@ namespace PacManGame
 
             spriteBatch.Begin();
             spriteBatch.Draw(score, new Vector2(0, 380), Color.White);
-            spriteBatch.DrawString(font, "" + game.PacManGame.Score.Score, new Vector2(10, 420), Color.White);
+            spriteBatch.DrawString(font, "" + sl.Score, new Vector2(10, 420), Color.White);
 
             spriteBatch.Draw(livesTitle, new Vector2(270, 380), Color.White);
-            if (game.PacManGame.Score.Lives == 3)
+            if (sl.Lives == 3)
             {
                 spriteBatch.Draw(lives, new Rectangle(275, 420, 20, 20), Color.White);
                 spriteBatch.Draw(lives, new Rectangle(300, 420, 20, 20), Color.White);
                 spriteBatch.Draw(lives, new Rectangle(325, 420, 20, 20), Color.White);
             }
-            else if (game.PacManGame.Score.Lives == 2)
+            else if (sl.Lives == 2)
             {
                 spriteBatch.Draw(lives, new Rectangle(275, 420, 20, 20), Color.White);
                 spriteBatch.Draw(lives, new Rectangle(300, 420, 20, 20), Color.White);
             }
-            else if (game.PacManGame.Score.Lives == 1)
+            else if (sl.Lives == 1)
             {
                 spriteBatch.Draw(lives, new Rectangle(275, 420, 20, 20), Color.White);
             }
 
-            if (game.PacManGame.Score.Lives == -1)
+            if (sl.Lives == -1)
             {
                 spriteBatch.Draw(gameOver, new Rectangle(95, 100, 180, 83), Color.White);
             }
 
-            if (game.PacManGame.Maze.gameWon() == true && game.PacManGame.Score.Lives > 0)
+            if (game.PacManGame.Maze.gameWon() == true && sl.Lives > 0)
             {
                 spriteBatch.Draw(victory, new Rectangle(95, 100, 180, 135), Color.White);
             }
 
+            foreach (Ghost g in ghostEatenPosition)
+            {
+               spriteBatch.DrawString(font, "" + sl.Score, new Vector2(10, 420), Color.White);
+            }
             if (game.Paused)
             {
                 spriteBatch.DrawString(font, "Paused", new Vector2(130, 160), Color.White);
             }
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        public void eatGhost(ICollidable ic) {
+            if (ic is Ghost)
+            {
+                //ghostEatenPosition.Add(((Ghost)ic).Position);
+            }
+
         }
     }
 }

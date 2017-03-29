@@ -19,7 +19,8 @@ namespace PacMan
 
         public event Action<string> GameOver;
         public event Action<ICollidable> Eats;
-
+        public event Action<Boolean> Pause;
+        private Boolean paused = false;
         /// <summary>
         /// Constructor thats takes in the gamestate but does nothing with it
         /// Implementation of subscribing to events have changed to the gamestate
@@ -75,6 +76,12 @@ namespace PacMan
                     Eats?.Invoke(collidable);
                 }
             }
+        }
+        public void PauseGame()
+        {
+            paused = !paused;
+            Pause?.Invoke(paused);
+            
         }
     }
 }

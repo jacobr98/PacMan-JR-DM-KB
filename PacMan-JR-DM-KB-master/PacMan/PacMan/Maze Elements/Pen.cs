@@ -69,9 +69,10 @@ namespace PacMan
             ghosts.Enqueue(ghost);
             ghost.Position = pen[ghosts.Count - 1].Position;
             Timer t = new Timer((ghosts.Count * 1250));
+            timers.Add(t);
             t.Enabled = true;
             t.Elapsed += Release;
-            timers.Add(t);
+            
         }
 
         public bool IsGhostInPen(Ghost g)
@@ -84,6 +85,22 @@ namespace PacMan
                 }
             }
             return false;
+        }
+
+        public void Pause(Boolean p)
+        {
+            if (p)
+            {
+                foreach (Timer t in timers)
+                {
+                    t.Stop();
+                }
+            }
+            else {
+                foreach (Timer t in timers){
+                    t.Start();
+                }
+            }
         }
     }
 }

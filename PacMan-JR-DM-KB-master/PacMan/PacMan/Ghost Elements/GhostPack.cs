@@ -18,7 +18,7 @@ namespace PacMan
         private Timer scared;
         private Timer scatter;
         private Boolean isScared = false;
-
+        private Boolean isScattered = false;
         public event Action Fear;
         public event Action FearOff;
         
@@ -28,6 +28,8 @@ namespace PacMan
         public GhostPack()
         {
             ghosts = new List<Ghost>();
+            scared = new Timer();
+            scatter = new Timer();
         }
 
         /// <summary>
@@ -117,7 +119,7 @@ namespace PacMan
                 if (g.CurrentState == GhostState.Scared)
                     g.ChangeState(GhostState.Chase);
             }
-            scared = null;
+            scared = new Timer();
         }
 
         /// <summary>
@@ -209,6 +211,20 @@ namespace PacMan
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ghosts.GetEnumerator();
+        }
+
+        public void Pause(Boolean p)
+        {
+            if (p)
+            {
+                scared.Stop();
+                scatter.Stop();
+            }
+            else if (isScared)
+            { scared.Start(); }
+            else if (isScattered){
+                scatter.Stop();
+            }
         }
     }
 }

@@ -106,6 +106,7 @@ namespace PacManGame
             else if (c is Ghost)
             {
                 eatGhost.Play();
+                
             }
             //counterSound set to 4 because the sound is about 1 second
             //and pacman eats about 4 pellets in 1 second
@@ -233,7 +234,7 @@ namespace PacManGame
                 frame++;
                 animationcounter = 0;
             }
-            else
+            else if (!game.Paused)
                 animationcounter++;
 
             if (frame > 2)

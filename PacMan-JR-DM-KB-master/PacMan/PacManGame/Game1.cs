@@ -148,6 +148,7 @@ namespace PacManGame
         private void Pause()
         {
             Paused = !Paused;
+            PacManGame.Score.PauseGame();
         }
     }
 }

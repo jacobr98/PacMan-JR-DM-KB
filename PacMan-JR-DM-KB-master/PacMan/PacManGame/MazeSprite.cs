@@ -214,7 +214,7 @@ namespace PacManGame
                 frame++;
                 animationcounter = 0;
             }
-            else
+            else if (!game.Paused)
                 animationcounter++;
 
             if (frame > 1)
