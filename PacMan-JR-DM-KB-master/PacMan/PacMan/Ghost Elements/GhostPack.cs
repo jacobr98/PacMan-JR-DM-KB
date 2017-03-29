@@ -81,14 +81,10 @@ namespace PacMan
             if (isScared)
             {
                 scared.Stop();
-                scared = new Timer(5500);
-                scared.Elapsed += DisableScared;
-                scared.Start();
             }
-            else
-            {
-                isScared = true;
-                foreach (Ghost g in ghosts)
+            
+               
+            foreach (Ghost g in ghosts)
                 {
                     if (g.CurrentState == GhostState.Chase)
                     {
@@ -96,11 +92,11 @@ namespace PacMan
                     }
 
                 }
-
-                scared = new Timer(5500);
+            isScared = true;
+            scared = new Timer(5500);
                 scared.Elapsed += DisableScared;
                 scared.Start();
-            }
+            
         }
 
         /// <summary>
