@@ -23,10 +23,11 @@ namespace PacManGame
         private SpriteBatch spriteBatch;
         private Texture2D ghostImage;
         private Texture2D eyeImage;
-        private Game1 game; 
+        private Game1 game;
         private GhostPack ghostPack;
         private SoundEffect scared;
-
+        private Boolean isScared;
+        private SoundEffectInstance scaredInstance;
         //Movement Counters
         private int threshold;
         private int counter;
@@ -51,7 +52,8 @@ namespace PacManGame
             counter = 0;
             originalthreshold = 8;
             threshold = 8;
-            scaredthreshold = 16;
+            scaredthreshold = 15;
+            isScared = false;
             base.Initialize();
         }
 
@@ -64,10 +66,11 @@ namespace PacManGame
             ghostImage = game.Content.Load<Texture2D>("ghost");
             eyeImage = game.Content.Load<Texture2D>("ghosteye");
             scared = game.Content.Load<SoundEffect>("ghostscared");
+            scaredInstance = scared.CreateInstance();
             this.ghostPack = game.PacManGame.Ghostpack;
             ghostPack.Fear += Scared;
             ghostPack.FearOff += UnScared;
-
+            game.PacManGame.Score.Pause += Scared;
             base.LoadContent();
         }
 
@@ -81,7 +84,8 @@ namespace PacManGame
             {
                 ghostPack.Move();
                 counter = 0;
-            } else { counter++; }
+            }
+            else { counter++; }
 
             base.Update(gameTime);
         }
@@ -92,9 +96,24 @@ namespace PacManGame
         /// <param name="c">The collidable</param>
         public void Scared()
         {
-                threshold = scaredthreshold;
-                SoundEffectInstance scaredInstance = scared.CreateInstance();
-                scaredInstance.Play();
+            threshold = scaredthreshold;
+            isScared = true;
+            scaredInstance.Stop();
+            scaredInstance = scared.CreateInstance();
+            scaredInstance.Play();
+
+        }
+
+        public void Scared(Boolean b)
+        {
+            if (b && isScared)
+            {
+                scaredInstance.Pause();
+            }
+            else if (!b && isScared)
+            {
+                scaredInstance.Resume();
+            }
         }
 
         /// <summary>
@@ -103,8 +122,9 @@ namespace PacManGame
         public void UnScared()
         {
             threshold = originalthreshold;
+            isScared = false;
         }
-        
+
         /// <summary>
         /// Draws the spritebatch
         /// </summary>
@@ -112,8 +132,9 @@ namespace PacManGame
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-        
-            foreach (Ghost g in ghostPack) {
+
+            foreach (Ghost g in ghostPack)
+            {
                 if (g.CurrentState == GhostState.Scared)
                 {
                     spriteBatch.Draw(ghostImage, new Rectangle((int)g.Position.X * spriteSize, (int)g.Position.Y * spriteSize, spriteSize, spriteSize), Color.Blue);

@@ -141,8 +141,7 @@ namespace PacMan
         /// Event handler for pacman's death
         /// </summary>
         protected void OnPacmanDied()
-        {
-            Console.WriteLine("collide with pacman and died");
+        { 
             PacmanDied?.Invoke();
         }
 

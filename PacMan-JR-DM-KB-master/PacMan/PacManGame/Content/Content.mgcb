@@ -337,3 +337,9 @@
 /processorParam:TextureFormat=Color
 /build:emptywall.png
 
+#begin death.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:death.mp3
+
