@@ -22,11 +22,13 @@ namespace PacManGame
         private ScoreAndLives sl;
         //Used for showing the score when you eat a ghost
         private Boolean ateGhost;
-        private List<Ghost> ghostEatenPosition;
+        private List<Ghost> eatenGhost;
         private int ghostEatenCounter = 0;
 
         private SpriteBatch spriteBatch;
         private SpriteFont font;
+        private SpriteFont scorePopOut;
+
         private Texture2D lives;
         private Texture2D livesTitle;
         private Texture2D score;
@@ -51,7 +53,7 @@ namespace PacManGame
         /// </summary>
         public override void Initialize()
         {
-            ghostEatenPosition = new List<Ghost>();
+            
             base.Initialize();
         }
 
@@ -62,7 +64,8 @@ namespace PacManGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sl = game.PacManGame.Score;
-            sl.Eats += eatGhost;
+            eatenGhost = new List<Ghost>();
+
             font = game.Content.Load<SpriteFont>("score");
             lives = game.Content.Load<Texture2D>("livesimage");
             score = game.Content.Load<Texture2D>("scoretitle");
@@ -136,10 +139,6 @@ namespace PacManGame
                 spriteBatch.Draw(victory, new Rectangle(95, 100, 180, 135), Color.White);
             }
 
-            foreach (Ghost g in ghostEatenPosition)
-            {
-               spriteBatch.DrawString(font, "" + sl.Score, new Vector2(10, 420), Color.White);
-            }
             if (game.Paused)
             {
                 spriteBatch.DrawString(font, "Paused", new Vector2(130, 160), Color.White);
@@ -148,12 +147,5 @@ namespace PacManGame
             base.Draw(gameTime);
         }
 
-        public void eatGhost(ICollidable ic) {
-            if (ic is Ghost)
-            {
-                //ghostEatenPosition.Add(((Ghost)ic).Position);
-            }
-
-        }
     }
 }

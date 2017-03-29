@@ -319,3 +319,9 @@
 /processorParam:TextureFormat=Color
 /build:ghosteye.png
 
+#begin scorepop.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:scorepop.spritefont
+
