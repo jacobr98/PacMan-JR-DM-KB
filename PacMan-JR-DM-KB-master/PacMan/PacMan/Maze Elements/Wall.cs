@@ -17,7 +17,7 @@ namespace PacMan
     public enum WallType
     {
         Horizontal, Vertical, CornerUR, CornerUL, CornerDR, CornerDL,
-        ClosedR, ClosedL, ClosedD, ClosedU, ConnectorR, ConnectorL, ConnectorU, ConnectorD
+        ClosedR, ClosedL, ClosedD, ClosedU, ConnectorR, ConnectorL, ConnectorU, ConnectorD, EmtpyWall
 }
 public class Wall : Tile
     {

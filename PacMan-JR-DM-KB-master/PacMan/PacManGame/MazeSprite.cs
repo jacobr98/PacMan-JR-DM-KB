@@ -31,6 +31,7 @@ namespace PacManGame
         private Texture2D connectorvertical;
         private Texture2D cornerbot;
         private Texture2D cornertop;
+        private Texture2D emptywall;
 
         //test
         private Texture2D energizerAnimation;
@@ -80,6 +81,7 @@ namespace PacManGame
             connectorvertical = game.Content.Load<Texture2D>("connectorvertical");
             cornerbot = game.Content.Load<Texture2D>("cornerbot");
             cornertop = game.Content.Load<Texture2D>("cornertop");
+            emptywall = game.Content.Load<Texture2D>("emptywall");
             energizerAnimation = game.Content.Load<Texture2D>("energizeranimation");
 
             //game items
@@ -181,6 +183,11 @@ namespace PacManGame
                                     new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), null, Color.White, 0,
                                     new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
                                 break;
+                            case WallType.EmtpyWall:
+                                spriteBatch.Draw(emptywall,
+                                    new Rectangle(i * spriteSize, j * spriteSize, spriteSize, spriteSize), Color.White);
+                                break;
+
                         }
 
                     }

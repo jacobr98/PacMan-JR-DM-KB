@@ -72,6 +72,9 @@ namespace PacMan
                 {
                     switch (parse[y][x])
                     {
+                        case "ew":
+                            array[x, y] = new Wall(x, y, WallType.EmtpyWall);
+                            break;
                         case "w":
                             array[x, y] = new Wall(x, y, WallType.Horizontal);
                             break;
