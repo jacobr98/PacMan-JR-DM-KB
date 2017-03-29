@@ -19,6 +19,7 @@ namespace PacMan
 
         public event Action<string> GameOver;
         public event Action<ICollidable> Eats;
+
         /// <summary>
         /// Constructor thats takes in the gamestate but does nothing with it
         /// Implementation of subscribing to events have changed to the gamestate

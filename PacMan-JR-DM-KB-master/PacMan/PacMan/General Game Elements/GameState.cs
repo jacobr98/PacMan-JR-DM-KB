@@ -184,6 +184,8 @@ namespace PacMan
                 }
             }
             g.maze.SetTiles(array);
+
+            //sets home positions for scatter mode
             foreach (Ghost ghost in g.ghostpack)
             {
                 switch (ghost.Name)

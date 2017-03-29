@@ -17,6 +17,9 @@ namespace PacMan
         private List<Ghost> ghosts;
         private Timer scared;
         private Timer scatter;
+
+        public event Action Fear;
+        public event Action FearOff;
         /// <summary>
         /// Constructor that instantiates a new List of ghosts.
         /// </summary>
@@ -69,7 +72,7 @@ namespace PacMan
         /// </summary>
         public void ScareGhosts()
         {
-
+            Fear?.Invoke();
             foreach (Ghost g in ghosts)
             {
                 if (g.CurrentState == GhostState.Chase)
@@ -79,7 +82,7 @@ namespace PacMan
                 
             }
 
-            scared = new Timer(6000);
+            scared = new Timer(5500);
             scared.Elapsed += DisableScared;
             scared.Start();
         }
@@ -93,7 +96,7 @@ namespace PacMan
         {
             Timer t = (Timer)sender;
             t.Enabled = false;
-
+            FearOff?.Invoke();
             foreach (var g in ghosts)
             {
                 if (g.CurrentState == GhostState.Scared)

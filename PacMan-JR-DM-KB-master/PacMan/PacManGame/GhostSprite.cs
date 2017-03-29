@@ -19,15 +19,19 @@ namespace PacManGame
     /// </summary>
     class GhostSprite : DrawableGameComponent
     {
+        //Game Elements
         private SpriteBatch spriteBatch;
         private Texture2D ghostImage;
         private Texture2D eyeImage;
         private Game1 game; 
         private GhostPack ghostPack;
-
         private SoundEffect scared;
+
+        //Movement Counters
         private int threshold;
         private int counter;
+        private int originalthreshold;
+        private int scaredthreshold;
 
         private int spriteSize = 16;
 
@@ -45,7 +49,9 @@ namespace PacManGame
         public override void Initialize()
         {
             counter = 0;
+            originalthreshold = 8;
             threshold = 8;
+            scaredthreshold = 16;
             base.Initialize();
         }
 
@@ -58,8 +64,9 @@ namespace PacManGame
             ghostImage = game.Content.Load<Texture2D>("ghost");
             eyeImage = game.Content.Load<Texture2D>("ghosteye");
             scared = game.Content.Load<SoundEffect>("ghostscared");
-            game.PacManGame.Score.Eats += Scared;
             this.ghostPack = game.PacManGame.Ghostpack;
+            ghostPack.Fear += Scared;
+            ghostPack.FearOff += UnScared;
 
             base.LoadContent();
         }
@@ -80,19 +87,23 @@ namespace PacManGame
         }
 
         /// <summary>
-        /// Plays the scared sound effect
+        /// Plays the scared sound effect and slows the ghostpack speed
         /// </summary>
         /// <param name="c">The collidable</param>
-        public void Scared(ICollidable c)
+        public void Scared()
         {
-            SoundEffectInstance scaredInstance = scared.CreateInstance();
-
-            if (c is Energizer)
-            {
+                threshold = scaredthreshold;
+                SoundEffectInstance scaredInstance = scared.CreateInstance();
                 scaredInstance.Play();
-            }
         }
-
+        /// <summary>
+        /// Puts the ghost speed back to normal
+        /// </summary>
+        public void UnScared()
+        {
+            threshold = originalthreshold;
+        }
+        
         /// <summary>
         /// Draws the spritebatch
         /// </summary>
