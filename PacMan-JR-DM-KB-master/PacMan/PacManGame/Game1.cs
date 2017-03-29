@@ -25,6 +25,12 @@ namespace PacManGame
         private GameState gameState;
         public GameState PacManGame { get { return this.gameState; } }
 
+        private KeyboardState oldState;
+        private int counter;
+        private int threshold;
+
+        public bool Paused { get; private set; }
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -104,19 +110,22 @@ namespace PacManGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             KeyboardState newState = Keyboard.GetState();
-            if ((PacManGame.Score.Lives == -1 && newState.IsKeyDown(Keys.Enter)) ||
-                PacManGame.Maze.gameWon() == true && newState.IsKeyDown(Keys.Enter))
+            if (newState.IsKeyDown(Keys.Escape) && !oldState.IsKeyDown(Keys.Escape))
             {
-                Reset();
+                Pause();
+            } 
+                if ((PacManGame.Score.Lives == -1 && newState.IsKeyDown(Keys.Enter)) ||
+                    PacManGame.Maze.gameWon() == true && newState.IsKeyDown(Keys.Enter))
+                {
+                    Reset();
+                }
+            oldState = newState;
+            if (!Paused)
+                {
+                    base.Update(gameTime);
+                }
             }
-
-            base.Update(gameTime);
-        }
-
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -134,6 +143,11 @@ namespace PacManGame
         private void Reset()
         {
             Exit();
+        }
+
+        private void Pause()
+        {
+            Paused = !Paused;
         }
     }
 }

@@ -188,6 +188,7 @@ namespace PacManGame
                         pacman.PacmanDirection = Direction.Down;
                 }
             }
+            oldState = newState;
             if (movecounter > movethreshold)
             {
                 pacman.Move(pacman.PacmanDirection);
