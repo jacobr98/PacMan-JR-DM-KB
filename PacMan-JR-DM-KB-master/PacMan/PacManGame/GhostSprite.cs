@@ -91,11 +91,6 @@ namespace PacManGame
             {
                 scaredInstance.Play();
             }
-
-            if (game.PacManGame.Score.Lives == -1)
-            {
-                scaredInstance.Stop();
-            }
         }
 
         /// <summary>
