@@ -24,6 +24,7 @@ namespace PacManGame
         private Texture2D pacmanHorizontal;
         private Texture2D pacmanVertical;
 
+        private SoundEffect death;
         private Game1 game;
         private Pacman pacman;
 
@@ -242,5 +243,6 @@ namespace PacManGame
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
     }
 }

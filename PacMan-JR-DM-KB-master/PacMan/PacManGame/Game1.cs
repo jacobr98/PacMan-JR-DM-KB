@@ -115,6 +115,7 @@ namespace PacManGame
             {
                 Pause();
             } 
+            
                 if ((PacManGame.Score.Lives == -1 && newState.IsKeyDown(Keys.Enter)) ||
                     PacManGame.Maze.gameWon() == true && newState.IsKeyDown(Keys.Enter))
                 {
