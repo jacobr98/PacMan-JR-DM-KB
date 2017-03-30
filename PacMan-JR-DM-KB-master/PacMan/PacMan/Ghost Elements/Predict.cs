@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace PacMan
 {
-    
+    /// <summary>
+    /// Authors : Jacob Riendeau, Kevin Bui
+    /// </summary>
     class Predict : IGhostState
     {
         private Pacman pacman;
@@ -16,6 +18,10 @@ namespace PacMan
         private Vector2 target;
         private Ghost ghost;
         public Vector2 Target { get { return target; } }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Predict(Ghost g, Ghost gg, Maze m, Pacman pacman)
         {
             this.target = pacman.Position;
@@ -24,21 +30,29 @@ namespace PacMan
             this.maze = m;
             this.ghost = g;
         }
+
+        /// <summary>
+        /// Finds pacman in the maze
+        /// </summary>
         private Vector2 findTarget()
         {
             Vector2 p = findPacman();
             Vector2 c = assistant.Position - p;
-            c.X = MathHelper.Clamp(c.X * 2,1,maze.Length -2);
+            c.X = MathHelper.Clamp(c.X * 2, 1, maze.Length - 2);
             c.Y = MathHelper.Clamp(c.Y * 2, 1, maze.Height - 2);
             Boolean goodpos = true;
             if (maze[(int)c.X, (int)c.Y] is Wall || maze[(int)c.X, (int)c.Y] is PenPath)
                 goodpos = false;
             if (!goodpos)
                 findAdjacentTarget();
-             
-            
+
+
             return p;
         }
+
+        /// <summary>
+        /// Finds the nearest path to ambush pacman
+        /// </summary>
         public Vector2 findAdjacentTarget()
         {
             Tile current = maze[(int)ghost.Position.X, (int)ghost.Position.Y];
@@ -66,9 +80,11 @@ namespace PacMan
                 ghost.Direction = Direction.Down;
 
             return shortestDistance.Position;
-
-           
         }
+
+        /// <summary>
+        /// Finds pacman
+        /// </summary>
         private Vector2 findPacman()
         {
             int counter = 0;
@@ -110,6 +126,10 @@ namespace PacMan
                 default: return pacman.Position;
             }
         }
+
+        /// <summary>
+        /// Calculates the shortest distance for the ghosts to catch pacman
+        /// </summary>
         public void Move()
         {
             Tile current = maze[(int)ghost.Position.X, (int)ghost.Position.Y];

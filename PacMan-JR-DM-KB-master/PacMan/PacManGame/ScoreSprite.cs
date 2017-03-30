@@ -21,13 +21,10 @@ namespace PacManGame
         private Game1 game;
         private ScoreAndLives sl;
         //Used for showing the score when you eat a ghost
-        private Boolean ateGhost;
         private List<Ghost> eatenGhost;
-        private int ghostEatenCounter = 0;
 
         private SpriteBatch spriteBatch;
         private SpriteFont font;
-        private SpriteFont scorePopOut;
 
         private Texture2D lives;
         private Texture2D livesTitle;

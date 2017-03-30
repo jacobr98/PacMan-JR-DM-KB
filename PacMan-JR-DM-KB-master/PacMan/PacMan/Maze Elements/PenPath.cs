@@ -43,10 +43,7 @@ namespace PacMan
         /// <summary>
         /// Calls the member's collide method and deletes the meber afterwards
         /// </summary>
-        public override void Collide()
-        {
-         
-        }
+        public override void Collide() { }
 
         /// <summary>
         /// The element defines whether there is a member within it.
@@ -54,7 +51,6 @@ namespace PacMan
         /// <returns>boolean</returns>
         public override bool isEmpty()
         {
-           
                 return true;
         }
     }

@@ -66,8 +66,6 @@ namespace PacMan
             {
                 ghost.Reset();
             }
-
         }
-
     }
 }

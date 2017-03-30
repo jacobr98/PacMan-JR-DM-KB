@@ -60,6 +60,7 @@ namespace PacManGame
             Components.Add(scoreSprite);
             base.Initialize();
 
+            //events
             this.PacManGame.Maze.PacmanWon += Maze_PacmanWon;
             this.PacManGame.Score.GameOver += Score_GameOver;
         }
@@ -114,19 +115,20 @@ namespace PacManGame
             if (newState.IsKeyDown(Keys.Escape) && !oldState.IsKeyDown(Keys.Escape))
             {
                 Pause();
-            } 
-            
-                if ((PacManGame.Score.Lives == -1 && newState.IsKeyDown(Keys.Enter)) ||
-                    PacManGame.Maze.gameWon() == true && newState.IsKeyDown(Keys.Enter))
-                {
-                    Reset();
-                }
+            }
+
+            if ((PacManGame.Score.Lives == -1 && newState.IsKeyDown(Keys.Enter)) ||
+                PacManGame.Maze.gameWon() == true && newState.IsKeyDown(Keys.Enter))
+            {
+                Reset();
+            }
             oldState = newState;
             if (!Paused)
-                {
-                    base.Update(gameTime);
-                }
+            {
+                base.Update(gameTime);
             }
+        }
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -146,6 +148,9 @@ namespace PacManGame
             Exit();
         }
 
+        /// <summary>
+        /// Pauses the game
+        /// </summary>
         private void Pause()
         {
             Paused = !Paused;

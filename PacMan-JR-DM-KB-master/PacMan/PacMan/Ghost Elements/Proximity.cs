@@ -44,6 +44,7 @@ namespace PacMan
                 return ghost.HomePosition;
             }
         }
+
         /// <summary>
         /// Calculates the shortest distance for the ghosts to catch pacman
         /// </summary>

@@ -209,6 +209,9 @@ namespace PacMan
             return ghosts.GetEnumerator();
         }
 
+        /// <summary>
+        /// Checks if the game is paused or not
+        /// </summary>
         public void Pause(Boolean p)
         {
             if (p)

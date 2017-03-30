@@ -24,7 +24,6 @@ namespace PacManGame
         private Texture2D pacmanHorizontal;
         private Texture2D pacmanVertical;
 
-        private SoundEffect death;
         private Game1 game;
         private Pacman pacman;
 
@@ -46,6 +45,7 @@ namespace PacManGame
         private SoundEffect eatEnergizer;
         private SoundEffect eatGhost;
         private SoundEffect eatPellet;
+        private SoundEffect death;
 
         //size of the sprites
         private int spriteSize = 16;
@@ -88,6 +88,7 @@ namespace PacManGame
             eatEnergizer = game.Content.Load<SoundEffect>("pacmaneatfruit");
             eatGhost = game.Content.Load<SoundEffect>("pacmaneatghost");
             eatPellet = game.Content.Load<SoundEffect>("pacmanchomp");
+
             this.pacman = game.PacManGame.Pacman;
             game.PacManGame.Score.Eats += eat;
             base.LoadContent();
@@ -118,7 +119,6 @@ namespace PacManGame
             }
 
         }
-
 
         /// <summary>
         /// Updates the game
@@ -230,6 +230,8 @@ namespace PacManGame
                         new Rectangle(spriteSize * frame, 0, spriteSize, spriteSize), Color.White, 0, new Vector2(0, 0), SpriteEffects.None, 0);
                     break;
             }
+
+            //animates pacman
             if (animationcounter > 5)
             {
                 frame++;
@@ -240,12 +242,9 @@ namespace PacManGame
 
             if (frame > 2)
                 frame = 0;
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
-
-     
-
-  
     }
 }
